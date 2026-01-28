@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { useMobile } from "../hooks/use-mobile";
 
 const HeroScroll = () => {
     const canvasRef = useRef(null);
@@ -6,6 +7,7 @@ const HeroScroll = () => {
     const [imagesLoaded, setImagesLoaded] = useState(false);
     const imagesRef = useRef([]);
     const frameCount = 210; // Based on the file count in public/hero_section_animation
+    const isMobile = useMobile();
 
     // Helper to get image path
     const currentFrame = (index) =>
@@ -61,7 +63,7 @@ const HeroScroll = () => {
 
             const containerRect = container.getBoundingClientRect();
             const containerHeight = containerRect.height;
-            const windowHeight = window.innerHeight;
+            const windowHeight = isMobile ? window.innerHeight * 0.6 : window.innerHeight;
 
             // Calculate scrollable distance (height - viewport)
             const scrollableDistance = containerHeight - windowHeight;
@@ -89,7 +91,9 @@ const HeroScroll = () => {
                     // High DPI support
                     const dpr = window.devicePixelRatio || 1;
                     canvas.width = window.innerWidth * dpr;
-                    canvas.height = window.innerHeight * dpr;
+                    // On mobile, use a shorter height (60% of viewport) to avoid taking up too much space
+                    const targetHeight = isMobile ? window.innerHeight * 0.6 : window.innerHeight;
+                    canvas.height = targetHeight * dpr;
 
                     // Reset transformation matrix before scaling to avoid cumulative scaling
                     context.setTransform(1, 0, 0, 1, 0, 0);
@@ -100,7 +104,7 @@ const HeroScroll = () => {
 
                     // Calculations based on CSS size (window.inner...)
                     const canvasWidth = window.innerWidth;
-                    const canvasHeight = window.innerHeight;
+                    const canvasHeight = targetHeight;
 
                     const hRatio = canvasWidth / img.width;
                     const vRatio = canvasHeight / img.height;
@@ -135,12 +139,24 @@ const HeroScroll = () => {
             window.removeEventListener('scroll', handleScroll);
             window.removeEventListener('resize', handleScroll);
         };
-    }, [imagesLoaded]);
+    }, [imagesLoaded, isMobile]);
 
     return (
-        <section className="hero-scroll-container" ref={containerRef}>
+        <section
+            className="hero-scroll-container"
+            ref={containerRef}
+            style={{ height: isMobile ? '250vh' : '400vh' }}
+        >
             <div className="sticky-wrapper">
-                <canvas id="hero-canvas" ref={canvasRef}></canvas>
+                <canvas
+                    id="hero-canvas"
+                    ref={canvasRef}
+                    style={{
+                        width: '100%',
+                        height: isMobile ? '60vh' : '100%',
+                        objectFit: 'cover'
+                    }}
+                ></canvas>
                 <div className="hero-text">
                     <h1 id="main-title">Mythic Reverse Network</h1>
                 </div>

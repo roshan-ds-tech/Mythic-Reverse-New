@@ -1,5 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import { useScroll, useTransform, motion } from "framer-motion";
+import { useMobile } from "../../hooks/use-mobile";
 
 export const ContainerScroll = ({
     titleComponent,
@@ -10,18 +11,7 @@ export const ContainerScroll = ({
         target: containerRef,
         offset: ["0.05 end", "end end"] // Starts when top of container is 5% into the viewport from bottom
     });
-    const [isMobile, setIsMobile] = useState(false);
-
-    useEffect(() => {
-        const checkMobile = () => {
-            setIsMobile(window.innerWidth <= 768);
-        };
-        checkMobile();
-        window.addEventListener("resize", checkMobile);
-        return () => {
-            window.removeEventListener("resize", checkMobile);
-        };
-    }, []);
+    const isMobile = useMobile();
 
     const scaleDimensions = () => {
         return isMobile ? [0.7, 0.9] : [1.05, 1];

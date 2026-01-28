@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { HoveredLink, Menu, MenuItem, ProductItem } from "./ui/navbar-menu";
 import { cn } from "../lib/utils";
 import { motion, useScroll, useMotionValueEvent } from "framer-motion";
+import { useMobile } from "../hooks/use-mobile";
 
 export function NavbarDemo() {
     return (
@@ -15,6 +16,7 @@ function Navbar({ className }) {
     const [active, setActive] = useState(null);
     const { scrollY } = useScroll();
     const [visible, setVisible] = useState(true);
+    const isMobile = useMobile();
 
     useMotionValueEvent(scrollY, "change", (current) => {
         // Check if current is not undefined and is a number
@@ -58,7 +60,7 @@ function Navbar({ className }) {
                     </div>
                 </MenuItem>
                 <MenuItem setActive={setActive} active={active} item="Products">
-                    <div className="text-sm grid grid-cols-2 gap-2 md:gap-10 p-4">
+                    <div className="text-sm grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-10 p-4">
                         <ProductItem
                             title="Algochurn"
                             href="#"

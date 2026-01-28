@@ -3,7 +3,7 @@ import { ContainerScroll } from "./ui/container-scroll-animation";
 
 export function ScrollAnimationDemo() {
     return (
-        <div className="flex flex-col overflow-hidden bg-black">
+        <div className="flex flex-col overflow-hidden bg-black -mt-40 md:mt-0">
             <ContainerScroll
                 titleComponent={
                     <>
@@ -16,7 +16,7 @@ export function ScrollAnimationDemo() {
                         >
                             Unleash the power of <br />
                             <span className="text-4xl md:text-[6rem] font-bold mt-1 leading-none">
-                                Scroll Animations
+                                Mythic Reverse
                             </span>
                         </motion.h1>
                     </>
