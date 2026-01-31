@@ -1,5 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useMobile } from "../hooks/use-mobile";
+import { SparklesCore } from "./ui/sparkles";
+import { ChevronDown } from "lucide-react";
+import { motion } from "framer-motion";
 
 const HeroScroll = () => {
     const canvasRef = useRef(null);
@@ -141,13 +144,53 @@ const HeroScroll = () => {
         };
     }, [imagesLoaded, isMobile]);
 
+    // Custom smooth scroll function
+    const smoothScrollToBottom = () => {
+        if (containerRef.current) {
+            const containerRect = containerRef.current.getBoundingClientRect();
+            const absoluteBottom = window.scrollY + containerRect.bottom;
+
+            const startPosition = window.scrollY;
+            const distance = absoluteBottom - startPosition;
+            const duration = 3000; // 3 seconds for a slow, smooth scroll
+            let start = null;
+
+            const step = (timestamp) => {
+                if (!start) start = timestamp;
+                const progress = timestamp - start;
+                const percentage = Math.min(progress / duration, 1);
+
+                // Ease-in-out easing function
+                const ease = percentage < 0.5
+                    ? 2 * percentage * percentage
+                    : 1 - Math.pow(-2 * percentage + 2, 2) / 2;
+
+                window.scrollTo(0, startPosition + distance * ease);
+
+                if (progress < duration) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+
+            window.requestAnimationFrame(step);
+        }
+    };
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            smoothScrollToBottom();
+        }, 3000);
+
+        return () => clearTimeout(timer);
+    }, []);
+
     return (
         <section
             className="hero-scroll-container"
             ref={containerRef}
             style={{ height: isMobile ? '250vh' : '400vh' }}
         >
-            <div className="sticky-wrapper">
+            <div className="sticky-wrapper relative">
                 <canvas
                     id="hero-canvas"
                     ref={canvasRef}
@@ -157,9 +200,43 @@ const HeroScroll = () => {
                         objectFit: 'cover'
                     }}
                 ></canvas>
-                <div className="hero-text">
-                    <h1 id="main-title">Mythic Reverse Network</h1>
+
+                {/* Sparkles with mask to avoid covering the center (laptop) */}
+                <div className="absolute inset-0 w-full h-full z-10 pointer-events-none">
+                    <div className="w-full h-full bg-transparent absolute inset-0 [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]">
+                        <SparklesCore
+                            id="tsparticleshero"
+                            background="transparent"
+                            minSize={1}
+                            maxSize={3}
+                            particleDensity={500}
+                            className="w-full h-full"
+                            particleColor="#FFFFFF"
+                        />
+                    </div>
                 </div>
+
+                <div className="hero-text">
+                    <h1 id="main-title" className="font-bold">
+                        <span className="bg-clip-text text-transparent bg-gradient-to-r from-violet-400 to-fuchsia-400 text-[1 em] drop-shadow-[0_0_15px_rgba(192,132,252,0.6)]">Mythic Reverse</span> <br className="md:hidden" /> Network
+                    </h1>
+                </div>
+
+                <motion.div
+                    initial={{ opacity: 0, y: 0 }}
+                    animate={{ opacity: 1, y: [0, 10, 0] }}
+                    transition={{
+                        duration: 1.5,
+                        repeat: Infinity,
+                        repeatType: "loop",
+                        ease: "easeInOut"
+                    }}
+                    className="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-20 text-white cursor-pointer flex flex-col items-center"
+                    onClick={smoothScrollToBottom}
+                >
+                    <p className="text-white text-sm mb-2 font-medium drop-shadow-[0_0_10px_rgba(255,255,255,0.7)]">Click to explore</p>
+                    <ChevronDown size={48} className="drop-shadow-[0_0_10px_rgba(255,255,255,0.7)] mx-auto" />
+                </motion.div>
             </div>
         </section>
     );
