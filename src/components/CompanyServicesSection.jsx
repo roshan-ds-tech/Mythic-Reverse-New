@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
-import { motion, useInView, useSpring, useTransform } from "framer-motion";
+import { motion, useInView, useSpring, useTransform } from "motion/react";
 import { Monitor, Smartphone, Database, CheckCircle2, ArrowRight, Sparkles } from "lucide-react";
 import ServicesOrbitalDisplay from "./ServicesOrbitalDisplay";
 import { SparklesCore } from "./ui/sparkles";
@@ -252,10 +252,10 @@ export default function CompanyServicesSection() {
             className="w-full min-h-screen py-24 px-4 bg-black relative overflow-hidden"
         >
             <motion.div
-                className="absolute top-20 left-10 w-64 h-64 rounded-full bg-purple-500/10 blur-3xl" // Changed to purple, lower opacity
+                className="absolute top-20 left-10 w-64 h-64 rounded-full bg-purple-500/10 blur-3xl"
                 animate={{
                     scale: [1, 1.2, 1],
-                    opacity: [0.1, 0.2, 0.1], // Reduced opacity
+                    opacity: [0.1, 0.2, 0.1],
                 }}
                 transition={{
                     duration: 8,
@@ -264,10 +264,10 @@ export default function CompanyServicesSection() {
                 }}
             />
             <motion.div
-                className="absolute bottom-20 right-10 w-80 h-80 rounded-full bg-cyan-500/10 blur-3xl" // Lower opacity
+                className="absolute bottom-20 right-10 w-80 h-80 rounded-full bg-cyan-500/10 blur-3xl"
                 animate={{
                     scale: [1.2, 1, 1.2],
-                    opacity: [0.1, 0.2, 0.1], // Reduced opacity
+                    opacity: [0.1, 0.2, 0.1],
                 }}
                 transition={{
                     duration: 8,
@@ -283,7 +283,7 @@ export default function CompanyServicesSection() {
                     background="transparent"
                     minSize={0.6}
                     maxSize={1.4}
-                    particleDensity={100}
+                    particleDensity={25}
                     className="w-full h-full"
                     particleColor="#FFFFFF"
                 />
@@ -303,7 +303,7 @@ export default function CompanyServicesSection() {
                     }}
                 >
                     <motion.div
-                        className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 text-neutral-300 font-medium mb-4 border border-white/10" // Neutral styling
+                        className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 text-neutral-300 font-medium mb-4 border border-white/10"
                         initial={{ opacity: 0, scale: 0.8 }}
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ duration: 0.5 }}
@@ -377,6 +377,6 @@ export default function CompanyServicesSection() {
                     </Button>
                 </motion.div>
             </motion.div>
-        </section>
+        </section >
     );
 }

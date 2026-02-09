@@ -1,12 +1,8 @@
 "use client";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import { motion, useAnimation } from "motion/react";
 import Particles, { initParticlesEngine } from "@tsparticles/react";
 import { loadSlim } from "@tsparticles/slim";
-import { cn } from "../../lib/utils";
-import { motion, useAnimation } from "framer-motion";
-
-// Global flag to track initialization
-let particlesInitialized = false;
 
 export const SparklesCore = (props) => {
     const {
@@ -18,23 +14,17 @@ export const SparklesCore = (props) => {
         speed,
         particleColor,
         particleDensity,
-        minOpacity = 0.1,
-        maxOpacity = 0.5,
     } = props;
     const [init, setInit] = useState(false);
 
     useEffect(() => {
-        if (!particlesInitialized) {
-            initParticlesEngine(async (engine) => {
-                await loadSlim(engine);
-            }).then(() => {
-                particlesInitialized = true;
-                setInit(true);
-            });
-        } else {
+        initParticlesEngine(async (engine) => {
+            await loadSlim(engine);
+        }).then(() => {
             setInit(true);
-        }
+        });
     }, []);
+
     const controls = useAnimation();
 
     const particlesLoaded = async (container) => {
@@ -48,17 +38,19 @@ export const SparklesCore = (props) => {
         }
     };
 
+    const generatedId = React.useId();
+
     return (
-        <motion.div animate={controls} className={cn("opacity-0", className)}>
+        <motion.div animate={controls} className={`opacity-0 ${className || ""}`}>
             {init && (
                 <Particles
-                    id={id || "tsparticles"}
-                    className={cn("h-full w-full")}
+                    id={id || generatedId}
+                    className="h-full w-full"
                     particlesLoaded={particlesLoaded}
                     options={{
                         background: {
                             color: {
-                                value: background || "#0d47a1",
+                                value: background || "transparent",
                             },
                         },
                         fullScreen: {
@@ -97,41 +89,83 @@ export const SparklesCore = (props) => {
                                     value: 1,
                                 },
                             },
+                            collisions: {
+                                absorb: {
+                                    speed: 2,
+                                },
+                                bounce: {
+                                    horizontal: {
+                                        value: 1,
+                                    },
+                                    vertical: {
+                                        value: 1,
+                                    },
+                                },
+                                enable: false,
+                                maxSpeed: 50,
+                                mode: "bounce",
+                                overlap: {
+                                    enable: true,
+                                    retries: 0,
+                                },
+                            },
                             color: {
                                 value: particleColor || "#ffffff",
                             },
-                            links: {
-                                color: particleColor || "#ffffff",
-                                distance: 150,
-                                enable: false,
-                                opacity: 0.5,
-                                width: 1,
-                            },
                             move: {
+                                angle: {
+                                    offset: 0,
+                                    value: 90,
+                                },
+                                attract: {
+                                    distance: 200,
+                                    enable: false,
+                                    rotate: {
+                                        x: 3000,
+                                        y: 3000,
+                                    },
+                                },
                                 direction: "none",
                                 enable: true,
                                 outModes: {
-                                    default: "bounce",
+                                    default: "out",
                                 },
                                 random: false,
-                                speed: speed || 2,
+                                speed: {
+                                    min: 0.1,
+                                    max: 1,
+                                },
                                 straight: false,
                             },
                             number: {
                                 density: {
                                     enable: true,
-                                    area: 800,
+                                    width: 400,
+                                    height: 400,
                                 },
-                                value: particleDensity || 100,
+                                value: particleDensity || 120,
                             },
                             opacity: {
-                                value: { min: minOpacity, max: maxOpacity },
+                                value: {
+                                    min: 0.1,
+                                    max: 1,
+                                },
+                                animation: {
+                                    enable: true,
+                                    speed: speed || 4,
+                                    sync: false,
+                                    mode: "auto",
+                                    startValue: "random",
+                                },
                             },
                             shape: {
                                 type: "circle",
                             },
                             size: {
-                                value: { min: minSize || 1, max: maxSize || 3 },
+                                value: {
+                                    min: minSize || 1,
+                                    max: maxSize || 3,
+                                },
                             },
                         },
                         detectRetina: true,

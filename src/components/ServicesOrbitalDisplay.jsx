@@ -194,8 +194,7 @@ function ServicesOrbitalDisplay({ servicesData }) {
 
     return (
         <div
-            //   className="w-full h-screen flex flex-col items-center justify-center bg-transparent overflow-hidden relative"
-            className="w-full h-[500px] md:h-[600px] flex flex-col items-center justify-center bg-transparent overflow-hidden relative" // Adjusted height for larger orbit
+            className="w-full h-[500px] md:h-[600px] flex flex-col items-center justify-center bg-transparent overflow-hidden relative"
             ref={containerRef}
             onClick={handleContainerClick}
         >

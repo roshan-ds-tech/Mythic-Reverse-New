@@ -4,6 +4,9 @@ import { GlowingEffectDemoSecond } from './components/GlowingEffectDemoSecond'
 import CompanyServicesSection from './components/CompanyServicesSection'
 import { SparklesCore } from "./components/ui/sparkles";
 import { HeroParallaxDemo } from "./components/HeroParallaxDemo";
+import { PremiumTestimonialsDemo } from "./components/PremiumTestimonialsDemo";
+import { Footer } from "./components/ui/footer-section";
+import { CTASection } from "./components/ui/cta-section";
 
 function App() {
   return (
@@ -14,7 +17,7 @@ function App() {
           background="transparent"
           minSize={0.6}
           maxSize={1.8}
-          particleDensity={300}
+          particleDensity={50}
           className="w-full h-full"
           particleColor="#FFFFFF"
         />
@@ -26,9 +29,10 @@ function App() {
         <GlowingEffectDemoSecond />
       </div>
       <CompanyServicesSection />
-      <div style={{ height: '100vh', background: '#111', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <h2>Content continues here...</h2>
-      </div>
+      <PremiumTestimonialsDemo />
+      <CTASection />
+      <div className="h-28 bg-black" />
+      <Footer />
     </>
   )
 }
