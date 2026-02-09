@@ -1,9 +1,9 @@
-import HeroScroll from './components/HeroScroll'
 import { NavbarDemo } from './components/NavbarDemo'
 import { ScrollAnimationDemo } from './components/ScrollAnimationDemo'
 import { GlowingEffectDemoSecond } from './components/GlowingEffectDemoSecond'
 import CompanyServicesSection from './components/CompanyServicesSection'
 import { SparklesCore } from "./components/ui/sparkles";
+import { HeroParallaxDemo } from "./components/HeroParallaxDemo";
 
 function App() {
   return (
@@ -20,7 +20,7 @@ function App() {
         />
       </div>
       <NavbarDemo />
-      <HeroScroll />
+      <HeroParallaxDemo />
       <ScrollAnimationDemo />
       <div className="bg-black pt-0 pb-20 px-4">
         <GlowingEffectDemoSecond />
