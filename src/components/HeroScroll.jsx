@@ -9,8 +9,15 @@ const HeroScroll = () => {
     const containerRef = useRef(null);
     const [imagesLoaded, setImagesLoaded] = useState(false);
     const imagesRef = useRef([]);
-    const frameCount = 210; // Based on the file count in public/hero_section_animation
+    const frameCount = 210;
     const isMobile = useMobile();
+
+    // Animation State
+    const [hasTriggered, setHasTriggered] = useState(false);
+    const [isSynced, setIsSynced] = useState(false);
+    const autoFrameRef = useRef(0); // Tracks auto-play progress (0 to 210)
+    const requestRef = useRef();
+    const startTimeRef = useRef();
 
     // Helper to get image path
     const currentFrame = (index) =>
@@ -36,159 +43,163 @@ const HeroScroll = () => {
             setImagesLoaded(true);
 
             // Initial draw
-            const canvas = canvasRef.current;
-            const context = canvas.getContext('2d');
             if (imagesRef.current[0]) {
-                context.drawImage(imagesRef.current[0], 0, 0);
+                drawFrame(0);
             }
         };
 
         preloadImages();
     }, []);
 
-    useEffect(() => {
-        if (!imagesLoaded) return;
-
+    const drawFrame = (frameIndex) => {
+        const index = Math.min(frameCount - 1, Math.max(0, Math.floor(frameIndex)));
+        const img = imagesRef.current[index];
         const canvas = canvasRef.current;
+        if (!img || !canvas) return;
+
         const context = canvas.getContext('2d');
-        const container = containerRef.current;
 
-        // Set canvas dimensions to match image aspect ratio usually, 
-        // or window size. The user prompt said object-fit: cover logic.
-        // We'll handle resizing.
+        // High DPI support
+        const dpr = window.devicePixelRatio || 1;
+        canvas.width = window.innerWidth * dpr;
+        // On mobile, use a shorter height
+        const targetHeight = isMobile ? window.innerHeight * 0.6 : window.innerHeight;
+        canvas.height = targetHeight * dpr;
 
-        const render = () => {
-            // Logic handled in scroll listener
-        };
+        // Reset transformation matrix before scaling
+        context.setTransform(1, 0, 0, 1, 0, 0);
+        context.scale(dpr, dpr);
+        context.imageSmoothingEnabled = true;
+        context.imageSmoothingQuality = 'high';
 
-        const handleScroll = () => {
-            if (!container) return;
+        const canvasWidth = window.innerWidth;
+        const canvasHeight = targetHeight;
 
-            const containerRect = container.getBoundingClientRect();
-            const containerHeight = containerRect.height;
-            const windowHeight = isMobile ? window.innerHeight * 0.6 : window.innerHeight;
+        const hRatio = canvasWidth / img.width;
+        const vRatio = canvasHeight / img.height;
+        const ratio = Math.max(hRatio, vRatio);
 
-            // Calculate scrollable distance (height - viewport)
-            const scrollableDistance = containerHeight - windowHeight;
+        const centerShift_x = (canvasWidth - img.width * ratio) / 2;
+        const centerShift_y = (canvasHeight - img.height * ratio) / 2;
 
-            // Distance scrolled from top of container
-            const scrolled = -containerRect.top;
+        context.drawImage(img, 0, 0, img.width, img.height,
+            centerShift_x, centerShift_y, img.width * ratio, img.height * ratio);
 
-            let scrollFraction = scrolled / scrollableDistance;
-
-            // Clamp between 0 and 1
-            scrollFraction = Math.max(0, Math.min(1, scrollFraction));
-
-            // Calculate frame index
-            const frameIndex = Math.min(
-                frameCount - 1,
-                Math.ceil(scrollFraction * frameCount)
-            );
-
-            requestAnimationFrame(() => {
-                if (imagesRef.current[frameIndex]) {
-                    const img = imagesRef.current[frameIndex];
-                    const canvas = canvasRef.current;
-                    const context = canvas.getContext('2d');
-
-                    // High DPI support
-                    const dpr = window.devicePixelRatio || 1;
-                    canvas.width = window.innerWidth * dpr;
-                    // On mobile, use a shorter height (60% of viewport) to avoid taking up too much space
-                    const targetHeight = isMobile ? window.innerHeight * 0.6 : window.innerHeight;
-                    canvas.height = targetHeight * dpr;
-
-                    // Reset transformation matrix before scaling to avoid cumulative scaling
-                    context.setTransform(1, 0, 0, 1, 0, 0);
-                    // Scale context to match
-                    context.scale(dpr, dpr);
-                    context.imageSmoothingEnabled = true;
-                    context.imageSmoothingQuality = 'high';
-
-                    // Calculations based on CSS size (window.inner...)
-                    const canvasWidth = window.innerWidth;
-                    const canvasHeight = targetHeight;
-
-                    const hRatio = canvasWidth / img.width;
-                    const vRatio = canvasHeight / img.height;
-                    const ratio = Math.max(hRatio, vRatio);
-
-                    const centerShift_x = (canvasWidth - img.width * ratio) / 2;
-                    const centerShift_y = (canvasHeight - img.height * ratio) / 2;
-
-                    context.drawImage(img, 0, 0, img.width, img.height,
-                        centerShift_x, centerShift_y, img.width * ratio, img.height * ratio);
-                }
-            });
-
-            // Text Animation Logic
-            const title = document.getElementById("main-title");
-            if (title && title.parentElement) {
-                if (scrollFraction > 0.4 && scrollFraction < 0.98) {
-                    title.parentElement.style.opacity = 1;
-                } else {
-                    title.parentElement.style.opacity = 0;
-                }
+        // Text Animation Logic based on frame index
+        const title = document.getElementById("main-title");
+        if (title && title.parentElement) {
+            if (index > 85 && index < 205) {
+                title.parentElement.style.opacity = 1;
+            } else {
+                title.parentElement.style.opacity = 0;
             }
-        };
-
-        window.addEventListener('scroll', handleScroll);
-        window.addEventListener('resize', handleScroll); // Redraw on resize
-
-        // Initial draw call
-        handleScroll();
-
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-            window.removeEventListener('resize', handleScroll);
-        };
-    }, [imagesLoaded, isMobile]);
-
-    // Custom smooth scroll function
-    const smoothScrollToBottom = () => {
-        if (containerRef.current) {
-            const containerRect = containerRef.current.getBoundingClientRect();
-            const absoluteBottom = window.scrollY + containerRect.bottom;
-
-            const startPosition = window.scrollY;
-            const distance = absoluteBottom - startPosition;
-            const duration = 3000; // 3 seconds for a slow, smooth scroll
-            let start = null;
-
-            const step = (timestamp) => {
-                if (!start) start = timestamp;
-                const progress = timestamp - start;
-                const percentage = Math.min(progress / duration, 1);
-
-                // Ease-in-out easing function
-                const ease = percentage < 0.5
-                    ? 2 * percentage * percentage
-                    : 1 - Math.pow(-2 * percentage + 2, 2) / 2;
-
-                window.scrollTo(0, startPosition + distance * ease);
-
-                if (progress < duration) {
-                    window.requestAnimationFrame(step);
-                }
-            };
-
-            window.requestAnimationFrame(step);
         }
     };
 
+    // 1. Triggers: Timer (2s) or Scroll
     useEffect(() => {
-        const timer = setTimeout(() => {
-            smoothScrollToBottom();
-        }, 3000);
+        if (!imagesLoaded) return;
 
-        return () => clearTimeout(timer);
+        const timer = setTimeout(() => {
+            if (!hasTriggered) setHasTriggered(true);
+        }, 2000);
+
+        const handleScrollTrigger = () => {
+            if (!hasTriggered && window.scrollY > 0) {
+                setHasTriggered(true);
+            }
+        };
+
+        window.addEventListener('scroll', handleScrollTrigger);
+        return () => {
+            clearTimeout(timer);
+            window.removeEventListener('scroll', handleScrollTrigger);
+        };
+    }, [imagesLoaded, hasTriggered]);
+
+    // 2. Animation Logic (Hybrid)
+    useEffect(() => {
+        if (!imagesLoaded) return;
+
+        const animate = (time) => {
+            // A. Update Auto-Play Frame
+            // Only update auto-play if we haven't synced yet
+            if (hasTriggered && !isSynced && autoFrameRef.current < frameCount) {
+                if (!startTimeRef.current) startTimeRef.current = time;
+                const progress = time - startTimeRef.current;
+                const duration = 2000; // 2 seconds duration (Fast)
+
+                const fraction = Math.min(progress / duration, 1);
+                autoFrameRef.current = fraction * (frameCount - 1);
+            }
+
+            // B. Calculate Scroll Frame
+            const container = containerRef.current;
+            let scrollFrame = 0;
+
+            if (container) {
+                const containerRect = container.getBoundingClientRect();
+                const containerHeight = containerRect.height;
+                const windowHeight = isMobile ? window.innerHeight * 0.6 : window.innerHeight;
+                const scrollableDistance = containerHeight - windowHeight;
+                const scrolled = -containerRect.top; // Distance from top
+
+                // If user scrolled past the section, reset autoFrame to allow reverse scrubbing
+                if (scrolled > scrollableDistance + 10) {
+                    autoFrameRef.current = 0;
+                    if (!isSynced) setIsSynced(true);
+                }
+
+                let scrollFraction = scrolled / scrollableDistance;
+                scrollFraction = Math.max(0, Math.min(1, scrollFraction));
+                scrollFrame = scrollFraction * (frameCount - 1);
+            }
+
+            // C. Combine: Use Max(Auto, Scroll)
+            const finalFrame = Math.max(autoFrameRef.current, scrollFrame);
+
+            drawFrame(finalFrame);
+
+            requestRef.current = requestAnimationFrame(animate);
+        };
+
+        requestRef.current = requestAnimationFrame(animate);
+        return () => cancelAnimationFrame(requestRef.current);
+    }, [imagesLoaded, hasTriggered, isMobile, isSynced]);
+
+    // Handle Resize Redraw
+    useEffect(() => {
+        const handleResize = () => {
+            // Redraw handled by animation loop
+        };
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
     }, []);
+
+
+    // Custom smooth scroll function
+    const smoothScrollToBottom = () => {
+        // Simple scroll to next section
+        window.scrollTo({
+            top: window.innerHeight,
+            behavior: 'smooth'
+        });
+    };
+
+    // Handle "Click to explore"
+    const handleExploreClick = () => {
+        if (!hasTriggered) {
+            setHasTriggered(true);
+        } else {
+            smoothScrollToBottom();
+        }
+    };
 
     return (
         <section
             className="hero-scroll-container"
             ref={containerRef}
-            style={{ height: isMobile ? '250vh' : '400vh' }}
+            style={{ height: isMobile ? '250vh' : '300vh' }} // Increased height for scrubbing
         >
             <div className="sticky-wrapper relative">
                 <canvas
@@ -232,7 +243,7 @@ const HeroScroll = () => {
                         ease: "easeInOut"
                     }}
                     className="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-20 text-white cursor-pointer flex flex-col items-center"
-                    onClick={smoothScrollToBottom}
+                    onClick={handleExploreClick}
                 >
                     <p className="text-white text-sm mb-2 font-medium drop-shadow-[0_0_10px_rgba(255,255,255,0.7)]">Click to explore</p>
                     <ChevronDown size={48} className="drop-shadow-[0_0_10px_rgba(255,255,255,0.7)] mx-auto" />

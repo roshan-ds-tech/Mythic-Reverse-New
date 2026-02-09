@@ -3,6 +3,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion, useInView, useSpring, useTransform } from "framer-motion";
 import { Monitor, Smartphone, Database, CheckCircle2, ArrowRight, Sparkles } from "lucide-react";
+import ServicesOrbitalDisplay from "./ServicesOrbitalDisplay";
+import { SparklesCore } from "./ui/sparkles";
 import { clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 
@@ -275,6 +277,18 @@ export default function CompanyServicesSection() {
                 }}
             />
 
+            <div className="absolute inset-0 z-0 pointer-events-none">
+                <SparklesCore
+                    id="tsparticles-services"
+                    background="transparent"
+                    minSize={0.6}
+                    maxSize={1.4}
+                    particleDensity={100}
+                    className="w-full h-full"
+                    particleColor="#FFFFFF"
+                />
+            </div>
+
             <motion.div
                 className="container mx-auto max-w-7xl relative z-10"
                 initial="hidden"
@@ -282,7 +296,7 @@ export default function CompanyServicesSection() {
                 variants={containerVariants}
             >
                 <motion.div
-                    className="text-center mb-16"
+                    className="text-center mb-8"
                     variants={{
                         hidden: { opacity: 0, y: -20 },
                         visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
@@ -304,6 +318,11 @@ export default function CompanyServicesSection() {
                         Delivering cutting-edge digital solutions with classic social media blue aesthetics and clean, trustworthy design
                     </p>
                 </motion.div>
+
+                {/* Orbital Services Display */}
+                <div className="w-full">
+                    <ServicesOrbitalDisplay />
+                </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
                     {SERVICES.map((service, index) => (

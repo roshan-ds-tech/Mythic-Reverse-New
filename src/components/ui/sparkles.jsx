@@ -5,6 +5,9 @@ import { loadSlim } from "@tsparticles/slim";
 import { cn } from "../../lib/utils";
 import { motion, useAnimation } from "framer-motion";
 
+// Global flag to track initialization
+let particlesInitialized = false;
+
 export const SparklesCore = (props) => {
     const {
         id,
@@ -15,14 +18,22 @@ export const SparklesCore = (props) => {
         speed,
         particleColor,
         particleDensity,
+        minOpacity = 0.1,
+        maxOpacity = 0.5,
     } = props;
     const [init, setInit] = useState(false);
+
     useEffect(() => {
-        initParticlesEngine(async (engine) => {
-            await loadSlim(engine);
-        }).then(() => {
+        if (!particlesInitialized) {
+            initParticlesEngine(async (engine) => {
+                await loadSlim(engine);
+            }).then(() => {
+                particlesInitialized = true;
+                setInit(true);
+            });
+        } else {
             setInit(true);
-        });
+        }
     }, []);
     const controls = useAnimation();
 
@@ -114,7 +125,7 @@ export const SparklesCore = (props) => {
                                 value: particleDensity || 100,
                             },
                             opacity: {
-                                value: { min: 0.1, max: 0.5 },
+                                value: { min: minOpacity, max: maxOpacity },
                             },
                             shape: {
                                 type: "circle",
