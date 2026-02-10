@@ -99,7 +99,7 @@ export const ExpandableMenuItem = ({
     );
 };
 
-export const ExpandableMenu = ({
+const ExpandableMenu = ({
     setActive,
     children,
     className
@@ -116,3 +116,5 @@ export const ExpandableMenu = ({
         </nav>
     );
 };
+
+export { ExpandableMenuItem, ExpandableMenu };

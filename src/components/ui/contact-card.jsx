@@ -1,6 +1,6 @@
 import React from 'react';
 import { cn } from '../../lib/utils';
-import { PlusIcon } from 'lucide-react';
+import { Plus } from 'lucide-react';
 
 export function ContactCard({
     title = 'Contact With Us',
@@ -26,10 +26,10 @@ export function ContactCard({
             <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-violet-600/10 blur-[120px] translate-y-1/2 -translate-x-1/2 pointer-events-none" />
 
             {/* Decorative Corner Icons */}
-            <PlusIcon className="absolute top-6 left-6 h-4 w-4 text-purple-500/40" />
-            <PlusIcon className="absolute top-6 right-6 h-4 w-4 text-purple-500/40" />
-            <PlusIcon className="absolute bottom-6 left-6 h-4 w-4 text-purple-500/40" />
-            <PlusIcon className="absolute bottom-6 right-6 h-4 w-4 text-purple-500/40" />
+            <Plus className="absolute top-6 left-6 h-4 w-4 text-purple-500/40" />
+            <Plus className="absolute top-6 right-6 h-4 w-4 text-purple-500/40" />
+            <Plus className="absolute bottom-6 left-6 h-4 w-4 text-purple-500/40" />
+            <Plus className="absolute bottom-6 right-6 h-4 w-4 text-purple-500/40" />
 
             {/* Left Content Section */}
             <div className="flex flex-col justify-between lg:col-span-2 relative z-10 border-b border-white/5 md:border-b-0 md:border-r">

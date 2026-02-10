@@ -7,12 +7,12 @@ import { HyperText } from "../components/ui/hyper-text";
 import { SparklesCore } from "../components/ui/sparkles";
 import { FeaturedSpotlight } from "../components/ui/feature-spotlight";
 import { CircularTestimonialsDemo } from "../components/CircularTestimonialsDemo";
-import { Zap, Rocket, Globe, Brain, Award, MailIcon, PhoneIcon, MapPinIcon } from 'lucide-react';
-import { ContactCard } from "../components/ui/contact-card";
-import { Input } from "../components/ui/input";
-import { Button } from "../components/ui/button";
-import { Label } from "../components/ui/label";
-import { Textarea } from "../components/ui/textarea";
+import { Zap, Rocket, Globe, Brain, Award, Mail, Phone, MapPin } from 'lucide-react';
+import { ContactCard } from "@/components/ui/contact-card";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 
 const timelineData = [
     { year: "2020", title: "The Singularity", description: "Mythic Reverse emerges from the void. Founded to shatter the status quo of legacy tech.", icon: <Zap className="w-5 h-5" />, color: "from-violet-500 to-purple-500" },
@@ -101,17 +101,17 @@ const AboutUs = () => {
                         description="Ready to push the boundaries of what's possible? Reach out to our team of architects and engineers today. We're eager to hear about your vision."
                         contactInfo={[
                             {
-                                icon: MailIcon,
+                                icon: Mail,
                                 label: 'Email',
                                 value: 'hello@mythicreverse.io',
                             },
                             {
-                                icon: PhoneIcon,
+                                icon: Phone,
                                 label: 'Phone',
                                 value: '+1 (555) 000-0000',
                             },
                             {
-                                icon: MapPinIcon,
+                                icon: MapPin,
                                 label: 'Location',
                                 value: 'San Francisco, CA',
                                 className: 'col-span-2',

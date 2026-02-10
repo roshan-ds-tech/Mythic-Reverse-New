@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { HoveredLink, ProductItem } from "./ui/navbar-menu";
-import { ExpandableMenu, ExpandableMenuItem } from "./ui/expandable-menu";
+import { HoveredLink, ProductItem } from "@/components/ui/navbar-menu";
+import { ExpandableMenu, ExpandableMenuItem } from "@/components/ui/expandable-menu";
 import { cn } from "../lib/utils";
 import { motion, useScroll, useMotionValueEvent } from "framer-motion";
 import { useMobile } from "../hooks/use-mobile";
