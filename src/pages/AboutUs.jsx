@@ -1,12 +1,10 @@
 import React from 'react';
-import AnimatedShaderBackground from "../components/ui/animated-shader-background";
+import { HeroSection } from "../components/HeroSection";
 import Timeline from "../components/ui/timeline";
 import { Footer } from "../components/ui/footer-section";
-import { motion } from "framer-motion";
-import { HyperText } from "../components/ui/hyper-text";
-import { SparklesCore } from "../components/ui/sparkles";
 import { FeaturedSpotlight } from "../components/ui/feature-spotlight";
 import { CircularTestimonialsDemo } from "../components/CircularTestimonialsDemo";
+import { SparklesCore } from "../components/ui/sparkles";
 import { Zap, Rocket, Globe, Brain, Award, Mail, Phone, MapPin } from 'lucide-react';
 import { ContactCard } from "@/components/ui/contact-card";
 import { Input } from "@/components/ui/input";
@@ -25,43 +23,8 @@ const timelineData = [
 const AboutUs = () => {
     return (
         <div className="bg-black min-h-screen text-white overflow-hidden">
-            {/* Hero Section with Shader */}
-            <div className="relative h-screen w-full flex items-center justify-center">
-                <div className="absolute inset-0 z-0">
-                    <AnimatedShaderBackground />
-                </div>
-                <div className="absolute inset-0 z-1 pointer-events-none">
-                    <SparklesCore
-                        id="about-us-hero-sparkles"
-                        background="transparent"
-                        minSize={0.6}
-                        maxSize={1.4}
-                        particleDensity={100}
-                        className="w-full h-full"
-                        particleColor="#FFFFFF"
-                    />
-                </div>
-                {/* Gradient to blend hero into next section */}
-                <div className="absolute bottom-0 left-0 w-full h-40 bg-gradient-to-t from-black to-transparent z-[2] pointer-events-none" />
-                <div className="relative z-10 text-center flex flex-col items-center gap-4">
-                    <HyperText
-                        className="text-5xl md:text-8xl font-black tracking-tighter bg-clip-text text-transparent bg-gradient-to-b from-white to-white/40"
-                        text="ARCHITECTS OF"
-                    />
-                    <HyperText
-                        className="text-5xl md:text-8xl font-black tracking-tighter bg-clip-text text-transparent bg-gradient-to-b from-white to-white/40"
-                        text="THE IMPOSSIBLE"
-                    />
-                    <motion.p
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 0.5, duration: 0.8 }}
-                        className="mt-6 text-2xl text-zinc-400 max-w-3xl mx-auto px-4 font-light"
-                    >
-                        We don't just build software. We engineer reality.
-                    </motion.p>
-                </div>
-            </div>
+            {/* Hero Section */}
+            <HeroSection />
 
             {/* Feature Spotlight Section */}
             <section className="py-20 relative z-10 bg-black flex justify-center overflow-hidden">

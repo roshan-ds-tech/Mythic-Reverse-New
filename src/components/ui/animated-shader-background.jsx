@@ -71,26 +71,26 @@ const AnimatedShaderBackground = ({ className, ...props }) => {
 
             float time = iTime * 0.8;
             
-            // Primary flow
+            // Primary flow - Boosted to match About Us brightness
             vec2 p = px;
             float q = fbm(p - time * 0.1);
             vec2 r = vec2(fbm(p + q + time * 0.4 - p.x - p.y), fbm(p + q - time * 0.2));
-            vec3 c = mix(vec3(0.1, 0.0, 0.2), vec3(0.2, 0.0, 0.4), fbm(p + r)); // Darker base
+            vec3 c = mix(vec3(0.22, 0.0, 0.45), vec3(0.4, 0.0, 0.7), fbm(p + r)); // Brighter purple base
             
             // Neon veins
             float vein = fbm(p * 3.0 + r * 5.0 + time);
-            c = mix(c, vec3(0.0, 1.0, 1.0), smoothstep(0.0, 1.0, vein * vein * vein) * 0.6); 
+            c = mix(c, vec3(0.85, 0.25, 1.0), smoothstep(0.0, 1.0, vein * vein * vein) * 0.65); 
             
             // Secondary glow
             float glow = fbm(p * 6.0 - time * 0.5);
-            c = mix(c, vec3(0.8, 0.0, 1.0), smoothstep(0.0, 1.0, glow * glow) * 0.5); 
+            c = mix(c, vec3(0.7, 0.05, 0.95), smoothstep(0.0, 1.0, glow * glow) * 0.55); 
             
             // Extra "Intense" burst
             float burst = fbm(p * 10.0 + time);
-            c += vec3(0.1, 0.0, 0.2) * smoothstep(0.4, 1.0, burst);
+            c += vec3(0.4, 0.05, 0.6) * smoothstep(0.4, 1.0, burst);
 
-            // Vignette
-            float vignette = 1.0 - length(uv - 0.5) * 1.5;
+            // Subtle vignette for focus
+            float vignette = 1.0 - length(uv - 0.5) * 0.9;
             c *= clamp(vignette, 0.0, 1.0);
 
             fragColor = vec4(c, 1.0);

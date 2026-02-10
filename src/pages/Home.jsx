@@ -1,5 +1,4 @@
-import React from 'react';
-import { HeroParallaxDemo } from "../components/HeroParallaxDemo";
+import { AboutHero } from "../components/AboutHero";
 import { ScrollAnimationDemo } from "../components/ScrollAnimationDemo";
 import { GlowingEffectDemoSecond } from "../components/GlowingEffectDemoSecond";
 import CompanyServicesSection from "../components/CompanyServicesSection";
@@ -9,8 +8,8 @@ import { Footer } from "../components/ui/footer-section";
 
 const Home = () => {
     return (
-        <div className="relative z-10">
-            <HeroParallaxDemo />
+        <div className="bg-black min-h-screen text-white overflow-hidden">
+            <AboutHero />
             <ScrollAnimationDemo />
             <div className="bg-black pt-0 pb-20 px-4">
                 <GlowingEffectDemoSecond />
