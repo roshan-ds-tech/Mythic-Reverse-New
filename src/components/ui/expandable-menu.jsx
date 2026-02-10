@@ -30,7 +30,7 @@ const spanVariants = {
     exit: { width: 0, opacity: 0 },
 };
 
-export const ExpandableMenuItem = ({
+const ExpandableMenuItem = ({
     setActive,
     active,
     item,
