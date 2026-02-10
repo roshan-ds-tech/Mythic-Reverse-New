@@ -44,7 +44,7 @@ const footerLinks = [
 
 export function Footer() {
     return (
-        <footer className="relative w-full border-t border-purple-500/30 bg-[radial-gradient(35%_128px_at_50%_0%,theme(backgroundColor.purple.500/10%),transparent)] px-6 py-12 lg:py-16 shadow-[0_-1px_15px_-5px_theme(colors.purple.500/30%)]">
+        <footer className="relative w-full border-t border-purple-500/30 bg-zinc-950 px-6 py-12 lg:py-16 shadow-[0_-1px_15px_-5px_theme(colors.purple.500/30%)]">
             <div className="bg-purple-500/30 absolute top-0 right-1/2 left-1/2 h-px w-1/3 -translate-x-1/2 -translate-y-1/2 rounded-full blur-[2px]" />
 
             <div className="max-w-7xl mx-auto">

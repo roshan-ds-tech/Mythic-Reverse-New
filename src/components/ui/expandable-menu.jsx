@@ -36,13 +36,16 @@ export const ExpandableMenuItem = ({
     item,
     icon: Icon,
     children,
+    href,
     activeColor = "text-neutral-900 dark:text-white",
 }) => {
     const isSelected = active === item;
+    const Component = href ? motion.a : motion.button;
 
     return (
         <div onMouseEnter={() => setActive(item)} className="relative">
-            <motion.button
+            <Component
+                href={href}
                 variants={buttonVariants}
                 initial={false}
                 animate="animate"
@@ -70,7 +73,7 @@ export const ExpandableMenuItem = ({
                         </motion.span>
                     )}
                 </AnimatePresence>
-            </motion.button>
+            </Component>
 
             {active !== null && children && (
                 <motion.div

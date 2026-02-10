@@ -1,16 +1,12 @@
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { NavbarDemo } from './components/NavbarDemo'
-import { ScrollAnimationDemo } from './components/ScrollAnimationDemo'
-import { GlowingEffectDemoSecond } from './components/GlowingEffectDemoSecond'
-import CompanyServicesSection from './components/CompanyServicesSection'
 import { SparklesCore } from "./components/ui/sparkles";
-import { HeroParallaxDemo } from "./components/HeroParallaxDemo";
-import { PremiumTestimonialsDemo } from "./components/PremiumTestimonialsDemo";
-import { Footer } from "./components/ui/footer-section";
-import { CTASection } from "./components/ui/cta-section";
+import Home from "./pages/Home";
+import AboutUs from "./pages/AboutUs";
 
 function App() {
   return (
-    <>
+    <Router>
       <div className="fixed inset-0 z-0 pointer-events-none">
         <SparklesCore
           id="tsparticlesfullpage"
@@ -23,17 +19,11 @@ function App() {
         />
       </div>
       <NavbarDemo />
-      <HeroParallaxDemo />
-      <ScrollAnimationDemo />
-      <div className="bg-black pt-0 pb-20 px-4">
-        <GlowingEffectDemoSecond />
-      </div>
-      <CompanyServicesSection />
-      <PremiumTestimonialsDemo />
-      <CTASection />
-      <div className="h-28 bg-black" />
-      <Footer />
-    </>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about-us" element={<AboutUs />} />
+      </Routes>
+    </Router>
   )
 }
 
