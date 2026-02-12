@@ -157,25 +157,39 @@ function ServicesOrbitalDisplay({ servicesData }) {
             <style>
                 {`
                     @keyframes orbitRotate {
-                        from {
-                            transform: rotate(0deg);
-                        }
-                        to {
-                            transform: rotate(360deg);
-                        }
+                        from { transform: rotate(0deg); }
+                        to { transform: rotate(360deg); }
+                    }
+
+                    @keyframes counterRotate {
+                        from { transform: rotate(0deg); }
+                        to { transform: rotate(-360deg); }
                     }
                     
                     .orbit-container {
                         will-change: transform;
                         animation: orbitRotate 30s linear infinite;
-                        animation-play-state: ${autoRotate ? 'running' : 'paused'};
                     }
                     
+                    .orbit-container.paused {
+                        animation: none;
+                    }
+
                     /* Optimize rendering for nodes */
                     .orbit-node {
                         will-change: transform;
                         transform: translateZ(0);
                         backface-visibility: hidden;
+                    }
+
+                    /* Text counter-rotation - updated to apply to full node content */
+                    .orbit-node-rotator {
+                        will-change: transform;
+                        animation: counterRotate 30s linear infinite;
+                    }
+
+                    .orbit-node-rotator.paused {
+                        animation: none;
                     }
                 `}
             </style>
@@ -203,7 +217,9 @@ function ServicesOrbitalDisplay({ servicesData }) {
                         {/* Rotating container with CSS animation */}
                         <div
                             ref={orbitRef}
-                            className="orbit-container absolute w-full h-full"
+                            className={cn("orbit-container absolute w-full h-full flex items-center justify-center pointer-events-none", {
+                                "paused": !autoRotate
+                            })}
                         >
                             {servicesData.map((item, index) => {
                                 const position = calculateNodePosition(index, servicesData.length);
@@ -223,116 +239,137 @@ function ServicesOrbitalDisplay({ servicesData }) {
                                         ref={(el) => {
                                             if (el) nodeRefs.current[item.id] = el;
                                         }}
-                                        className="orbit-node absolute transition-all duration-700 cursor-pointer"
+                                        // Center the pivot point of the node
+                                        className="orbit-node absolute left-1/2 top-1/2 -ml-5 -mt-5 w-10 h-10 transition-all duration-700 pointer-events-auto cursor-pointer flex items-center justify-center"
                                         style={nodeStyle}
                                         onClick={(e) => {
                                             e.stopPropagation();
                                             toggleItem(item.id);
                                         }}
                                     >
-                                        {/* Node Orb - Removed heavy shadows and pulses */}
+                                        {/* Rotator wrapper to keep content upright */}
                                         <div
-                                            className={cn(
-                                                "w-10 h-10 rounded-full flex items-center justify-center border-2 transition-all duration-300 transform",
-                                                {
-                                                    "bg-violet-600 text-white border-violet-500 shadow-lg shadow-violet-600/30 scale-150": isExpanded,
-                                                    "bg-violet-600/70 text-white border-violet-400": isRelated,
-                                                    "bg-zinc-800 text-white border-violet-500 shadow-sm shadow-violet-600/10": !isExpanded && !isRelated
-                                                }
-                                            )}
+                                            className={cn("orbit-node-rotator relative w-full h-full flex items-center justify-center", {
+                                                "paused": !autoRotate
+                                            })}
+                                            style={!autoRotate ? {
+                                                transform: `rotate(-${rotationAngleRef.current}deg)`
+                                            } : {}}
                                         >
-                                            <Icon size={16} />
-                                        </div>
+                                            {/* Energy Pulse Ring */}
+                                            <div
+                                                className={`absolute rounded-full -inset-1 ${isExpanded || isRelated ? "animate-pulse duration-1000" : ""}`}
+                                                style={{
+                                                    background: `radial-gradient(circle, rgba(139,92,246,0.3) 0%, rgba(139,92,246,0) 70%)`, // Violet pulse
+                                                    width: `${item.energy * 0.5 + 40}px`,
+                                                    height: `${item.energy * 0.5 + 40}px`,
+                                                    left: `50%`,
+                                                    top: `50%`,
+                                                    transform: `translate(-50%, -50%)`,
+                                                }}
+                                            ></div>
 
-                                        {/* Node Label - Counter-rotate to keep text upright */}
-                                        <div
-                                            className={cn(
-                                                "absolute top-12 whitespace-nowrap text-xs font-semibold tracking-wider transition-all duration-300",
-                                                {
-                                                    "text-white scale-125 font-bold": isExpanded,
-                                                    "text-violet-200 font-medium": !isExpanded
-                                                }
-                                            )}
-                                            style={{
-                                                transform: `rotate(${autoRotate ? '0deg' : `-${rotationAngleRef.current}deg`})`
-                                            }}
-                                        >
-                                            {item.title}
-                                        </div>
+                                            {/* Node Orb - Removed heavy shadows and pulses */}
+                                            <div
+                                                className={cn(
+                                                    "w-10 h-10 rounded-full flex items-center justify-center border-2 transition-all duration-300 transform relative z-10",
+                                                    {
+                                                        "bg-violet-600 text-white border-violet-500 shadow-lg shadow-violet-600/30 scale-150": isExpanded,
+                                                        "bg-violet-600/70 text-white border-violet-400": isRelated,
+                                                        "bg-zinc-800 text-white border-violet-500 shadow-sm shadow-violet-600/10": !isExpanded && !isRelated
+                                                    }
+                                                )}
+                                            >
+                                                <Icon size={16} />
+                                            </div>
 
-                                        {/* Expanded Card Details */}
-                                        {isExpanded && (
-                                            <Card className="absolute top-20 left-1/2 -translate-x-1/2 w-80 bg-zinc-900/95 backdrop-blur-lg border-violet-500/30 shadow-lg shadow-violet-900/10 overflow-visible z-[600]">
-                                                <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-px h-3 bg-violet-500/50"></div>
-                                                <CardHeader className="pb-2">
-                                                    <div className="flex justify-between items-center">
-                                                        <Badge
-                                                            className={cn("px-2 text-xs", getStatusStyles(item.status))}
-                                                        >
-                                                            {item.status === "completed"
-                                                                ? "ACTIVE"
-                                                                : item.status === "in-progress"
-                                                                    ? "FEATURED"
-                                                                    : "COMING SOON"}
-                                                        </Badge>
-                                                        <span className="text-xs font-mono text-violet-400/70">
-                                                            {item.date}
-                                                        </span>
-                                                    </div>
-                                                    <CardTitle className="text-sm mt-2 text-violet-400">
-                                                        {item.title}
-                                                    </CardTitle>
-                                                </CardHeader>
-                                                <CardContent className="text-xs text-neutral-300">
-                                                    <p className="leading-relaxed">{item.content}</p>
+                                            {/* Node Label - Counter-rotate to keep text upright */}
+                                            <div
+                                                className={cn(
+                                                    "absolute top-12 left-1/2 -translate-x-1/2 whitespace-nowrap text-xs font-semibold tracking-wider transition-all duration-300 z-20",
+                                                    {
+                                                        "text-white scale-125 font-bold": isExpanded,
+                                                        "text-violet-200 font-medium": !isExpanded
+                                                    }
+                                                )}
+                                            >
+                                                {item.title}
+                                            </div>
 
-                                                    <div className="mt-4 pt-3 border-t border-violet-500/20">
-                                                        <div className="flex justify-between items-center text-xs mb-1">
-                                                            <span className="flex items-center text-violet-400">
-                                                                <Zap size={10} className="mr-1" />
-                                                                Service Level
+                                            {/* Expanded Card Details */}
+                                            {isExpanded && (
+                                                <Card className="absolute top-20 left-1/2 -translate-x-1/2 w-80 bg-zinc-900/95 backdrop-blur-lg border-violet-500/30 shadow-lg shadow-violet-900/10 overflow-visible z-[600]">
+                                                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-px h-3 bg-violet-500/50"></div>
+                                                    <CardHeader className="pb-2">
+                                                        <div className="flex justify-between items-center">
+                                                            <Badge
+                                                                className={cn("px-2 text-xs", getStatusStyles(item.status))}
+                                                            >
+                                                                {item.status === "completed"
+                                                                    ? "ACTIVE"
+                                                                    : item.status === "in-progress"
+                                                                        ? "FEATURED"
+                                                                        : "COMING SOON"}
+                                                            </Badge>
+                                                            <span className="text-xs font-mono text-violet-400/70">
+                                                                {item.date}
                                                             </span>
-                                                            <span className="font-mono text-violet-400">{item.energy}%</span>
                                                         </div>
-                                                        <div className="w-full h-1.5 bg-violet-500/10 rounded-full overflow-hidden">
-                                                            <div
-                                                                className="h-full bg-gradient-to-r from-violet-600 to-fuchsia-600"
-                                                                style={{ width: `${item.energy}%` }}
-                                                            ></div>
-                                                        </div>
-                                                    </div>
+                                                        <CardTitle className="text-sm mt-2 text-violet-400">
+                                                            {item.title}
+                                                        </CardTitle>
+                                                    </CardHeader>
+                                                    <CardContent className="text-xs text-neutral-300">
+                                                        <p className="leading-relaxed">{item.content}</p>
 
-                                                    {item.relatedIds.length > 0 && (
                                                         <div className="mt-4 pt-3 border-t border-violet-500/20">
-                                                            <div className="flex items-center mb-2">
-                                                                <h4 className="text-xs uppercase tracking-wider font-medium text-violet-400/80">
-                                                                    Related Services
-                                                                </h4>
+                                                            <div className="flex justify-between items-center text-xs mb-1">
+                                                                <span className="flex items-center text-violet-400">
+                                                                    <Zap size={10} className="mr-1" />
+                                                                    Service Level
+                                                                </span>
+                                                                <span className="font-mono text-violet-400">{item.energy}%</span>
                                                             </div>
-                                                            <div className="flex flex-wrap gap-1">
-                                                                {item.relatedIds.map((relatedId) => {
-                                                                    const relatedItem = servicesData.find(
-                                                                        (i) => i.id === relatedId
-                                                                    );
-                                                                    return (
-                                                                        <button
-                                                                            key={relatedId}
-                                                                            className="flex items-center h-6 px-2 py-0 text-xs rounded-md border border-violet-500/30 bg-transparent hover:bg-violet-500/10 text-violet-400 transition-all"
-                                                                            onClick={(e) => {
-                                                                                e.stopPropagation();
-                                                                                toggleItem(relatedId);
-                                                                            }}
-                                                                        >
-                                                                            {relatedItem?.title}
-                                                                        </button>
-                                                                    );
-                                                                })}
+                                                            <div className="w-full h-1.5 bg-violet-500/10 rounded-full overflow-hidden">
+                                                                <div
+                                                                    className="h-full bg-gradient-to-r from-violet-600 to-fuchsia-600"
+                                                                    style={{ width: `${item.energy}%` }}
+                                                                ></div>
                                                             </div>
                                                         </div>
-                                                    )}
-                                                </CardContent>
-                                            </Card>
-                                        )}
+
+                                                        {item.relatedIds.length > 0 && (
+                                                            <div className="mt-4 pt-3 border-t border-violet-500/20">
+                                                                <div className="flex items-center mb-2">
+                                                                    <h4 className="text-xs uppercase tracking-wider font-medium text-violet-400/80">
+                                                                        Related Services
+                                                                    </h4>
+                                                                </div>
+                                                                <div className="flex flex-wrap gap-1">
+                                                                    {item.relatedIds.map((relatedId) => {
+                                                                        const relatedItem = servicesData.find(
+                                                                            (i) => i.id === relatedId
+                                                                        );
+                                                                        return (
+                                                                            <button
+                                                                                key={relatedId}
+                                                                                className="flex items-center h-6 px-2 py-0 text-xs rounded-md border border-violet-500/30 bg-transparent hover:bg-violet-500/10 text-violet-400 transition-all"
+                                                                                onClick={(e) => {
+                                                                                    e.stopPropagation();
+                                                                                    toggleItem(relatedId);
+                                                                                }}
+                                                                            >
+                                                                                {relatedItem?.title}
+                                                                            </button>
+                                                                        );
+                                                                    })}
+                                                                </div>
+                                                            </div>
+                                                        )}
+                                                    </CardContent>
+                                                </Card>
+                                            )}
+                                        </div>
                                     </div>
                                 );
                             })}
