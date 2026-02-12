@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
-import { Monitor, Smartphone, Server, Zap, Check, ChevronRight } from "lucide-react";
+import React, { useState, useRef } from "react";
+import { Monitor, Smartphone, Server, Zap } from "lucide-react";
 import { clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 
@@ -53,11 +53,11 @@ const CardContent = ({ className, ...props }) => (
 
 function ServicesOrbitalDisplay({ servicesData }) {
     const [expandedItems, setExpandedItems] = useState({});
-    const [rotationAngle, setRotationAngle] = useState(0);
     const [autoRotate, setAutoRotate] = useState(true);
-    const [pulseEffect, setPulseEffect] = useState({});
-    const [centerOffset] = useState({ x: 0, y: 0 });
     const [activeNodeId, setActiveNodeId] = useState(null);
+
+    // Use refs instead of state for values that don't need to trigger re-renders
+    const rotationAngleRef = useRef(0);
     const containerRef = useRef(null);
     const orbitRef = useRef(null);
     const nodeRefs = useRef({});
@@ -66,7 +66,6 @@ function ServicesOrbitalDisplay({ servicesData }) {
         if (e.target === containerRef.current || e.target === orbitRef.current) {
             setExpandedItems({});
             setActiveNodeId(null);
-            setPulseEffect({});
             setAutoRotate(true);
         }
     };
@@ -86,81 +85,41 @@ function ServicesOrbitalDisplay({ servicesData }) {
             if (!prev[id]) {
                 setActiveNodeId(id);
                 setAutoRotate(false);
-
-                const relatedItems = getRelatedItems(id);
-                const newPulseEffect = {};
-                relatedItems.forEach((relId) => {
-                    newPulseEffect[relId] = true;
-                });
-                setPulseEffect(newPulseEffect);
-
                 centerViewOnNode(id);
             } else {
                 setActiveNodeId(null);
                 setAutoRotate(true);
-                setPulseEffect({});
             }
 
             return newState;
         });
     };
 
-    useEffect(() => {
-        let animationFrameId;
-        let lastTime = performance.now();
-
-        const animate = (time) => {
-            if (!autoRotate) return;
-
-            const deltaTime = time - lastTime;
-
-            // Normalize speed regardless of frame rate (target ~12 deg/sec)
-            // 0.6 deg per 50ms = 0.012 deg per ms
-            const speedFactor = 0.012;
-
-            if (deltaTime >= 16) { // Cap at ~60fps
-                setRotationAngle((prev) => {
-                    const newAngle = (prev + (deltaTime * speedFactor)) % 360;
-                    return Number(newAngle.toFixed(3));
-                });
-                lastTime = time;
-            }
-
-            animationFrameId = requestAnimationFrame(animate);
-        };
-
-        if (autoRotate) {
-            animationFrameId = requestAnimationFrame(animate);
-        }
-
-        return () => {
-            if (animationFrameId) {
-                cancelAnimationFrame(animationFrameId);
-            }
-        };
-    }, [autoRotate]);
-
     const centerViewOnNode = (nodeId) => {
-        if (!nodeRefs.current[nodeId]) return;
+        if (!nodeRefs.current[nodeId] || !orbitRef.current) return;
 
         const nodeIndex = servicesData.findIndex((item) => item.id === nodeId);
         const totalNodes = servicesData.length;
         const targetAngle = (nodeIndex / totalNodes) * 360;
 
-        setRotationAngle(270 - targetAngle);
+        // Update ref instead of state
+        rotationAngleRef.current = 270 - targetAngle;
+
+        // Apply rotation directly to the orbit element
+        orbitRef.current.style.transform = `rotate(${rotationAngleRef.current}deg)`;
     };
 
     const calculateNodePosition = (index, total) => {
-        const angle = ((index / total) * 360 + rotationAngle) % 360;
-        const radius = 200; // Restored Radius
+        const angle = (index / total) * 360;
+        const radius = 200;
         const radian = (angle * Math.PI) / 180;
 
-        const x = radius * Math.cos(radian) + centerOffset.x;
-        const y = radius * Math.sin(radian) + centerOffset.y;
+        const x = radius * Math.cos(radian);
+        const y = radius * Math.sin(radian);
 
         const zIndex = Math.round(100 + 50 * Math.cos(radian));
         const opacity = Math.max(
-            0.7, // Increased minimum opacity for better visibility
+            0.7,
             Math.min(1, 0.7 + 0.3 * ((1 + Math.sin(radian)) / 2))
         );
 
@@ -193,178 +152,195 @@ function ServicesOrbitalDisplay({ servicesData }) {
     };
 
     return (
-        <div
-            className="w-full h-[500px] md:h-[600px] flex flex-col items-center justify-center bg-transparent overflow-hidden relative"
-            ref={containerRef}
-            onClick={handleContainerClick}
-        >
-            <div className="relative w-full max-w-4xl h-full flex items-center justify-center">
-                <div
-                    className="absolute w-full h-full flex items-center justify-center"
-                    ref={orbitRef}
-                    style={{
-                        perspective: "1000px",
-                        transform: `translate(${centerOffset.x}px, ${centerOffset.y}px)`,
-                    }}
-                >
-                    {/* Main Center Orb - Violet/Fuchsia */}
-                    <div className="absolute w-16 h-16 rounded-full bg-gradient-to-br from-violet-600 via-fuchsia-600 to-violet-600 animate-pulse flex items-center justify-center z-10 shadow-lg shadow-violet-600/30">
-                        <div className="absolute w-20 h-20 rounded-full border border-violet-600/30 animate-ping opacity-70"></div>
+        <>
+            {/* CSS Animation for GPU-accelerated rotation */}
+            <style>
+                {`
+                    @keyframes orbitRotate {
+                        from {
+                            transform: rotate(0deg);
+                        }
+                        to {
+                            transform: rotate(360deg);
+                        }
+                    }
+                    
+                    .orbit-container {
+                        will-change: transform;
+                        animation: orbitRotate 30s linear infinite;
+                        animation-play-state: ${autoRotate ? 'running' : 'paused'};
+                    }
+                    
+                    /* Optimize rendering for nodes */
+                    .orbit-node {
+                        will-change: transform;
+                        transform: translateZ(0);
+                        backface-visibility: hidden;
+                    }
+                `}
+            </style>
+
+            <div
+                className="w-full h-[500px] md:h-[600px] flex flex-col items-center justify-center bg-transparent overflow-hidden relative"
+                ref={containerRef}
+                onClick={handleContainerClick}
+            >
+                <div className="relative w-full max-w-4xl h-full flex items-center justify-center">
+                    <div
+                        className="absolute w-full h-full flex items-center justify-center"
+                        style={{
+                            perspective: "1000px",
+                        }}
+                    >
+                        {/* Main Center Orb - Violet/Fuchsia - Reduced animation */}
+                        <div className="absolute w-16 h-16 rounded-full bg-gradient-to-br from-violet-600 via-fuchsia-600 to-violet-600 flex items-center justify-center z-10 shadow-md shadow-violet-600/20">
+                            <div className="w-8 h-8 rounded-full bg-white/90 backdrop-blur-md"></div>
+                        </div>
+
+                        {/* Orbit Ring */}
+                        <div className="absolute w-96 h-96 rounded-full border border-violet-500/50"></div>
+
+                        {/* Rotating container with CSS animation */}
                         <div
-                            className="absolute w-24 h-24 rounded-full border border-fuchsia-600/20 animate-ping opacity-50"
-                            style={{ animationDelay: "0.5s" }}
-                        ></div>
-                        <div className="w-8 h-8 rounded-full bg-white/90 backdrop-blur-md"></div>
-                    </div>
+                            ref={orbitRef}
+                            className="orbit-container absolute w-full h-full"
+                        >
+                            {servicesData.map((item, index) => {
+                                const position = calculateNodePosition(index, servicesData.length);
+                                const isExpanded = expandedItems[item.id];
+                                const isRelated = isRelatedToActive(item.id);
+                                const Icon = item.icon;
 
-                    {/* Orbit Ring */}
-                    <div className="absolute w-96 h-96 rounded-full border border-violet-500/50"></div>
+                                const nodeStyle = {
+                                    transform: `translate(${position.x}px, ${position.y}px)`,
+                                    zIndex: isExpanded ? 500 : position.zIndex,
+                                    opacity: isExpanded ? 1 : position.opacity,
+                                };
 
-                    {servicesData.map((item, index) => {
-                        const position = calculateNodePosition(index, servicesData.length);
-                        const isExpanded = expandedItems[item.id];
-                        const isRelated = isRelatedToActive(item.id);
-                        const isPulsing = pulseEffect[item.id];
-                        const Icon = item.icon;
-
-                        const nodeStyle = {
-                            transform: `translate(${position.x}px, ${position.y}px)`,
-                            zIndex: isExpanded ? 500 : position.zIndex, // Higher z-index for expanded
-                            opacity: isExpanded ? 1 : position.opacity,
-                        };
-
-                        return (
-                            <div
-                                key={item.id}
-                                ref={(el) => {
-                                    if (el) nodeRefs.current[item.id] = el;
-                                }}
-                                className="absolute transition-all duration-700 cursor-pointer"
-                                style={nodeStyle}
-                                onClick={(e) => {
-                                    e.stopPropagation();
-                                    toggleItem(item.id);
-                                }}
-                            >
-                                {/* Energy Pulse Ring */}
-                                <div
-                                    className={`absolute rounded-full -inset-1 ${isPulsing ? "animate-pulse duration-1000" : ""
-                                        }`}
-                                    style={{
-                                        background: `radial-gradient(circle, rgba(139,92,246,0.3) 0%, rgba(139,92,246,0) 70%)`, // Violet pulse
-                                        width: `${item.energy * 0.5 + 40}px`,
-                                        height: `${item.energy * 0.5 + 40}px`,
-                                        left: `-${(item.energy * 0.5 + 40 - 40) / 2}px`,
-                                        top: `-${(item.energy * 0.5 + 40 - 40) / 2}px`,
-                                    }}
-                                ></div>
-
-                                {/* Node Orb */}
-                                <div
-                                    className={cn(
-                                        "w-10 h-10 rounded-full flex items-center justify-center border-2 transition-all duration-300 transform",
-                                        {
-                                            "bg-violet-600 text-white border-violet-500 shadow-lg shadow-violet-600/40 scale-150": isExpanded,
-                                            "bg-violet-600/70 text-white border-violet-400 animate-pulse": isRelated,
-                                            "bg-zinc-800 text-white border-violet-500 shadow-[0_0_10px_rgba(139,92,246,0.2)]": !isExpanded && !isRelated
-                                        }
-                                    )}
-                                >
-                                    <Icon size={16} />
-                                </div>
-
-                                {/* Node Label */}
-                                <div
-                                    className={cn(
-                                        "absolute top-12 whitespace-nowrap text-xs font-semibold tracking-wider transition-all duration-300",
-                                        {
-                                            "text-white scale-125 font-bold": isExpanded,
-                                            "text-violet-200 font-medium": !isExpanded
-                                        }
-                                    )}
-                                >
-                                    {item.title}
-                                </div>
-
-                                {/* Expanded Card Details */}
-                                {isExpanded && (
-                                    <Card className="absolute top-20 left-1/2 -translate-x-1/2 w-80 bg-zinc-900/95 backdrop-blur-lg border-violet-500/30 shadow-xl shadow-violet-900/20 overflow-visible z-[600]"> {/* High z-index */}
-                                        <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-px h-3 bg-violet-500/50"></div>
-                                        <CardHeader className="pb-2">
-                                            <div className="flex justify-between items-center">
-                                                <Badge
-                                                    className={cn("px-2 text-xs", getStatusStyles(item.status))}
-                                                >
-                                                    {item.status === "completed"
-                                                        ? "ACTIVE"
-                                                        : item.status === "in-progress"
-                                                            ? "FEATURED"
-                                                            : "COMING SOON"}
-                                                </Badge>
-                                                <span className="text-xs font-mono text-violet-400/70">
-                                                    {item.date}
-                                                </span>
-                                            </div>
-                                            <CardTitle className="text-sm mt-2 text-violet-400">
-                                                {item.title}
-                                            </CardTitle>
-                                        </CardHeader>
-                                        <CardContent className="text-xs text-neutral-300">
-                                            <p className="leading-relaxed">{item.content}</p>
-
-                                            <div className="mt-4 pt-3 border-t border-violet-500/20">
-                                                <div className="flex justify-between items-center text-xs mb-1">
-                                                    <span className="flex items-center text-violet-400">
-                                                        <Zap size={10} className="mr-1" />
-                                                        Service Level
-                                                    </span>
-                                                    <span className="font-mono text-violet-400">{item.energy}%</span>
-                                                </div>
-                                                <div className="w-full h-1.5 bg-violet-500/10 rounded-full overflow-hidden">
-                                                    <div
-                                                        className="h-full bg-gradient-to-r from-violet-600 to-fuchsia-600"
-                                                        style={{ width: `${item.energy}%` }}
-                                                    ></div>
-                                                </div>
-                                            </div>
-
-                                            {item.relatedIds.length > 0 && (
-                                                <div className="mt-4 pt-3 border-t border-violet-500/20">
-                                                    <div className="flex items-center mb-2">
-                                                        <h4 className="text-xs uppercase tracking-wider font-medium text-violet-400/80">
-                                                            Related Services
-                                                        </h4>
-                                                    </div>
-                                                    <div className="flex flex-wrap gap-1">
-                                                        {item.relatedIds.map((relatedId) => {
-                                                            const relatedItem = servicesData.find(
-                                                                (i) => i.id === relatedId
-                                                            );
-                                                            return (
-                                                                <button
-                                                                    key={relatedId}
-                                                                    className="flex items-center h-6 px-2 py-0 text-xs rounded-md border border-violet-500/30 bg-transparent hover:bg-violet-500/10 text-violet-400 transition-all"
-                                                                    onClick={(e) => {
-                                                                        e.stopPropagation();
-                                                                        toggleItem(relatedId);
-                                                                    }}
-                                                                >
-                                                                    {relatedItem?.title}
-                                                                </button>
-                                                            );
-                                                        })}
-                                                    </div>
-                                                </div>
+                                return (
+                                    <div
+                                        key={item.id}
+                                        ref={(el) => {
+                                            if (el) nodeRefs.current[item.id] = el;
+                                        }}
+                                        className="orbit-node absolute transition-all duration-700 cursor-pointer"
+                                        style={nodeStyle}
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            toggleItem(item.id);
+                                        }}
+                                    >
+                                        {/* Node Orb - Removed heavy shadows and pulses */}
+                                        <div
+                                            className={cn(
+                                                "w-10 h-10 rounded-full flex items-center justify-center border-2 transition-all duration-300 transform",
+                                                {
+                                                    "bg-violet-600 text-white border-violet-500 shadow-lg shadow-violet-600/30 scale-150": isExpanded,
+                                                    "bg-violet-600/70 text-white border-violet-400": isRelated,
+                                                    "bg-zinc-800 text-white border-violet-500 shadow-sm shadow-violet-600/10": !isExpanded && !isRelated
+                                                }
                                             )}
-                                        </CardContent>
-                                    </Card>
-                                )}
-                            </div>
-                        );
-                    })}
+                                        >
+                                            <Icon size={16} />
+                                        </div>
+
+                                        {/* Node Label - Counter-rotate to keep text upright */}
+                                        <div
+                                            className={cn(
+                                                "absolute top-12 whitespace-nowrap text-xs font-semibold tracking-wider transition-all duration-300",
+                                                {
+                                                    "text-white scale-125 font-bold": isExpanded,
+                                                    "text-violet-200 font-medium": !isExpanded
+                                                }
+                                            )}
+                                            style={{
+                                                transform: `rotate(${autoRotate ? '0deg' : `-${rotationAngleRef.current}deg`})`
+                                            }}
+                                        >
+                                            {item.title}
+                                        </div>
+
+                                        {/* Expanded Card Details */}
+                                        {isExpanded && (
+                                            <Card className="absolute top-20 left-1/2 -translate-x-1/2 w-80 bg-zinc-900/95 backdrop-blur-lg border-violet-500/30 shadow-lg shadow-violet-900/10 overflow-visible z-[600]">
+                                                <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-px h-3 bg-violet-500/50"></div>
+                                                <CardHeader className="pb-2">
+                                                    <div className="flex justify-between items-center">
+                                                        <Badge
+                                                            className={cn("px-2 text-xs", getStatusStyles(item.status))}
+                                                        >
+                                                            {item.status === "completed"
+                                                                ? "ACTIVE"
+                                                                : item.status === "in-progress"
+                                                                    ? "FEATURED"
+                                                                    : "COMING SOON"}
+                                                        </Badge>
+                                                        <span className="text-xs font-mono text-violet-400/70">
+                                                            {item.date}
+                                                        </span>
+                                                    </div>
+                                                    <CardTitle className="text-sm mt-2 text-violet-400">
+                                                        {item.title}
+                                                    </CardTitle>
+                                                </CardHeader>
+                                                <CardContent className="text-xs text-neutral-300">
+                                                    <p className="leading-relaxed">{item.content}</p>
+
+                                                    <div className="mt-4 pt-3 border-t border-violet-500/20">
+                                                        <div className="flex justify-between items-center text-xs mb-1">
+                                                            <span className="flex items-center text-violet-400">
+                                                                <Zap size={10} className="mr-1" />
+                                                                Service Level
+                                                            </span>
+                                                            <span className="font-mono text-violet-400">{item.energy}%</span>
+                                                        </div>
+                                                        <div className="w-full h-1.5 bg-violet-500/10 rounded-full overflow-hidden">
+                                                            <div
+                                                                className="h-full bg-gradient-to-r from-violet-600 to-fuchsia-600"
+                                                                style={{ width: `${item.energy}%` }}
+                                                            ></div>
+                                                        </div>
+                                                    </div>
+
+                                                    {item.relatedIds.length > 0 && (
+                                                        <div className="mt-4 pt-3 border-t border-violet-500/20">
+                                                            <div className="flex items-center mb-2">
+                                                                <h4 className="text-xs uppercase tracking-wider font-medium text-violet-400/80">
+                                                                    Related Services
+                                                                </h4>
+                                                            </div>
+                                                            <div className="flex flex-wrap gap-1">
+                                                                {item.relatedIds.map((relatedId) => {
+                                                                    const relatedItem = servicesData.find(
+                                                                        (i) => i.id === relatedId
+                                                                    );
+                                                                    return (
+                                                                        <button
+                                                                            key={relatedId}
+                                                                            className="flex items-center h-6 px-2 py-0 text-xs rounded-md border border-violet-500/30 bg-transparent hover:bg-violet-500/10 text-violet-400 transition-all"
+                                                                            onClick={(e) => {
+                                                                                e.stopPropagation();
+                                                                                toggleItem(relatedId);
+                                                                            }}
+                                                                        >
+                                                                            {relatedItem?.title}
+                                                                        </button>
+                                                                    );
+                                                                })}
+                                                            </div>
+                                                        </div>
+                                                    )}
+                                                </CardContent>
+                                            </Card>
+                                        )}
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
+        </>
     );
 }
 
