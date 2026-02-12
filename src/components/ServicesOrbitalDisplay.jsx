@@ -63,11 +63,10 @@ function ServicesOrbitalDisplay({ servicesData }) {
     const nodeRefs = useRef({});
 
     const handleContainerClick = (e) => {
-        if (e.target === containerRef.current || e.target === orbitRef.current) {
-            setExpandedItems({});
-            setActiveNodeId(null);
-            setAutoRotate(true);
-        }
+        // Any click that bubbles to the container is a background click
+        setExpandedItems({});
+        setActiveNodeId(null);
+        setAutoRotate(true);
     };
 
     const toggleItem = (id) => {
@@ -191,6 +190,16 @@ function ServicesOrbitalDisplay({ servicesData }) {
                     .orbit-node-rotator.paused {
                         animation: none;
                     }
+
+                    /* Card Entry Animation */
+                    @keyframes cardEntry {
+                        from { opacity: 0; transform: translate(-50%, -40%) scale(0.95); }
+                        to { opacity: 1; transform: translate(-50%, 0) scale(1); }
+                    }
+
+                    .card-entry {
+                        animation: cardEntry 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+                    }
                 `}
             </style>
 
@@ -206,20 +215,25 @@ function ServicesOrbitalDisplay({ servicesData }) {
                             perspective: "1000px",
                         }}
                     >
-                        {/* Main Center Orb - Violet/Fuchsia - Reduced animation */}
-                        <div className="absolute w-16 h-16 rounded-full bg-gradient-to-br from-violet-600 via-fuchsia-600 to-violet-600 flex items-center justify-center z-10 shadow-md shadow-violet-600/20">
+                        {/* Main Center Orb - Violet/Fuchsia */}
+                        <div className="absolute w-16 h-16 rounded-full bg-gradient-to-br from-violet-600 via-fuchsia-600 to-violet-600 flex items-center justify-center z-10 shadow-md shadow-violet-600/20 pointer-events-none">
                             <div className="w-8 h-8 rounded-full bg-white/90 backdrop-blur-md"></div>
                         </div>
 
                         {/* Orbit Ring */}
-                        <div className="absolute w-96 h-96 rounded-full border border-violet-500/50"></div>
+                        <div className="absolute w-96 h-96 rounded-full border border-violet-500/50 pointer-events-none"></div>
 
                         {/* Rotating container with CSS animation */}
                         <div
                             ref={orbitRef}
                             className={cn("orbit-container absolute w-full h-full flex items-center justify-center pointer-events-none", {
-                                "paused": !autoRotate
+                                "paused z-50": !autoRotate // Z-50 fixes overlay issue when expanded
                             })}
+                            style={autoRotate ? {
+                                // Resume animation from the current angle using negative delay
+                                // 30s duration. angle / 360 * 30s.
+                                animationDelay: `-${(rotationAngleRef.current % 360) / 360 * 30}s`
+                            } : {}}
                         >
                             {servicesData.map((item, index) => {
                                 const position = calculateNodePosition(index, servicesData.length);
@@ -254,7 +268,10 @@ function ServicesOrbitalDisplay({ servicesData }) {
                                             })}
                                             style={!autoRotate ? {
                                                 transform: `rotate(-${rotationAngleRef.current}deg)`
-                                            } : {}}
+                                            } : {
+                                                // Counter-rotate to match the negative delay of parent
+                                                animationDelay: `-${(rotationAngleRef.current % 360) / 360 * 30}s`
+                                            }}
                                         >
                                             {/* Energy Pulse Ring */}
                                             <div
@@ -298,7 +315,7 @@ function ServicesOrbitalDisplay({ servicesData }) {
 
                                             {/* Expanded Card Details */}
                                             {isExpanded && (
-                                                <Card className="absolute top-20 left-1/2 -translate-x-1/2 w-80 bg-zinc-900/95 backdrop-blur-lg border-violet-500/30 shadow-lg shadow-violet-900/10 overflow-visible z-[600]">
+                                                <Card className="card-entry absolute top-20 left-1/2 -translate-x-1/2 w-80 bg-zinc-900/95 backdrop-blur-lg border-violet-500/30 shadow-lg shadow-violet-900/10 overflow-visible z-[600]">
                                                     <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-px h-3 bg-violet-500/50"></div>
                                                     <CardHeader className="pb-2">
                                                         <div className="flex justify-between items-center">
