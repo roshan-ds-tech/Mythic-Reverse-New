@@ -6,14 +6,30 @@ import { GlowingEffect } from "./ui/glowing-effect";
 import { motion } from "framer-motion";
 
 export function GlowingEffectDemoSecond() {
+    const premiumEasing = [0.16, 1, 0.3, 1];
+
     return (
         <section className="py-20 bg-mythic-black">
             <div className="container mx-auto px-4 md:px-6">
                 <div className="mb-12 text-center">
-                    <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">Why Choose Mythic Reverse?</h2>
-                    <p className="text-text-secondary max-w-2xl mx-auto">
+                    <motion.h2
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8, delay: 0.2, ease: premiumEasing }}
+                        viewport={{ once: false, margin: "-100px" }}
+                        className="text-3xl md:text-5xl font-bold text-white mb-4"
+                    >
+                        Why Choose Mythic Reverse?
+                    </motion.h2>
+                    <motion.p
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8, delay: 0.4, ease: premiumEasing }}
+                        viewport={{ once: false, margin: "-100px" }}
+                        className="text-text-secondary max-w-2xl mx-auto"
+                    >
                         Elevating digital experiences through precision, innovation, and community.
-                    </p>
+                    </motion.p>
                 </div>
 
                 <ul className="grid grid-cols-1 grid-rows-none gap-4 md:grid-cols-12 md:grid-rows-3 lg:gap-4 xl:grid-rows-2">
@@ -126,37 +142,54 @@ const GridItem = ({ area, icon, title, description, children, color = "cyan" }) 
     };
 
     const currentTheme = colorStyles[color] || colorStyles.cyan;
+    const premiumEasing = [0.16, 1, 0.3, 1];
 
     return (
         <motion.li
-            initial={{ opacity: 0, y: -50 }}
+            initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            viewport={{ once: false }}
+            transition={{
+                duration: 0.8,
+                delay: 0.1,
+                ease: premiumEasing
+            }}
+            viewport={{ once: false, margin: "-50px" }}
             className={`min-h-[14rem] list-none ${area}`}
         >
             <div className="relative h-full rounded-2xl border p-2 md:rounded-3xl md:p-3 bg-zinc-900/50 border-neutral-800">
                 <GlowingEffect
                     blur={0}
                     borderWidth={5}
-                    spread={80}
+                    spread={60}
                     glow={true}
                     disabled={false}
                     proximity={64}
                     inactiveZone={0.01}
                 />
-                <div className="relative flex h-full flex-col justify-start gap-6 overflow-hidden rounded-xl p-6 md:p-6 dark:shadow-[0px_0px_27px_0px_#2D2D2D] bg-gradient-to-br from-black to-zinc-900 border border-white/10">
-                    <div className={`w-fit rounded-lg border ${currentTheme.border} ${currentTheme.bg} p-2`}>
+                <div className="relative flex h-full flex-col justify-start gap-6 overflow-hidden rounded-xl p-6 md:p-6 bg-gradient-to-br from-black to-zinc-900 border border-white/10">
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 0.5, delay: 0.2, ease: premiumEasing }}
+                        viewport={{ once: false, margin: "-50px" }}
+                        className={`w-fit rounded-lg border ${currentTheme.border} ${currentTheme.bg} p-2`}
+                    >
                         {icon}
-                    </div>
-                    <div className="space-y-3">
+                    </motion.div>
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, delay: 0.3, ease: premiumEasing }}
+                        viewport={{ once: false, margin: "-50px" }}
+                        className="space-y-3"
+                    >
                         <h3 className="font-sans text-xl font-semibold text-white md:text-2xl">
                             {title}
                         </h3>
                         <p className="font-sans text-sm text-text-secondary md:text-base">
                             {description}
                         </p>
-                    </div>
+                    </motion.div>
                     {children}
                 </div>
             </div>

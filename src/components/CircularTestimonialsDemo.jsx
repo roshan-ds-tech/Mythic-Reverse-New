@@ -8,7 +8,7 @@ const testimonials = [
         name: "Tamar Mendelson",
         designation: "Restaurant Critic",
         src:
-            "https://images.unsplash.com/photo-1512316609839-ce289d3eba0a?q=80&w=1368&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+            "images/web_images/Prasanna Kumar.jpg",
     },
     {
         quote:
@@ -16,7 +16,7 @@ const testimonials = [
         name: "Joe Charlescraft",
         designation: "Frequent Visitor",
         src:
-            "https://images.unsplash.com/photo-1628749528992-f5702133b686?q=80&w=1368&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fA%3D%3D",
+            "images/web_images/roshan1.jpg",
     },
     {
         quote:

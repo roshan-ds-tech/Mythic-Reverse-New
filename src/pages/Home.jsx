@@ -2,8 +2,8 @@ import { AboutHero } from "../components/AboutHero";
 import { ScrollAnimationDemo } from "../components/ScrollAnimationDemo";
 import { GlowingEffectDemoSecond } from "../components/GlowingEffectDemoSecond";
 import CompanyServicesSection from "../components/CompanyServicesSection";
-import { PremiumTestimonialsDemo } from "../components/PremiumTestimonialsDemo";
-import { CTASection } from "../components/ui/cta-section";
+import TestimonialsSection from "../components/ui/testimonial-v2";
+
 import { Footer } from "../components/ui/footer-section";
 
 const Home = () => {
@@ -15,8 +15,8 @@ const Home = () => {
                 <GlowingEffectDemoSecond />
             </div>
             <CompanyServicesSection />
-            <PremiumTestimonialsDemo />
-            <CTASection />
+            <TestimonialsSection />
+
             <div className="h-26 bg-black" />
             <Footer />
         </div>

@@ -4,7 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { motion, useInView, useSpring, useTransform } from "motion/react";
 import { Monitor, Smartphone, Database, CheckCircle2, ArrowRight, Sparkles } from "lucide-react";
 import ServicesOrbitalDisplay from "./ServicesOrbitalDisplay";
-import { SparklesCore } from "./ui/sparkles";
+
 import { clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 
@@ -97,7 +97,7 @@ const SERVICES = [
 
 function StatCounter({ value, label, suffix, delay }) {
     const countRef = useRef(null);
-    const isInView = useInView(countRef, { once: false });
+    const isInView = useInView(countRef, { once: true });
     const [hasAnimated, setHasAnimated] = useState(false);
 
     const springValue = useSpring(0, {
@@ -119,7 +119,7 @@ function StatCounter({ value, label, suffix, delay }) {
 
     return (
         <motion.div
-            className="bg-white/5 backdrop-blur-sm p-6 rounded-xl flex flex-col items-center text-center group hover:bg-white/10 transition-colors duration-300 border border-white/10"
+            className="bg-white/5 p-6 rounded-xl flex flex-col items-center text-center group hover:bg-white/10 transition-colors duration-300 border border-white/10"
             variants={{
                 hidden: { opacity: 0, y: 20 },
                 visible: {
@@ -142,14 +142,15 @@ function StatCounter({ value, label, suffix, delay }) {
 
 function ServiceCard({ service, index, isActive, onClick }) {
     const cardRef = useRef(null);
-    const isInView = useInView(cardRef, { once: false, amount: 0.3 });
+    const isInView = useInView(cardRef, { once: true, amount: 0.3 });
+    const premiumEasing = [0.16, 1, 0.3, 1];
 
     return (
         <motion.div
             ref={cardRef}
-            initial={{ opacity: 0, y: 50 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-            transition={{ duration: 0.6, delay: index * 0.2 }}
+            initial={{ opacity: 0, y: 60 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 60 }}
+            transition={{ duration: 0.8, delay: index * 0.15, ease: premiumEasing }}
             onClick={onClick}
             className={cn(
                 "cursor-pointer transition-all duration-300",
@@ -225,8 +226,11 @@ export default function CompanyServicesSection() {
     const [activeService, setActiveService] = useState(null);
     const sectionRef = useRef(null);
     const statsRef = useRef(null);
-    const isInView = useInView(sectionRef, { once: false, amount: 0.1 });
-    const isStatsInView = useInView(statsRef, { once: false, amount: 0.3 });
+    const isInView = useInView(sectionRef, { once: true, amount: 0.1 });
+    const isStatsInView = useInView(statsRef, { once: true, amount: 0.3 });
+
+    // Premium easing curve
+    const premiumEasing = [0.16, 1, 0.3, 1];
 
     const stats = [
         { value: 50, label: "Projects Delivered", suffix: "+" },
@@ -240,8 +244,9 @@ export default function CompanyServicesSection() {
         visible: {
             opacity: 1,
             transition: {
-                staggerChildren: 0.2,
-                delayChildren: 0.3,
+                staggerChildren: 0.15,
+                delayChildren: 0.2,
+                ease: premiumEasing,
             },
         },
     };
@@ -251,43 +256,8 @@ export default function CompanyServicesSection() {
             ref={sectionRef}
             className="w-full min-h-screen py-24 px-4 bg-black relative overflow-hidden"
         >
-            <motion.div
-                className="absolute top-20 left-10 w-64 h-64 rounded-full bg-purple-500/10 blur-3xl"
-                animate={{
-                    scale: [1, 1.2, 1],
-                    opacity: [0.1, 0.2, 0.1],
-                }}
-                transition={{
-                    duration: 8,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                }}
-            />
-            <motion.div
-                className="absolute bottom-20 right-10 w-80 h-80 rounded-full bg-cyan-500/10 blur-3xl"
-                animate={{
-                    scale: [1.2, 1, 1.2],
-                    opacity: [0.1, 0.2, 0.1],
-                }}
-                transition={{
-                    duration: 8,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                    delay: 1,
-                }}
-            />
-
-            <div className="absolute inset-0 z-0 pointer-events-none">
-                <SparklesCore
-                    id="tsparticles-services"
-                    background="transparent"
-                    minSize={0.6}
-                    maxSize={1.4}
-                    particleDensity={25}
-                    className="w-full h-full"
-                    particleColor="#FFFFFF"
-                />
-            </div>
+            {/* Subtle static glow — no animation, no blur filter */}
+            <div className="absolute top-20 left-10 w-48 h-48 rounded-full" style={{ background: 'radial-gradient(circle, rgba(168,85,247,0.08) 0%, transparent 70%)' }} />
 
             <motion.div
                 className="container mx-auto max-w-7xl relative z-10"
@@ -298,25 +268,38 @@ export default function CompanyServicesSection() {
                 <motion.div
                     className="text-center mb-8"
                     variants={{
-                        hidden: { opacity: 0, y: -20 },
-                        visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+                        hidden: { opacity: 0, y: 30 },
+                        visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: premiumEasing } }
                     }}
                 >
                     <motion.div
                         className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 text-neutral-300 font-medium mb-4 border border-white/10"
                         initial={{ opacity: 0, scale: 0.8 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 0.5 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        viewport={{ once: true, margin: "-100px" }}
+                        transition={{ duration: 0.6, delay: 0.2, ease: premiumEasing }}
                     >
                         <Sparkles className="w-4 h-4 text-purple-400" />
                         OUR SERVICES
                     </motion.div>
-                    <h2 className="text-5xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-white via-neutral-200 to-neutral-400 bg-clip-text text-transparent">
+                    <motion.h2
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, margin: "-100px" }}
+                        transition={{ duration: 0.8, delay: 0.4, ease: premiumEasing }}
+                        className="text-5xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-white via-neutral-200 to-neutral-400 bg-clip-text text-transparent"
+                    >
                         What We Offer
-                    </h2>
-                    <p className="text-xl text-neutral-400 max-w-3xl mx-auto">
+                    </motion.h2>
+                    <motion.p
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, margin: "-100px" }}
+                        transition={{ duration: 0.8, delay: 0.6, ease: premiumEasing }}
+                        className="text-xl text-neutral-400 max-w-3xl mx-auto"
+                    >
                         Delivering cutting-edge digital solutions with classic social media blue aesthetics and clean, trustworthy design
-                    </p>
+                    </motion.p>
                 </motion.div>
 
                 {/* Orbital Services Display */}
@@ -355,13 +338,13 @@ export default function CompanyServicesSection() {
                 </motion.div>
 
                 <motion.div
-                    className="bg-gradient-to-r from-violet-900/50 to-fuchsia-900/50 border border-white/10 backdrop-blur-md text-white p-10 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-6 shadow-2xl relative overflow-hidden"
+                    className="bg-gradient-to-r from-violet-900/50 to-fuchsia-900/50 border border-white/10 text-white p-10 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-6 shadow-2xl relative overflow-hidden"
                     initial={{ opacity: 0, y: 30 }}
                     animate={isStatsInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
                     transition={{ duration: 0.8, delay: 0.5 }}
                 >
                     {/* Decorative glow */}
-                    <div className="absolute top-0 right-0 w-64 h-64 bg-fuchsia-500/20 blur-[100px] pointer-events-none" />
+                    <div className="absolute top-0 right-0 w-64 h-64 pointer-events-none" style={{ background: 'radial-gradient(circle, rgba(217,70,239,0.15) 0%, transparent 70%)' }} />
 
                     <div className="flex-1 text-center md:text-left relative z-10">
                         <h3 className="text-3xl font-bold mb-2">Ready to Start Your Project?</h3>

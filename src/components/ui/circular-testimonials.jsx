@@ -194,14 +194,12 @@ export const CircularTestimonials = ({
                             >
                                 {activeTestimonial.quote.split(" ").map((word, i) => (
                                     <motion.span
-                                        key={i}
+                                        key={`${activeIndex}-${i}`}
                                         initial={{
-                                            filter: "blur(10px)",
                                             opacity: 0,
                                             y: 5,
                                         }}
                                         animate={{
-                                            filter: "blur(0px)",
                                             opacity: 1,
                                             y: 0,
                                         }}

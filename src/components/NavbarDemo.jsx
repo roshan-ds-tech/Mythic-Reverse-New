@@ -56,14 +56,7 @@ function Navbar({ className }) {
             <ExpandableMenu setActive={setActive}>
                 <ExpandableMenuItem setActive={setActive} active={active} item="Home" icon={Home} href="/" />
 
-                <ExpandableMenuItem setActive={setActive} active={active} item="Services" icon={Briefcase}>
-                    <div className="flex flex-col space-y-4 text-sm w-48">
-                        <HoveredLink href="#">Web Development</HoveredLink>
-                        <HoveredLink href="#">Interface Design</HoveredLink>
-                        <HoveredLink href="#">Search Engine Optimization</HoveredLink>
-                        <HoveredLink href="#">Branding</HoveredLink>
-                    </div>
-                </ExpandableMenuItem>
+                <ExpandableMenuItem setActive={setActive} active={active} item="Services" icon={Briefcase} href="/services" />
                 <ExpandableMenuItem setActive={setActive} active={active} item="About Us" icon={ShoppingBag} href="/about-us" />
                 <ExpandableMenuItem setActive={setActive} active={active} item="Internship" icon={GraduationCap}>
                     <div className="flex flex-col space-y-4 text-sm w-48">

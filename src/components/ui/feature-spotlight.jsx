@@ -157,7 +157,7 @@ export function FeaturedSpotlight() {
                         }}
                     />
                     <img
-                        src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2070&auto=format&fit=crop"
+                        src="images/web_images/group1.jpg"
                         alt="Team collaboration"
                         className="h-full w-full object-cover transition-all duration-1000"
                         style={{

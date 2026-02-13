@@ -96,7 +96,7 @@ export function PremiumTestimonials() {
             y: 0,
             transition: {
                 duration: 0.8,
-                ease: [0.23, 0.86, 0.39, 0.96]
+                ease: [0.16, 1, 0.3, 1] // Premium easing
             }
         }
     };
@@ -106,8 +106,9 @@ export function PremiumTestimonials() {
         visible: {
             opacity: 1,
             transition: {
-                staggerChildren: 0.1,
-                delayChildren: 0.3
+                staggerChildren: 0.15,
+                delayChildren: 0.2,
+                ease: [0.16, 1, 0.3, 1] // Premium easing
             }
         }
     };
@@ -128,13 +129,13 @@ export function PremiumTestimonials() {
             <div className="absolute top-0 left-0 w-full h-40 bg-gradient-to-b from-black via-black/80 to-transparent z-20 pointer-events-none" />
 
             {/* Enhanced Background Effects */}
-            <div className="absolute inset-0">
+            <div className="absolute inset-0" style={{ willChange: 'transform' }}>
                 <SparklesCore
                     id="testimonialsSparkles"
                     background="transparent"
                     minSize={0.6}
                     maxSize={1.4}
-                    particleDensity={20}
+                    particleDensity={5}
                     className="w-full h-full absolute inset-0 z-0"
                     particleColor="#a855f7"
                     speed={1}
@@ -155,9 +156,9 @@ export function PremiumTestimonials() {
                     }}
                 />
 
-                {/* Moving light orbs */}
+                {/* Moving light orbs - Optimized */}
                 <motion.div
-                    className="absolute top-1/3 left-1/5 w-72 h-72 bg-purple-600/20 rounded-full blur-3xl"
+                    className="absolute top-1/3 left-1/5 w-72 h-72 bg-purple-600/20 rounded-full blur-2xl"
                     animate={{
                         x: [0, 150, 0],
                         y: [0, 80, 0],
@@ -168,9 +169,10 @@ export function PremiumTestimonials() {
                         repeat: Infinity,
                         ease: "easeInOut"
                     }}
+                    style={{ willChange: 'transform' }}
                 />
                 <motion.div
-                    className="absolute bottom-1/3 right-1/5 w-80 h-80 bg-fuchsia-600/20 rounded-full blur-3xl"
+                    className="absolute bottom-1/3 right-1/5 w-80 h-80 bg-fuchsia-600/20 rounded-full blur-2xl"
                     animate={{
                         x: [0, -100, 0],
                         y: [0, -60, 0],
@@ -181,16 +183,18 @@ export function PremiumTestimonials() {
                         repeat: Infinity,
                         ease: "easeInOut"
                     }}
+                    style={{ willChange: 'transform' }}
                 />
 
-                {/* Floating particles - Purple tinted */}
-                {[...Array(12)].map((_, i) => (
+                {/* Floating particles - Reduced for performance */}
+                {[...Array(3)].map((_, i) => (
                     <motion.div
                         key={i}
                         className="absolute w-1 h-1 bg-purple-200/40 rounded-full"
                         style={{
-                            left: `${15 + (i * 7)}%`,
-                            top: `${25 + (i * 5)}%`,
+                            left: `${20 + (i * 15)}%`,
+                            top: `${30 + (i * 10)}%`,
+                            willChange: 'transform, opacity'
                         }}
                         animate={{
                             y: [0, -50, 0],
@@ -213,7 +217,7 @@ export function PremiumTestimonials() {
                 variants={staggerContainer}
                 initial="hidden"
                 whileInView="visible"
-                viewport={{ once: true, margin: "-100px" }}
+                viewport={{ once: false, margin: "-100px" }}
             >
                 {/* Header */}
                 <motion.div
