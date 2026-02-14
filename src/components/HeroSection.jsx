@@ -1,72 +1,243 @@
-
 "use client";
-import React from "react";
-import { motion } from "framer-motion";
-import { ArrowRight, ChevronRight } from "lucide-react";
-import { cn } from "@/lib/utils";
-
-import AnimatedShaderBackground from "./ui/animated-shader-background";
+import React, { useState, useEffect, useRef } from "react";
+import { motion, useAnimation, useInView } from "framer-motion";
+import { ArrowRight, Sparkles, ChevronRight } from "lucide-react";
+import { ProjectInquiryDialog } from "./ui/project-inquiry-dialog";
 import { SparklesCore } from "./ui/sparkles";
 
-export function HeroSection() {
+// --- Futuristic Particle Canvas Background ---
+const FuturisticBackground = () => {
+    const canvasRef = useRef(null);
+
+    useEffect(() => {
+        const canvas = canvasRef.current;
+        if (!canvas) return;
+
+        const ctx = canvas.getContext('2d');
+        if (!ctx) return;
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const particles = [];
+
+        for (let i = 0; i < 100; i++) {
+            particles.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                vx: (Math.random() - 0.5) * 0.5,
+                vy: (Math.random() - 0.5) * 0.5,
+                size: Math.random() * 2 + 1,
+                opacity: Math.random() * 0.5 + 0.2,
+            });
+        }
+
+        let animationFrameId;
+
+        const animate = () => {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            particles.forEach((particle, i) => {
+                particle.x += particle.vx;
+                particle.y += particle.vy;
+
+                if (particle.x < 0 || particle.x > canvas.width) particle.vx *= -1;
+                if (particle.y < 0 || particle.y > canvas.height) particle.vy *= -1;
+
+                ctx.beginPath();
+                ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(139, 92, 246, ${particle.opacity})`;
+                ctx.fill();
+
+                particles.forEach((otherParticle, j) => {
+                    if (i === j) return;
+                    const dx = particle.x - otherParticle.x;
+                    const dy = particle.y - otherParticle.y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < 150) {
+                        ctx.beginPath();
+                        ctx.moveTo(particle.x, particle.y);
+                        ctx.lineTo(otherParticle.x, otherParticle.y);
+                        ctx.strokeStyle = `rgba(139, 92, 246, ${0.1 * (1 - distance / 150)})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.stroke();
+                    }
+                });
+            });
+
+            animationFrameId = requestAnimationFrame(animate);
+        };
+
+        animate();
+
+        const handleResize = () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        };
+
+        window.addEventListener('resize', handleResize);
+
+        return () => {
+            cancelAnimationFrame(animationFrameId);
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
+
     return (
-        <div className="bg-black text-white selection:bg-purple-500/30 w-full">
-            <div className="relative h-screen w-full flex flex-col justify-center items-center overflow-hidden">
+        <canvas
+            ref={canvasRef}
+            className="absolute inset-0 w-full h-full"
+            style={{ opacity: 0.6 }}
+        />
+    );
+};
 
-                {/* Background Gradients */}
-                <div className="absolute inset-0 z-0">
-                    <AnimatedShaderBackground />
-                </div>
+// --- Grid Pattern ---
+const GridPattern = () => {
+    return (
+        <div className="absolute inset-0 overflow-hidden">
+            <div
+                className="absolute inset-0"
+                style={{
+                    backgroundImage: `linear-gradient(to right, rgba(139, 92, 246, 0.1) 1px, transparent 1px),
+                                     linear-gradient(to bottom, rgba(139, 92, 246, 0.1) 1px, transparent 1px)`,
+                    backgroundSize: '50px 50px',
+                }}
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/30" />
+        </div>
+    );
+};
 
-                {/* Sparkles Overlay */}
-                <div className="absolute inset-0 z-[1] pointer-events-none">
-                    <SparklesCore
-                        id="hero-sparkles"
-                        background="transparent"
-                        minSize={0.6}
-                        maxSize={1.4}
-                        particleDensity={100}
-                        className="w-full h-full"
-                        particleColor="#FFFFFF"
-                    />
-                </div>
+// --- Floating Orb ---
+const FloatingOrb = ({ delay = 0, duration = 20 }) => {
+    return (
+        <motion.div
+            className="absolute rounded-full blur-3xl"
+            style={{
+                background: 'radial-gradient(circle, rgba(139, 92, 246, 0.4) 0%, transparent 70%)',
+                width: '400px',
+                height: '400px',
+            }}
+            animate={{
+                x: [0, 100, -50, 0],
+                y: [0, -100, 50, 0],
+                scale: [1, 1.2, 0.8, 1],
+            }}
+            transition={{
+                duration,
+                repeat: Infinity,
+                delay,
+                ease: 'easeInOut',
+            }}
+        />
+    );
+};
 
-                {/* Gradient to blend hero into next section - exactly like About Us */}
-                <div className="absolute bottom-0 left-0 w-full h-40 bg-gradient-to-t from-black to-transparent z-[2] pointer-events-none" />
+// --- Main Hero Section ---
+export function HeroSection() {
+    const ref = useRef(null);
+    const isInView = useInView(ref, { once: true });
+    const controls = useAnimation();
+    const [dialogOpen, setDialogOpen] = useState(false);
 
-                <div className="relative z-10 container mx-auto px-4 md:px-6 flex flex-col items-center text-center">
+    useEffect(() => {
+        if (isInView) {
+            controls.start('visible');
+        }
+    }, [isInView, controls]);
 
+    const containerVariants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.2,
+                delayChildren: 0.3,
+            },
+        },
+    };
+
+    const itemVariants = {
+        hidden: { opacity: 0, y: 30 },
+        visible: {
+            opacity: 1,
+            y: 0,
+            transition: {
+                duration: 0.8,
+                ease: [0.22, 1, 0.36, 1],
+            },
+        },
+    };
+
+    return (
+        <section
+            ref={ref}
+            className="relative min-h-screen w-full overflow-hidden bg-black text-white flex items-center justify-center"
+        >
+            <GridPattern />
+
+            <div className="absolute top-1/4 left-1/4">
+                <FloatingOrb delay={0} duration={25} />
+            </div>
+            <div className="absolute bottom-1/4 right-1/4">
+                <FloatingOrb delay={5} duration={30} />
+            </div>
+
+            <FuturisticBackground />
+
+            <div className="absolute inset-0 bg-gradient-to-b from-purple-900/20 via-transparent to-transparent" />
+
+            {/* Sparkles Overlay */}
+            <div className="absolute inset-0 z-[1] pointer-events-none">
+                <SparklesCore
+                    id="about-hero-sparkles"
+                    background="transparent"
+                    minSize={0.6}
+                    maxSize={1.4}
+                    particleDensity={80}
+                    className="w-full h-full"
+                    particleColor="#FFFFFF"
+                />
+            </div>
+
+            <motion.div
+                className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl"
+                variants={containerVariants}
+                initial="hidden"
+                animate={controls}
+            >
+                <div className="flex flex-col items-center text-center space-y-8">
                     {/* Badge */}
                     <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5, delay: 0.2 }}
-                        className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-sm text-neutral-300 backdrop-blur-sm mb-8 hover:bg-white/10 transition-colors cursor-pointer"
+                        variants={itemVariants}
+                        className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-purple-500/30 bg-purple-500/10 backdrop-blur-sm"
                     >
-                        <span className="flex h-2 w-2 rounded-full bg-purple-500 animate-pulse"></span>
-                        <span className="text-xs font-medium tracking-wide uppercase">Mythic Reverse Studio</span>
-                        <ChevronRight className="h-4 w-4 text-neutral-500" />
+                        <Sparkles className="w-4 h-4 text-purple-400" />
+                        <span className="text-sm font-medium text-purple-300">
+                            Mythic Reverse Studio
+                        </span>
                     </motion.div>
 
                     {/* Headline */}
                     <motion.h1
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5, delay: 0.3 }}
-                        className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white to-white/60 pb-4 max-w-5xl mx-auto leading-[1.1]"
+                        variants={itemVariants}
+                        className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight"
                     >
-                        Delivering <br className="hidden md:block" />
-                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-500 via-purple-500 to-fuchsia-500">
+                        <span className="block bg-gradient-to-r from-white via-purple-200 to-purple-400 bg-clip-text text-transparent">
+                            Delivering
+                        </span>
+                        <span className="block bg-gradient-to-r from-violet-400 via-purple-500 to-fuchsia-500 bg-clip-text text-transparent">
                             Digital Firsts
                         </span>
                     </motion.h1>
 
                     {/* Subheadline */}
                     <motion.p
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5, delay: 0.4 }}
-                        className="mt-6 text-lg md:text-xl text-neutral-400 max-w-2xl mx-auto leading-relaxed"
+                        variants={itemVariants}
+                        className="text-lg sm:text-xl md:text-2xl font-light text-gray-300 max-w-3xl leading-relaxed"
                     >
                         We are a design and technology collective. We build products, platforms,
                         and experiences that define the next generation of the web.
@@ -74,23 +245,60 @@ export function HeroSection() {
 
                     {/* Buttons */}
                     <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5, delay: 0.5 }}
-                        className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4"
+                        variants={itemVariants}
+                        className="flex flex-col sm:flex-row gap-4 pt-4"
                     >
-                        <button className="group relative inline-flex h-12 items-center justify-center overflow-hidden rounded-full bg-white px-8 font-medium text-black transition-all hover:bg-neutral-200 w-full sm:w-auto">
-                            <span className="mr-2">Start Your Project</span>
-                            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                            <div className="absolute inset-0 -z-10 bg-gradient-to-r from-violet-600 to-fuchsia-600 opacity-0 transition-opacity group-hover:opacity-10" />
+                        <button
+                            onClick={() => setDialogOpen(true)}
+                            className="group relative inline-flex h-14 items-center justify-center overflow-hidden rounded-full bg-purple-600 hover:bg-purple-700 text-white px-8 font-semibold text-lg transition-all duration-300 shadow-lg shadow-purple-500/50 hover:shadow-purple-500/70 w-full sm:w-auto"
+                        >
+                            <span className="relative z-10 flex items-center gap-2">
+                                Start Your Project
+                                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                            </span>
+                            <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                         </button>
 
-                        <button className="inline-flex h-12 items-center justify-center rounded-full border border-white/10 bg-white/5 px-8 font-medium text-white backdrop-blur-sm transition-all hover:bg-white/10 w-full sm:w-auto">
+                        <button className="inline-flex h-14 items-center justify-center rounded-full border-2 border-purple-500/50 text-white hover:bg-purple-500/10 px-8 font-semibold text-lg backdrop-blur-sm transition-all duration-300 w-full sm:w-auto">
                             View Our Work
                         </button>
                     </motion.div>
+
+                    {/* Status indicators */}
+                    <motion.div
+                        variants={itemVariants}
+                        className="flex items-center gap-8 pt-8 text-sm text-gray-400"
+                    >
+                        <div className="flex items-center gap-2">
+                            <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+                            <span>Available for Projects</span>
+                        </div>
+                        <div className="h-4 w-px bg-gray-700" />
+                        <span>Trusted by 100+ Brands</span>
+                    </motion.div>
                 </div>
-            </div>
-        </div>
+            </motion.div>
+
+            {/* Bottom gradient fade */}
+            <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black to-transparent z-[3]" />
+
+            {/* Scroll indicator */}
+            <motion.div
+                className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+                animate={{ y: [0, 10, 0] }}
+                transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+            >
+                <div className="w-6 h-10 border-2 border-purple-500/50 rounded-full flex items-start justify-center p-2">
+                    <motion.div
+                        className="w-1.5 h-1.5 bg-purple-500 rounded-full"
+                        animate={{ y: [0, 12, 0] }}
+                        transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+                    />
+                </div>
+            </motion.div>
+
+            {/* Project Inquiry Dialog */}
+            <ProjectInquiryDialog open={dialogOpen} onOpenChange={setDialogOpen} />
+        </section>
     );
 }

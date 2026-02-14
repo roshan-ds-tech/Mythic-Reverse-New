@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { motion, useInView, useSpring, useTransform } from "motion/react";
 import { Monitor, Smartphone, Database, CheckCircle2, ArrowRight, Sparkles } from "lucide-react";
 import ServicesOrbitalDisplay from "./ServicesOrbitalDisplay";
+import { SparklesCore } from "./ui/sparkles";
 
 import { clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
@@ -119,7 +120,7 @@ function StatCounter({ value, label, suffix, delay }) {
 
     return (
         <motion.div
-            className="bg-white/5 p-6 rounded-xl flex flex-col items-center text-center group hover:bg-white/10 transition-colors duration-300 border border-white/10"
+            className="bg-zinc-900 p-6 rounded-xl flex flex-col items-center text-center group hover:bg-zinc-800 transition-colors duration-300 border border-white/10"
             variants={{
                 hidden: { opacity: 0, y: 20 },
                 visible: {
@@ -160,8 +161,8 @@ function ServiceCard({ service, index, isActive, onClick }) {
             <Card className={cn(
                 "p-8 h-full border-2 transition-all duration-300 group relative overflow-hidden", // Added relative overflow-hidden to parent
                 isActive
-                    ? `border-transparent shadow-2xl scale-[1.02]` // Active state
-                    : "border-white/5 bg-zinc-900/50 hover:border-white/10 hover:shadow-lg" // Neutral state
+                    ? `border-transparent shadow-2xl scale-[1.02] bg-zinc-900` // Active state - opaque background
+                    : "border-white/5 bg-zinc-900 hover:border-white/10 hover:shadow-lg" // Neutral state - opaque background
             )}>
                 {/* Persistent Background Gradient */}
                 <div
@@ -256,6 +257,18 @@ export default function CompanyServicesSection() {
             ref={sectionRef}
             className="w-full min-h-screen py-24 px-4 bg-black relative overflow-hidden"
         >
+            {/* Sparkles overlay */}
+            <div className="absolute inset-0 z-0 pointer-events-none">
+                <SparklesCore
+                    id="services-sparkles"
+                    background="transparent"
+                    minSize={0.6}
+                    maxSize={1.4}
+                    particleDensity={85}
+                    className="w-full h-full"
+                    particleColor="#FFFFFF"
+                />
+            </div>
             {/* Subtle static glow — no animation, no blur filter */}
             <div className="absolute top-20 left-10 w-48 h-48 rounded-full" style={{ background: 'radial-gradient(circle, rgba(168,85,247,0.08) 0%, transparent 70%)' }} />
 
@@ -343,6 +356,12 @@ export default function CompanyServicesSection() {
                     animate={isStatsInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
                     transition={{ duration: 0.8, delay: 0.5 }}
                 >
+                    {/* Opaque background to block sparkles */}
+                    <div className="absolute inset-0 bg-zinc-900 rounded-2xl" />
+
+                    {/* Gradient overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-violet-900/50 to-fuchsia-900/50 rounded-2xl" />
+
                     {/* Decorative glow */}
                     <div className="absolute top-0 right-0 w-64 h-64 pointer-events-none" style={{ background: 'radial-gradient(circle, rgba(217,70,239,0.15) 0%, transparent 70%)' }} />
 

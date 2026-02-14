@@ -1,10 +1,24 @@
 import { motion } from "framer-motion";
 import { ContainerScroll } from "./ui/container-scroll-animation";
+import { SparklesCore } from "./ui/sparkles";
 
 export function ScrollAnimationDemo() {
     return (
-        <div className="flex flex-col overflow-hidden bg-mythic-black py-20">
-            <div className="container mx-auto px-4 md:px-6">
+        <div className="flex flex-col overflow-hidden bg-mythic-black py-20 relative">
+            {/* Sparkles overlay */}
+            <div className="absolute inset-0 z-0 pointer-events-none">
+                <SparklesCore
+                    id="scroll-demo-sparkles"
+                    background="transparent"
+                    minSize={0.6}
+                    maxSize={1.4}
+                    particleDensity={80}
+                    className="w-full h-full"
+                    particleColor="#FFFFFF"
+                />
+            </div>
+            {/* Content */}
+            <div className="container mx-auto px-4 md:px-6 relative z-10">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
 
                     {/* Left Column: Text Content */}

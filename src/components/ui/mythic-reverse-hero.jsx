@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useMemo, useState } from "react"
-import { motion, useMotionValue, useMotionTemplate, animate } from "framer-motion"
+import { motion, useMotionValue, useMotionTemplate, animate, useScroll, useTransform } from "framer-motion"
 import { Canvas, useFrame, useThree } from "@react-three/fiber"
 import { Stars } from "@react-three/drei"
 import * as THREE from "three"
@@ -156,6 +156,16 @@ function MythicReverseHero({
     const border = useMotionTemplate`1px solid ${color}`
     const boxShadow = useMotionTemplate`0px 4px 32px ${color}`
 
+    // Scroll-based vertical shift animation (adjusted for better blending)
+    const sectionRef = useRef(null)
+    const { scrollYProgress } = useScroll({
+        target: sectionRef,
+        offset: ["start end", "end start"]
+    })
+
+    const y = useTransform(scrollYProgress, [0, 0.5, 1], [150, 0, -150])
+    const scale = useTransform(scrollYProgress, [0, 0.5, 1], [0.95, 1, 0.95])
+
     const fadeUpVariants = {
         hidden: { opacity: 0, y: 40 },
         visible: (i) => ({
@@ -171,6 +181,7 @@ function MythicReverseHero({
 
     return (
         <motion.section
+            ref={sectionRef}
             style={{
                 backgroundImage: backgroundGradient,
             }}
@@ -211,7 +222,10 @@ function MythicReverseHero({
             <div className="absolute inset-0 bg-gradient-to-b from-[#0B0B12] via-transparent to-[#0B0B12] pointer-events-none z-[2]" />
             <div className="absolute bottom-0 left-0 right-0 h-64 bg-gradient-to-t from-[#0B0B12] to-transparent pointer-events-none z-[2]" />
 
-            <div className="relative z-10 container mx-auto px-6 md:px-8">
+            <motion.div
+                style={{ y, scale }}
+                className="relative z-10 container mx-auto px-6 md:px-8"
+            >
                 <div className="max-w-5xl mx-auto text-center">
                     <motion.div
                         custom={0}
@@ -314,7 +328,7 @@ function MythicReverseHero({
                         ))}
                     </motion.div>
                 </div>
-            </div>
+            </motion.div>
 
             <div className="absolute inset-0 pointer-events-none overflow-hidden z-[3]">
                 <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-600/10 rounded-full blur-3xl animate-pulse" />

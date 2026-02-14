@@ -2,6 +2,7 @@
 
 import { Code, GraduationCap, Zap, Trophy, Layers } from "lucide-react";
 import { GlowingEffect } from "./ui/glowing-effect";
+import { SparklesCore } from "./ui/sparkles";
 
 import { motion } from "framer-motion";
 
@@ -9,8 +10,21 @@ export function GlowingEffectDemoSecond() {
     const premiumEasing = [0.16, 1, 0.3, 1];
 
     return (
-        <section className="py-20 bg-mythic-black">
-            <div className="container mx-auto px-4 md:px-6">
+        <section className="py-20 bg-mythic-black relative">
+            {/* Sparkles overlay */}
+            <div className="absolute inset-0 z-0 pointer-events-none">
+                <SparklesCore
+                    id="glowing-effect-sparkles"
+                    background="transparent"
+                    minSize={0.6}
+                    maxSize={1.4}
+                    particleDensity={70}
+                    className="w-full h-full"
+                    particleColor="#FFFFFF"
+                />
+            </div>
+            {/* Content */}
+            <div className="container mx-auto px-4 md:px-6 relative z-10">
                 <div className="mb-12 text-center">
                     <motion.h2
                         initial={{ opacity: 0, y: 30 }}
@@ -156,7 +170,7 @@ const GridItem = ({ area, icon, title, description, children, color = "cyan" }) 
             viewport={{ once: false, margin: "-50px" }}
             className={`min-h-[14rem] list-none ${area}`}
         >
-            <div className="relative h-full rounded-2xl border p-2 md:rounded-3xl md:p-3 bg-zinc-900/50 border-neutral-800">
+            <div className="relative h-full rounded-2xl border p-2 md:rounded-3xl md:p-3 bg-zinc-900 border-neutral-800">
                 <GlowingEffect
                     blur={0}
                     borderWidth={5}

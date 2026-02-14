@@ -3,6 +3,7 @@ import { ScrollAnimationDemo } from "../components/ScrollAnimationDemo";
 import { GlowingEffectDemoSecond } from "../components/GlowingEffectDemoSecond";
 import CompanyServicesSection from "../components/CompanyServicesSection";
 import TestimonialsSection from "../components/ui/testimonial-v2";
+import { SparklesCore } from "../components/ui/sparkles";
 
 import { Footer } from "../components/ui/footer-section";
 

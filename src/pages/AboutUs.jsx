@@ -1,9 +1,11 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import { HeroSection } from "../components/HeroSection";
 import Timeline from "../components/ui/timeline";
 import { Footer } from "../components/ui/footer-section";
 import { FeaturedSpotlight } from "../components/ui/feature-spotlight";
 import { CircularTestimonialsDemo } from "../components/CircularTestimonialsDemo";
+import { MythicAdvantage } from "../components/ui/mythic-advantage";
 import { SparklesCore } from "../components/ui/sparkles";
 import { Zap, Rocket, Globe, Brain, Award, Mail, Phone, MapPin } from 'lucide-react';
 import { ContactCard } from "@/components/ui/contact-card";
@@ -53,12 +55,21 @@ const AboutUs = () => {
                 </div>
             </section>
 
+            {/* Mythic Advantage Section */}
+            <MythicAdvantage />
+
             {/* Testimonials Section */}
             <CircularTestimonialsDemo />
 
             {/* Contact Section */}
             <section className="py-24 relative z-10 bg-black overflow-hidden">
-                <div className="container mx-auto px-6">
+                <motion.div
+                    className="container mx-auto px-6"
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    transition={{ duration: 0.6, ease: "easeOut" }}
+                >
                     <ContactCard
                         title="LET'S CO-CREATE"
                         description="Ready to push the boundaries of what's possible? Reach out to our team of architects and engineers today. We're eager to hear about your vision."
@@ -104,7 +115,7 @@ const AboutUs = () => {
                             </div>
                         </form>
                     </ContactCard>
-                </div>
+                </motion.div>
             </section>
 
             <div className="h-24 bg-black" />

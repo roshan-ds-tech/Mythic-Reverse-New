@@ -81,14 +81,7 @@ function Navbar({ className }) {
                     </div>
                 </ExpandableMenuItem>
 
-                <div className="h-6 w-px bg-border-steel mx-1" />
 
-                <button className="text-sm font-medium text-text-primary hover:text-fuchsia-400 px-3 py-2 transition-colors">
-                    Login
-                </button>
-                <button className="text-sm font-medium bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white px-4 py-2 rounded-full hover:from-violet-500 hover:to-fuchsia-500 transition-all shadow-[0_0_15px_rgba(168,85,247,0.5)]">
-                    Sign Up
-                </button>
             </ExpandableMenu>
         </motion.div>
     );

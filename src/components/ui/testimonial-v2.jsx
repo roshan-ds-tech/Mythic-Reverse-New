@@ -1,41 +1,43 @@
 import React from 'react';
 import { motion } from "motion/react";
+import { Quote } from 'lucide-react';
+import { SparklesCore } from "./sparkles";
 
 // --- Data ---
 const testimonials = [
     {
         text: "This ERP revolutionized our operations, streamlining finance and inventory. The cloud-based platform keeps us productive.",
-        image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=150&h=150",
+        image: "images/web_images/rishika.jpg",
         name: "Briana Patton",
         role: "Operations Manager",
     },
     {
         text: "Implementing this ERP was smooth and quick. The customizable, user-friendly interface made team training effortless.",
-        image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=150&h=150",
+        image: "images/web_images/nihar.jpg",
         name: "Bilal Ahmed",
         role: "IT Manager",
     },
     {
         text: "The support team is exceptional, guiding us through setup and providing ongoing assistance.",
-        image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=150&h=150",
+        image: "images/web_images/Keerthana K.jpg",
         name: "Saman Malik",
         role: "Customer Support Lead",
     },
     {
         text: "Seamless integration enhanced our business operations and efficiency. Highly recommend for its intuitive interface.",
-        image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=150&h=150",
+        image: "images/web_images/hariprasad1.jpg",
         name: "Omar Raza",
         role: "CEO",
     },
     {
         text: "Robust features and quick support have transformed our workflow, making us significantly more efficient.",
-        image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=150&h=150",
+        image: "images/web_images/Supriya Narayan.jpeg",
         name: "Zainab Hussain",
         role: "Project Manager",
     },
     {
         text: "The smooth implementation exceeded expectations. It streamlined processes, improving overall business performance.",
-        image: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&q=80&w=150&h=150",
+        image: "images/web_images/priyanka.jpg",
         name: "Aliza Khan",
         role: "Business Analyst",
     },
@@ -47,26 +49,59 @@ const premiumEasing = [0.16, 1, 0.3, 1];
 const row1 = testimonials.slice(0, 3);
 const row2 = testimonials.slice(3, 6);
 
-// --- Single Testimonial Card ---
+// --- Enhanced Responsive Testimonial Card ---
 const TestimonialCard = ({ text, image, name, role }) => (
-    <div className="testimonial-card flex-shrink-0 w-[350px] p-6 rounded-2xl border border-neutral-800 bg-neutral-900/80">
-        <p className="text-neutral-400 leading-relaxed text-sm mb-5">
-            "{text}"
-        </p>
-        <div className="flex items-center gap-3">
-            <img
-                width={36}
-                height={36}
-                src={image}
-                alt={name}
-                className="h-9 w-9 rounded-full object-cover ring-2 ring-neutral-800"
-                loading="lazy"
-            />
-            <div>
-                <div className="font-semibold text-white text-sm">{name}</div>
-                <div className="text-xs text-neutral-500">{role}</div>
+    <div className="testimonial-card group flex-shrink-0 w-[280px] sm:w-[320px] md:w-[360px] lg:w-[380px] p-5 sm:p-6 md:p-7 lg:p-8 rounded-2xl sm:rounded-3xl relative overflow-hidden">
+        {/* Opaque black background to block sparkles */}
+        <div className="absolute inset-0 bg-black rounded-2xl sm:rounded-3xl" />
+
+        {/* Glassmorphism overlay */}
+        <div className="absolute inset-0 rounded-2xl sm:rounded-3xl border border-white/5"
+            style={{
+                background: 'linear-gradient(135deg, rgba(139, 92, 246, 0.03) 0%, rgba(217, 70, 239, 0.03) 100%)',
+                boxShadow: '0 8px 32px 0 rgba(139, 92, 246, 0.1)',
+            }}
+        />
+
+        {/* Hover gradient */}
+        <div className="absolute inset-0 rounded-2xl sm:rounded-3xl bg-gradient-to-br from-violet-500/5 via-fuchsia-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+        {/* Animated gradient border on hover */}
+        <div className="absolute inset-0 rounded-2xl sm:rounded-3xl bg-gradient-to-r from-violet-500/20 via-fuchsia-500/20 to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm" />
+
+        {/* Content */}
+        <div className="relative z-10">
+            {/* Quote icon */}
+            <div className="mb-3 sm:mb-4 inline-flex p-2 sm:p-3 rounded-lg sm:rounded-xl bg-gradient-to-br from-violet-500/10 to-fuchsia-500/10 border border-violet-500/20">
+                <Quote className="w-4 h-4 sm:w-5 sm:h-5 text-violet-400" />
+            </div>
+
+            <p className="text-white/80 leading-relaxed text-xs sm:text-sm mb-4 sm:mb-6 group-hover:text-white/90 transition-colors duration-300 line-clamp-4 sm:line-clamp-none">
+                "{text}"
+            </p>
+
+            <div className="flex items-center gap-3 sm:gap-4">
+                <div className="relative">
+                    <img
+                        width={48}
+                        height={48}
+                        src={image}
+                        alt={name}
+                        className="h-10 w-10 sm:h-12 sm:w-12 rounded-full object-cover ring-2 ring-violet-500/20 group-hover:ring-violet-400/40 transition-all duration-300"
+                        loading="lazy"
+                    />
+                    {/* Glow effect behind avatar */}
+                    <div className="absolute inset-0 rounded-full bg-gradient-to-r from-violet-500/20 to-fuchsia-500/20 blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10" />
+                </div>
+                <div>
+                    <div className="font-semibold text-white text-sm sm:text-base">{name}</div>
+                    <div className="text-[10px] sm:text-xs text-violet-300/70">{role}</div>
+                </div>
             </div>
         </div>
+
+        {/* Floating orb effect */}
+        <div className="absolute -top-10 -right-10 w-24 h-24 sm:w-32 sm:h-32 bg-gradient-to-br from-violet-500/10 to-fuchsia-500/10 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
     </div>
 );
 
@@ -79,10 +114,12 @@ const MarqueeRow = ({ items, direction = "left", duration = 30 }) => {
     return (
         <div className="overflow-hidden w-full">
             <div
-                className="flex gap-6 w-max"
+                className="flex gap-4 sm:gap-6 w-max"
                 style={{
                     animation: `${animationName} ${duration}s linear infinite`,
                     willChange: 'transform',
+                    backfaceVisibility: 'hidden',
+                    perspective: '1000px',
                 }}
             >
                 {cards.map((t, i) => (
@@ -98,8 +135,24 @@ const TestimonialsSection = () => {
     return (
         <section
             aria-labelledby="testimonials-heading"
-            className="bg-black py-24 relative overflow-hidden"
+            className="bg-black py-16 sm:py-20 md:py-24 lg:py-28 relative overflow-hidden"
         >
+            {/* Sparkles overlay */}
+            <div className="absolute inset-0 z-0 pointer-events-none">
+                <SparklesCore
+                    id="testimonials-sparkles"
+                    background="transparent"
+                    minSize={0.6}
+                    maxSize={1.4}
+                    particleDensity={75}
+                    className="w-full h-full"
+                    particleColor="#FFFFFF"
+                />
+            </div>
+            {/* Background gradient orbs */}
+            <div className="absolute top-1/4 left-1/4 w-48 h-48 sm:w-72 sm:h-72 md:w-96 md:h-96 bg-violet-600/10 rounded-full blur-3xl" />
+            <div className="absolute bottom-1/4 right-1/4 w-48 h-48 sm:w-72 sm:h-72 md:w-96 md:h-96 bg-fuchsia-600/10 rounded-full blur-3xl" />
+
             {/* Pure CSS keyframes — only translate3d for GPU compositing */}
             <style>{`
                 @keyframes marqueeLeft {
@@ -111,14 +164,22 @@ const TestimonialsSection = () => {
                     100% { transform: translate3d(0, 0, 0); }
                 }
                 .testimonial-card {
-                    transition: border-color 0.3s ease;
+                    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                                box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
                 }
                 .testimonial-card:hover {
-                    border-color: rgba(139, 92, 246, 0.4);
+                    transform: translateY(-6px);
+                    box-shadow: 0 20px 40px rgba(139, 92, 246, 0.15);
+                }
+                @media (max-width: 640px) {
+                    .testimonial-card:hover {
+                        transform: translateY(-3px);
+                        box-shadow: 0 10px 20px rgba(139, 92, 246, 0.1);
+                    }
                 }
             `}</style>
 
-            <div className="max-w-6xl px-6 mx-auto mb-16">
+            <div className="max-w-7xl px-4 sm:px-6 mx-auto mb-12 sm:mb-16 md:mb-20 relative z-10">
                 {/* Header with scroll animation */}
                 <motion.div
                     initial={{ opacity: 0, y: 40 }}
@@ -127,28 +188,34 @@ const TestimonialsSection = () => {
                     transition={{ duration: 0.8, ease: premiumEasing }}
                     className="text-center"
                 >
-                    <div className="inline-block border border-purple-700 py-1 px-4 rounded-full text-xs font-semibold tracking-wide uppercase text-purple-400 bg-purple-800/50 mb-6">
-                        Testimonials
+                    <div className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-violet-500/10 border border-violet-500/20 mb-4 sm:mb-6">
+                        <span className="text-xs sm:text-sm text-violet-300">Client Success Stories</span>
                     </div>
-                    <h2 id="testimonials-heading" className="text-4xl md:text-5xl font-extrabold tracking-tight text-white">
-                        What our users say
+                    <h2 id="testimonials-heading" className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
+                        <span className="bg-gradient-to-r from-white via-white to-white/70 bg-clip-text text-transparent">
+                            What our users
+                        </span>
+                        <br />
+                        <span className="bg-gradient-to-r from-violet-400 via-fuchsia-400 to-purple-400 bg-clip-text text-transparent">
+                            are saying
+                        </span>
                     </h2>
-                    <p className="mt-5 text-neutral-400 text-lg leading-relaxed max-w-md mx-auto">
-                        Discover how thousands of teams streamline their operations with our platform.
+                    <p className="mt-4 sm:mt-6 text-white/60 text-sm sm:text-base md:text-lg leading-relaxed max-w-2xl mx-auto px-4 sm:px-0">
+                        Discover how thousands of teams streamline their operations and drive growth with our cutting-edge platform.
                     </p>
                 </motion.div>
             </div>
 
             {/* Marquee rows — full width, edge-to-edge with fade masks */}
             <div
-                className="flex flex-col gap-6"
+                className="flex flex-col gap-4 sm:gap-6 md:gap-8"
                 style={{
-                    maskImage: 'linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)',
-                    WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)',
+                    maskImage: 'linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%)',
+                    WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%)',
                 }}
             >
-                <MarqueeRow items={row1} direction="left" duration={35} />
-                <MarqueeRow items={row2} direction="right" duration={40} />
+                <MarqueeRow items={row1} direction="left" duration={40} />
+                <MarqueeRow items={row2} direction="right" duration={45} />
             </div>
         </section>
     );

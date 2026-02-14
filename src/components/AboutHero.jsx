@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import AnimatedShaderBackground from "./ui/animated-shader-background";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { HyperText } from "./ui/hyper-text";
@@ -11,6 +11,14 @@ const premiumEasing = [0.16, 1, 0.3, 1];
 export function AboutHero() {
     const [dialogOpen, setDialogOpen] = useState(false);
     const ref = useRef(null);
+
+    // Auto-open dialog after 5 seconds
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setDialogOpen(true);
+        }, 5000);
+        return () => clearTimeout(timer);
+    }, []);
 
     // Subtle parallax effect
     const { scrollYProgress } = useScroll({
