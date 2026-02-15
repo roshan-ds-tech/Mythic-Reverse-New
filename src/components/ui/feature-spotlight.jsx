@@ -131,7 +131,7 @@ export function FeaturedSpotlight() {
             >
                 {/* Frame outline */}
                 <div
-                    className="absolute -inset-3 border transition-all duration-700 md:-inset-4"
+                    className="absolute -inset-3 border transition-all duration-700 md:-inset-4 rounded-3xl"
                     style={{
                         borderColor: isHovered ? "rgba(167, 139, 250, 0.3)" : "transparent",
                         transform: isHovered ? "scale(1.01)" : "scale(1)",
@@ -141,7 +141,7 @@ export function FeaturedSpotlight() {
 
                 {/* Pop-out Gradient Shadow */}
                 <div
-                    className="absolute -inset-1 bg-gradient-to-r from-violet-600 to-fuchsia-600 rounded-xl blur-xl opacity-0 transition-all duration-500 group-hover:opacity-40 group-hover:duration-500"
+                    className="absolute -inset-1 bg-gradient-to-r from-violet-600 to-fuchsia-600 rounded-3xl blur-xl opacity-0 transition-all duration-500 group-hover:opacity-40 group-hover:duration-500"
                     style={{
                         transform: isHovered ? "scale(1.05)" : "scale(0.9)",
                         transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)",
@@ -149,7 +149,7 @@ export function FeaturedSpotlight() {
                 />
 
                 {/* Image container - responsive sizing */}
-                <div className="relative h-[400px] w-full max-w-[400px] overflow-hidden sm:h-[500px] sm:max-w-[450px] md:h-[600px] md:max-w-[500px] lg:h-[700px] lg:max-w-[600px] z-10">
+                <div className="relative h-[400px] w-full max-w-[400px] overflow-hidden sm:h-[500px] sm:max-w-[450px] md:h-[600px] md:max-w-[500px] lg:h-[700px] lg:max-w-[600px] z-10 rounded-3xl">
                     <div
                         className="absolute -inset-1 transition-all duration-700 bg-black"
                         style={{
@@ -217,17 +217,7 @@ export function FeaturedSpotlight() {
                     />
                 </div>
 
-                {/* Index number */}
-                <span
-                    className="absolute -bottom-6 right-0 font-mono text-xs text-zinc-400 transition-all duration-700 md:-bottom-8 md:text-sm"
-                    style={{
-                        opacity: isHovered ? 1 : 0.4,
-                        transform: isHovered ? "translateY(12px)" : "translateY(0)",
-                        transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)",
-                    }}
-                >
-                    01
-                </span>
+
             </div>
         </div>
     )

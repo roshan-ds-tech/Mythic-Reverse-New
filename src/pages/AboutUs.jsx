@@ -4,7 +4,7 @@ import { HeroSection } from "../components/HeroSection";
 import Timeline from "../components/ui/timeline";
 import { Footer } from "../components/ui/footer-section";
 import { FeaturedSpotlight } from "../components/ui/feature-spotlight";
-import { CircularTestimonialsDemo } from "../components/CircularTestimonialsDemo";
+import { TestimonialCarouselDemo } from "../components/TestimonialCarouselDemo";
 import { MythicAdvantage } from "../components/ui/mythic-advantage";
 import { SparklesCore } from "../components/ui/sparkles";
 import { Zap, Rocket, Globe, Brain, Award, Mail, Phone, MapPin } from 'lucide-react';
@@ -59,7 +59,8 @@ const AboutUs = () => {
             <MythicAdvantage />
 
             {/* Testimonials Section */}
-            <CircularTestimonialsDemo />
+            {/* Testimonials Section */}
+            <TestimonialCarouselDemo />
 
             {/* Contact Section */}
             <section className="py-24 relative z-10 bg-black overflow-hidden">

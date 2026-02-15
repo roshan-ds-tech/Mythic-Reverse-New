@@ -5,6 +5,7 @@ import { cn } from '../lib/utils';
 import MythicReverseHero from './ui/mythic-reverse-hero';
 import { SparklesCore } from './ui/sparkles';
 import Lenis from 'lenis';
+import { Footer } from './ui/footer-section';
 
 // ============================================================================
 // BG PATTERN COMPONENT
@@ -301,6 +302,7 @@ export default function ServicesPage() {
                     </motion.div>
                 </div>
             </section>
+            <Footer />
         </div>
     );
 }
