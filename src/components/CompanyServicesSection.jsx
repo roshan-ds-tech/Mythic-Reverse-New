@@ -1,10 +1,9 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
-import { motion, useInView, useSpring, useTransform } from "motion/react";
+import React, { useState, useRef } from "react";
 import { Monitor, Smartphone, Database, CheckCircle2, ArrowRight, Sparkles } from "lucide-react";
 import ServicesOrbitalDisplay from "./ServicesOrbitalDisplay";
-import { SparklesCore } from "./ui/sparkles";
+import { useScrollReveal } from "../hooks/useScrollReveal";
 
 import { clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
@@ -97,72 +96,47 @@ const SERVICES = [
 ];
 
 function StatCounter({ value, label, suffix, delay }) {
-    const countRef = useRef(null);
-    const isInView = useInView(countRef, { once: true });
-    const [hasAnimated, setHasAnimated] = useState(false);
-
-    const springValue = useSpring(0, {
-        stiffness: 50,
-        damping: 10,
-    });
-
-    useEffect(() => {
-        if (isInView && !hasAnimated) {
-            springValue.set(value);
-            setHasAnimated(true);
-        } else if (!isInView && hasAnimated) {
-            springValue.set(0);
-            setHasAnimated(false);
-        }
-    }, [isInView, value, springValue, hasAnimated]);
-
-    const displayValue = useTransform(springValue, (latest) => Math.floor(latest));
+    // Simple state-state based counting for CSS-only preference might be too complex or lack simple fallback.
+    // We will standard static display or simple CSS toggle.
+    // For now, let's keep the number static to avoid JS overhead, or simple increment.
+    // Let's stick to static for pure performance request, or simple useEffect for one-time count.
 
     return (
-        <motion.div
-            className="bg-zinc-900 p-6 rounded-xl flex flex-col items-center text-center group hover:bg-zinc-800 transition-colors duration-300 border border-white/10"
-            variants={{
-                hidden: { opacity: 0, y: 20 },
-                visible: {
-                    opacity: 1,
-                    y: 0,
-                    transition: { duration: 0.6, delay },
-                },
-            }}
-            whileHover={{ y: -5, transition: { duration: 0.2 } }}
+        <div
+            className={`relative p-6 rounded-xl flex flex-col items-center text-center group transition-all duration-500 border border-violet-500/20 hover:border-violet-500/40 overflow-hidden animate-on-scroll opacity-0 fill-mode-forwards ${delay}`}
+            style={{ background: 'linear-gradient(135deg, rgba(17,17,24,1) 0%, rgba(30,20,50,1) 100%)' }}
         >
-            <motion.div ref={countRef} className="text-3xl font-bold text-blue-400 flex items-center">
-                <motion.span>{displayValue}</motion.span>
+            {/* Subtle purple glow on hover */}
+            <div className="absolute inset-0 bg-gradient-to-br from-violet-500/0 to-fuchsia-500/0 group-hover:from-violet-500/10 group-hover:to-fuchsia-500/5 transition-all duration-500 pointer-events-none" />
+            {/* Corner glow accent */}
+            <div className="absolute -top-10 -right-10 w-24 h-24 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" style={{ background: 'radial-gradient(circle, rgba(139,92,246,0.15) 0%, transparent 70%)' }} />
+
+            <div className="text-3xl font-bold flex items-center relative z-10 bg-gradient-to-r from-violet-400 via-purple-400 to-fuchsia-400 bg-clip-text text-transparent">
+                <span>{value}</span>
                 <span>{suffix}</span>
-            </motion.div>
-            <p className="text-neutral-400 text-sm mt-1">{label}</p>
-            <motion.div className="w-10 h-0.5 bg-blue-500 mt-3 group-hover:w-16 transition-all duration-300" />
-        </motion.div>
+            </div>
+            <p className="text-neutral-400 text-sm mt-2 relative z-10">{label}</p>
+            <div className="w-10 h-0.5 mt-3 group-hover:w-16 transition-all duration-500 relative z-10 rounded-full bg-gradient-to-r from-violet-500 to-fuchsia-500" />
+        </div>
     );
 }
 
 function ServiceCard({ service, index, isActive, onClick }) {
-    const cardRef = useRef(null);
-    const isInView = useInView(cardRef, { once: true, amount: 0.3 });
-    const premiumEasing = [0.16, 1, 0.3, 1];
 
     return (
-        <motion.div
-            ref={cardRef}
-            initial={{ opacity: 0, y: 60 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 60 }}
-            transition={{ duration: 0.8, delay: index * 0.15, ease: premiumEasing }}
+        <div
             onClick={onClick}
             className={cn(
-                "cursor-pointer transition-all duration-300",
+                "cursor-pointer transition-all duration-300 animate-on-scroll opacity-0 fill-mode-forwards",
                 isActive ? "scale-105" : "scale-100 hover:scale-102"
             )}
+            style={{ animationDelay: `${index * 150}ms` }}
         >
             <Card className={cn(
-                "p-8 h-full border-2 transition-all duration-300 group relative overflow-hidden", // Added relative overflow-hidden to parent
+                "p-8 h-full border-2 transition-all duration-300 group relative overflow-hidden",
                 isActive
-                    ? `border-transparent shadow-2xl scale-[1.02] bg-zinc-900` // Active state - opaque background
-                    : "border-white/5 bg-zinc-900 hover:border-white/10 hover:shadow-lg" // Neutral state - opaque background
+                    ? `border-transparent shadow-2xl scale-[1.02] bg-zinc-900`
+                    : "border-white/5 bg-zinc-900 hover:border-white/10 hover:shadow-lg"
             )}>
                 {/* Persistent Background Gradient */}
                 <div
@@ -174,16 +148,14 @@ function ServiceCard({ service, index, isActive, onClick }) {
                 />
 
                 <div className="flex items-start gap-4 mb-4 relative z-10">
-                    <motion.div
+                    <div
                         className={cn(
-                            "p-3 rounded-lg bg-gradient-to-br",
-                            service.color,
-                            "text-white shadow-lg"
+                            "p-3 rounded-lg bg-gradient-to-br text-white shadow-lg transition-transform duration-500 group-hover:rotate-6",
+                            service.color
                         )}
-                        whileHover={{ rotate: [0, -10, 10, -5, 0], transition: { duration: 0.5 } }}
                     >
                         {service.icon}
-                    </motion.div>
+                    </div>
                     <div className="flex-1">
                         <span className={cn("text-sm font-bold", service.textAccent)}>{service.id}</span>
                         <h3 className="text-2xl font-bold mt-1 text-white">{service.title}</h3>
@@ -195,43 +167,37 @@ function ServiceCard({ service, index, isActive, onClick }) {
 
                 <div className="grid grid-cols-2 gap-3 mb-6 relative z-10">
                     {service.details.map((detail, i) => (
-                        <motion.div
+                        <div
                             key={i}
-                            initial={{ opacity: 0, x: -10 }}
-                            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -10 }}
-                            transition={{ duration: 0.4, delay: index * 0.2 + i * 0.1 }}
-                            className="flex items-center gap-2"
+                            className="flex items-center gap-2 animate-fade-in opacity-0 fill-mode-forwards"
+                            style={{ animationDelay: `${index * 200 + i * 100}ms` }}
                         >
                             <CheckCircle2 className={cn("w-4 h-4 flex-shrink-0", service.textAccent)} />
                             <span className="text-sm text-neutral-300">{detail}</span>
-                        </motion.div>
+                        </div>
                     ))}
                 </div>
 
-                <motion.div
+                <div
                     className={cn(
-                        "flex items-center gap-2 font-medium text-sm relative z-10",
-                        "opacity-0 group-hover:opacity-100 transition-opacity",
+                        "flex items-center gap-2 font-medium text-sm relative z-10 transition-all duration-300 transform translate-x-0 group-hover:translate-x-1",
+                        "opacity-0 group-hover:opacity-100",
                         service.textAccent
                     )}
-                    whileHover={{ x: 5 }}
                 >
                     Learn more <ArrowRight className="w-4 h-4" />
-                </motion.div>
+                </div>
             </Card>
-        </motion.div>
+        </div>
     );
 }
 
 export default function CompanyServicesSection() {
     const [activeService, setActiveService] = useState(null);
-    const sectionRef = useRef(null);
-    const statsRef = useRef(null);
-    const isInView = useInView(sectionRef, { once: true, amount: 0.1 });
-    const isStatsInView = useInView(statsRef, { once: true, amount: 0.3 });
+    const containerRef = useRef(null);
 
-    // Premium easing curve
-    const premiumEasing = [0.16, 1, 0.3, 1];
+    // Register scroll reveal for all animated elements within this section
+    useScrollReveal(containerRef, ".animate-on-scroll");
 
     const stats = [
         { value: 50, label: "Projects Delivered", suffix: "+" },
@@ -240,80 +206,28 @@ export default function CompanyServicesSection() {
         { value: 100, label: "Modern Stack", suffix: "%" }
     ];
 
-    const containerVariants = {
-        hidden: { opacity: 0 },
-        visible: {
-            opacity: 1,
-            transition: {
-                staggerChildren: 0.15,
-                delayChildren: 0.2,
-                ease: premiumEasing,
-            },
-        },
-    };
-
     return (
         <section
-            ref={sectionRef}
-            className="w-full min-h-screen py-24 px-4 bg-black relative overflow-hidden"
+            ref={containerRef}
+            className="w-full min-h-screen py-24 px-4 relative overflow-hidden"
         >
-            {/* Sparkles overlay */}
-            <div className="absolute inset-0 z-0 pointer-events-none">
-                <SparklesCore
-                    id="services-sparkles"
-                    background="transparent"
-                    minSize={0.6}
-                    maxSize={1.4}
-                    particleDensity={85}
-                    className="w-full h-full"
-                    particleColor="#FFFFFF"
-                />
-            </div>
-            {/* Subtle static glow — no animation, no blur filter */}
+
+            {/* Subtle static glow */}
             <div className="absolute top-20 left-10 w-48 h-48 rounded-full" style={{ background: 'radial-gradient(circle, rgba(168,85,247,0.08) 0%, transparent 70%)' }} />
 
-            <motion.div
-                className="container mx-auto max-w-7xl relative z-10"
-                initial="hidden"
-                animate={isInView ? "visible" : "hidden"}
-                variants={containerVariants}
-            >
-                <motion.div
-                    className="text-center mb-8"
-                    variants={{
-                        hidden: { opacity: 0, y: 30 },
-                        visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: premiumEasing } }
-                    }}
-                >
-                    <motion.div
-                        className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 text-neutral-300 font-medium mb-4 border border-white/10"
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        viewport={{ once: true, margin: "-100px" }}
-                        transition={{ duration: 0.6, delay: 0.2, ease: premiumEasing }}
-                    >
+            <div className="container mx-auto max-w-7xl relative z-10">
+                <div className="text-center mb-8 animate-on-scroll delay-100 opacity-0 fill-mode-forwards">
+                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 text-neutral-300 font-medium mb-4 border border-white/10">
                         <Sparkles className="w-4 h-4 text-purple-400" />
                         OUR SERVICES
-                    </motion.div>
-                    <motion.h2
-                        initial={{ opacity: 0, y: 30 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true, margin: "-100px" }}
-                        transition={{ duration: 0.8, delay: 0.4, ease: premiumEasing }}
-                        className="text-5xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-white via-neutral-200 to-neutral-400 bg-clip-text text-transparent"
-                    >
+                    </div>
+                    <h2 className="text-5xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-white via-neutral-200 to-neutral-400 bg-clip-text text-transparent">
                         What We Offer
-                    </motion.h2>
-                    <motion.p
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true, margin: "-100px" }}
-                        transition={{ duration: 0.8, delay: 0.6, ease: premiumEasing }}
-                        className="text-xl text-neutral-400 max-w-3xl mx-auto"
-                    >
+                    </h2>
+                    <p className="text-xl text-neutral-400 max-w-3xl mx-auto">
                         Delivering cutting-edge digital solutions with classic social media blue aesthetics and clean, trustworthy design
-                    </motion.p>
-                </motion.div>
+                    </p>
+                </div>
 
                 {/* Orbital Services Display */}
                 <div className="w-full">
@@ -332,53 +246,66 @@ export default function CompanyServicesSection() {
                     ))}
                 </div>
 
-                <motion.div
-                    ref={statsRef}
-                    className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-20"
-                    initial="hidden"
-                    animate={isStatsInView ? "visible" : "hidden"}
-                    variants={containerVariants}
-                >
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
                     {stats.map((stat, index) => (
                         <StatCounter
                             key={index}
                             value={stat.value}
                             label={stat.label}
                             suffix={stat.suffix}
-                            delay={index * 0.1}
+                            delay={`delay-${(index + 1) * 100}`}
                         />
                     ))}
-                </motion.div>
+                </div>
 
-                <motion.div
-                    className="bg-gradient-to-r from-violet-900/50 to-fuchsia-900/50 border border-white/10 text-white p-10 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-6 shadow-2xl relative overflow-hidden"
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={isStatsInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-                    transition={{ duration: 0.8, delay: 0.5 }}
+                <div className="relative p-12 md:p-16 rounded-3xl flex flex-col md:flex-row items-center justify-between gap-8 shadow-2xl overflow-hidden border border-violet-500/20 animate-on-scroll delay-500 opacity-0 fill-mode-forwards"
+                    style={{
+                        background: 'linear-gradient(135deg, rgba(17,17,24,1) 0%, rgba(30,20,40,1) 50%, rgba(40,25,55,1) 100%)'
+                    }}
                 >
-                    {/* Opaque background to block sparkles */}
-                    <div className="absolute inset-0 bg-zinc-900 rounded-2xl" />
+                    {/* Subtle animated gradient overlay */}
+                    <div
+                        className="absolute inset-0 opacity-20 animate-pulse-subtle"
+                        style={{
+                            background: 'radial-gradient(circle at 20% 50%, rgba(139,92,246,0.15) 0%, transparent 50%), radial-gradient(circle at 80% 50%, rgba(217,70,239,0.15) 0%, transparent 50%)'
+                        }}
+                    />
 
-                    {/* Gradient overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-violet-900/50 to-fuchsia-900/50 rounded-2xl" />
+                    {/* Subtle decorative glow */}
+                    <div className="absolute -top-20 -left-20 w-64 h-64 rounded-full opacity-10 blur-3xl pointer-events-none" style={{ background: 'radial-gradient(circle, rgba(139,92,246,0.4) 0%, transparent 70%)' }} />
 
-                    {/* Decorative glow */}
-                    <div className="absolute top-0 right-0 w-64 h-64 pointer-events-none" style={{ background: 'radial-gradient(circle, rgba(217,70,239,0.15) 0%, transparent 70%)' }} />
+                    {/* Bottom-right decorative glow */}
+                    <div className="absolute -bottom-20 -right-20 w-80 h-80 rounded-full opacity-8 blur-3xl pointer-events-none" style={{ background: 'radial-gradient(circle, rgba(217,70,239,0.3) 0%, transparent 70%)' }} />
 
                     <div className="flex-1 text-center md:text-left relative z-10">
-                        <h3 className="text-3xl font-bold mb-2">Ready to Start Your Project?</h3>
-                        <p className="text-neutral-300">
-                            Let's build something amazing together with modern technology and timeless design
+                        <h3 className="text-4xl md:text-5xl font-black mb-4 leading-tight">
+                            Ready to Start Your
+                            <span className="block bg-gradient-to-r from-violet-300 via-purple-300 to-fuchsia-300 bg-clip-text text-transparent">
+                                Dream Project?
+                            </span>
+                        </h3>
+                        <p className="text-lg text-neutral-400 max-w-xl leading-relaxed">
+                            Let's transform your vision into reality with cutting-edge technology, stunning design, and unmatched expertise.
                         </p>
                     </div>
-                    <Button
-                        size="lg"
-                        className="bg-white text-violet-950 hover:bg-neutral-100 font-semibold px-8 py-6 text-lg shadow-lg relative z-10"
-                    >
-                        Get Started <ArrowRight className="ml-2 w-5 h-5" />
-                    </Button>
-                </motion.div>
-            </motion.div>
+
+                    <div className="relative z-10">
+                        <Button
+                            size="lg"
+                            className="group relative bg-gradient-to-r from-violet-500 via-purple-500 to-fuchsia-500 hover:from-violet-400 hover:via-purple-400 hover:to-fuchsia-400 text-white font-bold px-10 py-7 text-lg shadow-lg shadow-violet-500/30 transition-all duration-500 hover:shadow-violet-500/50 hover:scale-105 active:scale-95 border-none overflow-hidden"
+                        >
+                            {/* Button shine effect */}
+                            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent animate-float" style={{ animationDuration: '3s' }} />
+                            <span className="relative z-10 flex items-center gap-2">
+                                Get Started <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                            </span>
+                        </Button>
+                        <p className="text-center text-violet-400/40 text-xs mt-3 uppercase tracking-widest font-medium">
+                            Free Consultation • No Commitment
+                        </p>
+                    </div>
+                </div>
+            </div>
         </section >
     );
 }

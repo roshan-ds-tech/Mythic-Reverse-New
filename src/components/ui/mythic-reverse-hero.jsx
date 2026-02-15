@@ -8,7 +8,7 @@ import { Button } from "./button"
 import { Sparkles } from "lucide-react"
 import { SparklesCore } from "./sparkles"
 
-const COLORS = ["#8B5CF6", "#EC4899", "#3B82F6", "#10B981"]
+const COLORS = ["#8B5CF6", "#A855F7", "#7C3AED"]; // Purple shades only
 
 const ShaderPlane = ({ vertexShader, fragmentShader, uniforms }) => {
     const meshRef = useRef(null)

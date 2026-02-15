@@ -1,89 +1,74 @@
-import { motion } from "framer-motion";
+import React, { useRef } from "react";
+import { useScrollReveal } from "../hooks/useScrollReveal";
+import { CheckCircle2 } from "lucide-react";
 import { ContainerScroll } from "./ui/container-scroll-animation";
-import { SparklesCore } from "./ui/sparkles";
 
 export function ScrollAnimationDemo() {
+    const containerRef = useRef(null);
+    useScrollReveal(containerRef, ".animate-on-scroll");
+
     return (
-        <div className="flex flex-col overflow-hidden bg-mythic-black py-20 relative">
-            {/* Sparkles overlay */}
-            <div className="absolute inset-0 z-0 pointer-events-none">
-                <SparklesCore
-                    id="scroll-demo-sparkles"
-                    background="transparent"
-                    minSize={0.6}
-                    maxSize={1.4}
-                    particleDensity={80}
-                    className="w-full h-full"
-                    particleColor="#FFFFFF"
-                />
+        <div
+            ref={containerRef}
+            className="flex flex-col overflow-hidden relative pt-0 pb-10 md:pb-16"
+            id="ecosystem"
+        >
+
+            {/* Top Header */}
+            <div className="relative z-10 text-center mb-8 md:mb-12 animate-on-scroll opacity-0 fill-mode-forwards">
+                <h2 className="text-3xl md:text-5xl font-bold text-white mb-2">Our Ecosystem</h2>
+                <p className="text-neutral-400">Explore our dashboard</p>
             </div>
-            {/* Content */}
-            <div className="container mx-auto px-4 md:px-6 relative z-10">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
 
-                    {/* Left Column: Text Content */}
-                    <div className="flex flex-col gap-6 text-left">
-                        <motion.h1
-                            initial={{ opacity: 0, x: -50 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            transition={{ duration: 0.8, ease: "easeOut" }}
-                            viewport={{ once: false }}
-                            className="text-4xl md:text-6xl font-bold text-text-primary leading-tight"
-                        >
-                            Empowering Your <br />
-                            <span className="text-primary drop-shadow-[0_0_15px_rgba(6,182,212,0.5)]">Digital Journey</span>
-                        </motion.h1>
+            <div className="container mx-auto px-4 md:px-6 relative z-10 flex flex-col md:flex-row items-center justify-between gap-12 lg:gap-20">
 
-                        <p className="text-lg text-text-secondary max-w-lg">
-                            We bridge the gap between education and industry. Join our ecosystem of
-                            <span className="text-text-primary font-semibold"> IT Solutions</span>,
-                            <span className="text-text-primary font-semibold"> EdTech</span>, and
-                            <span className="text-text-primary font-semibold"> Hackathons</span>.
-                        </p>
+                {/* Left Content: Text */}
+                <div className="md:w-1/2 text-left space-y-8 animate-on-scroll opacity-0 translate-y-8 fill-mode-forwards">
+                    <h1 className="text-4xl md:text-6xl font-bold leading-tight">
+                        <span className="text-white">Empowering Your</span> <br />
+                        <span className="bg-clip-text text-transparent bg-gradient-to-r from-violet-400 via-purple-500 to-fuchsia-500">
+                            Digital Journey
+                        </span>
+                    </h1>
 
-                        <ul className="space-y-4 mt-4">
-                            {[
-                                "Live Mentorship & Workshops",
-                                "Capstone Projects with Industry Experts",
-                                "National Level Hackathons",
-                                "100% Job Assistance & Internships"
-                            ].map((item, index) => (
-                                <motion.li
-                                    key={index}
-                                    initial={{ opacity: 0, x: -20 }}
-                                    whileInView={{ opacity: 1, x: 0 }}
-                                    transition={{ delay: index * 0.1, duration: 0.5 }}
-                                    className="flex items-center gap-3 text-text-secondary"
-                                >
-                                    <div className="h-2 w-2 rounded-full bg-primary shadow-[0_0_10px_#06B6D4]" />
-                                    {item}
-                                </motion.li>
-                            ))}
-                        </ul>
-                    </div>
+                    <p className="text-lg text-neutral-300 max-w-lg leading-relaxed">
+                        We bridge the gap between education and industry. Join our ecosystem of
+                        <span className="font-bold text-white"> IT Solutions</span>,
+                        <span className="font-bold text-white"> EdTech</span>, and
+                        <span className="font-bold text-white"> Hackathons</span>.
+                    </p>
 
-                    {/* Right Column: Scroll Animation */}
-                    <div className="relative">
+                    <ul className="space-y-4 mt-8">
+                        {[
+                            "Live Mentorship & Workshops",
+                            "Capstone Projects with Industry Experts",
+                            "National Level Hackathons",
+                            "100% Job Assistance & Internships"
+                        ].map((item, index) => (
+                            <li key={index} className="flex items-center gap-3 text-neutral-300">
+                                <span className="flex-shrink-0 w-2 h-2 rounded-full bg-purple-500 shadow-[0_0_8px_rgba(168,85,247,0.8)]" />
+                                {item}
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+
+                {/* Right Content: 3D Scroll Animation Component */}
+                <div className="md:w-1/2 flex justify-center md:end z-20">
+                    <div className="w-full max-w-[800px] -mr-20 md:-mr-40 scale-75 md:scale-90 origin-right">
                         <ContainerScroll
-                            // Force height override to shrink it vertically
-                            className="!h-[40rem] w-full"
-                            titleComponent={
-                                <div className="mb-0">
-                                    <h2 className="text-2xl font-bold text-white mb-2">Our Ecosystem</h2>
-                                    <p className="text-neutral-500 text-sm">Explore our dashboard</p>
-                                </div>
-                            }
+                            titleComponent={<></>}
                         >
                             <img
                                 src="/images/web_images/container_scroll.avif"
-                                alt="IT Solutions Dashboard"
-                                className="mx-auto rounded-2xl object-cover h-full object-left-top w-full"
+                                alt="Dashboard Preview"
+                                className="mx-auto rounded-2xl object-cover h-full object-left-top draggable-false"
                                 draggable={false}
                             />
                         </ContainerScroll>
                     </div>
-
                 </div>
+
             </div>
         </div>
     );

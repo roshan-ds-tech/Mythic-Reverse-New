@@ -93,7 +93,7 @@ const AnimatedShaderBackground = ({ className, ...props }) => {
             float vignette = 1.0 - length(uv - 0.5) * 0.9;
             c *= clamp(vignette, 0.0, 1.0);
 
-            fragColor = vec4(c, 1.0);
+            fragColor = vec4(c, 0.7);
         }
 
         void main() {

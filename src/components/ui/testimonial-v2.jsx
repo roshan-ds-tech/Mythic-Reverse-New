@@ -135,20 +135,8 @@ const TestimonialsSection = () => {
     return (
         <section
             aria-labelledby="testimonials-heading"
-            className="bg-black py-16 sm:py-20 md:py-24 lg:py-28 relative overflow-hidden"
+            className="py-16 sm:py-20 md:py-24 lg:py-28 relative overflow-hidden"
         >
-            {/* Sparkles overlay */}
-            <div className="absolute inset-0 z-0 pointer-events-none">
-                <SparklesCore
-                    id="testimonials-sparkles"
-                    background="transparent"
-                    minSize={0.6}
-                    maxSize={1.4}
-                    particleDensity={75}
-                    className="w-full h-full"
-                    particleColor="#FFFFFF"
-                />
-            </div>
             {/* Background gradient orbs */}
             <div className="absolute top-1/4 left-1/4 w-48 h-48 sm:w-72 sm:h-72 md:w-96 md:h-96 bg-violet-600/10 rounded-full blur-3xl" />
             <div className="absolute bottom-1/4 right-1/4 w-48 h-48 sm:w-72 sm:h-72 md:w-96 md:h-96 bg-fuchsia-600/10 rounded-full blur-3xl" />

@@ -1,146 +1,85 @@
 "use client";
-
 import React from "react";
-import { motion } from "motion/react";
+import { motion } from "framer-motion";
 import { ArrowRight, Sparkles } from "lucide-react";
 
-// Premium easing curve (awwwards-style)
-const premiumEasing = [0.16, 1, 0.3, 1];
-
-// ============================================================================
-// BUTTON COMPONENTS
-// ============================================================================
-
-const PrimaryButton = ({ children, className = "", ...props }) => (
-    <button
-        className={`group relative inline-flex h-12 cursor-pointer items-center justify-center rounded-full px-8 py-2 font-medium text-white bg-gradient-to-r from-purple-600 to-violet-600 hover:from-purple-500 hover:to-violet-500 transition-colors duration-300 ${className}`}
-        {...props}
-    >
-        {children}
-    </button>
-);
-
-const SecondaryButton = ({ children, className = "", ...props }) => (
-    <button
-        className={`relative inline-flex h-12 cursor-pointer items-center justify-center rounded-full px-8 py-2 font-medium text-white bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 transition-colors duration-300 ${className}`}
-        {...props}
-    >
-        {children}
-    </button>
-);
-
-// ============================================================================
-// MAIN CTA COMPONENT — Lightweight with smooth scroll animations
-// ============================================================================
 
 export function CTASection() {
     return (
-        <div className="relative min-h-screen w-full overflow-hidden bg-black">
-            {/* Simple gradient background */}
-            <div className="absolute inset-0 bg-gradient-to-b from-purple-950/10 via-black to-black"></div>
+        <section className="relative w-full overflow-hidden py-32 md:py-40">
 
-            {/* Subtle radial glow — zero filter cost */}
-            <div
-                className="absolute top-1/2 left-1/2 w-full h-full -translate-x-1/2 -translate-y-1/2"
-                style={{
-                    background: 'radial-gradient(ellipse 60% 40% at 50% 50%, rgba(139,92,246,0.08) 0%, transparent 70%)',
-                }}
-            ></div>
+            {/* Ambient Purple Glow */}
+            <div className="absolute inset-0 bg-gradient-to-t from-violet-950/20 via-black/40 to-black/80 pointer-events-none" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[40rem] h-[20rem] bg-violet-600/20 blur-[120px] rounded-full pointer-events-none" />
 
-            {/* Content */}
-            <div className="relative z-10 flex min-h-screen items-center justify-center px-6">
-                <div className="max-w-4xl mx-auto text-center">
-                    {/* Badge — scroll animated */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 30 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true, amount: 0.3 }}
-                        transition={{ duration: 0.7, delay: 0.1, ease: premiumEasing }}
-                        className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-8"
-                    >
-                        <Sparkles className="w-4 h-4 text-purple-400" />
-                        <span className="text-sm text-white/90 font-medium">Introducing the Future</span>
-                    </motion.div>
 
-                    {/* Main Heading — scroll animated */}
-                    <motion.h1
-                        initial={{ opacity: 0, y: 40 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true, amount: 0.3 }}
-                        transition={{ duration: 0.8, delay: 0.2, ease: premiumEasing }}
-                        className="text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-6 leading-tight"
-                    >
-                        Transform Your
-                        <br />
-                        <span className="bg-gradient-to-r from-purple-400 via-violet-400 to-fuchsia-400 bg-clip-text text-transparent">
-                            Digital Experience
+
+            {/* Content Container */}
+            <div className="relative z-20 container mx-auto px-4 md:px-6 text-center">
+
+                {/* Badge */}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5 }}
+                    className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-violet-500/30 bg-violet-500/10 mb-8 backdrop-blur-sm"
+                >
+                    <Sparkles className="w-4 h-4 text-violet-400" />
+                    <span className="text-sm font-medium text-violet-200">Ready to Scale?</span>
+                </motion.div>
+
+                {/* Main Heading */}
+                <motion.h2
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: 0.1 }}
+                    className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight text-white mb-6 relative"
+                >
+                    Build Something <br className="hidden md:block" />
+                    <span className="relative whitespace-nowrap">
+                        <span className="absolute -inset-1 bg-violet-500/20 blur-xl rounded-full"></span>
+                        <span className="relative bg-gradient-to-r from-violet-400 via-purple-400 to-fuchsia-400 bg-clip-text text-transparent">
+                            Truly Extraordinary
                         </span>
-                    </motion.h1>
+                    </span>
+                </motion.h2>
 
-                    {/* Description — scroll animated */}
-                    <motion.p
-                        initial={{ opacity: 0, y: 30 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true, amount: 0.3 }}
-                        transition={{ duration: 0.7, delay: 0.3, ease: premiumEasing }}
-                        className="text-lg md:text-xl text-white/70 mb-12 max-w-2xl mx-auto leading-relaxed"
-                    >
-                        Elevate your brand with cutting-edge design and seamless functionality.
-                        Join thousands of innovators who trust our platform.
-                    </motion.p>
+                {/* Subtitle */}
+                <motion.p
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: 0.2 }}
+                    className="text-lg md:text-xl text-neutral-400 max-w-2xl mx-auto mb-10 leading-relaxed"
+                >
+                    Join a community of innovators and start building the future today.
+                    Your journey to excellence begins with a single step.
+                </motion.p>
 
-                    {/* CTA Buttons — scroll animated */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 30 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true, amount: 0.3 }}
-                        transition={{ duration: 0.7, delay: 0.4, ease: premiumEasing }}
-                        className="flex flex-col sm:flex-row items-center justify-center gap-6"
-                    >
-                        <PrimaryButton>
-                            <span className="flex items-center gap-2">
-                                Get Started Free
-                                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                            </span>
-                        </PrimaryButton>
+                {/* Buttons */}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: 0.3 }}
+                    className="flex flex-col sm:flex-row items-center justify-center gap-4"
+                >
+                    <button className="group relative inline-flex h-12 items-center justify-center overflow-hidden rounded-full bg-gradient-to-r from-violet-600 via-purple-600 to-fuchsia-600 px-8 font-medium text-white transition-all duration-300 hover:scale-105 hover:shadow-[0_0_20px_rgba(139,92,246,0.5)]">
+                        <span className="mr-2">Get Started Now</span>
+                        <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+                        <div className="absolute inset-0 -z-10 bg-gradient-to-r from-violet-600 via-purple-600 to-fuchsia-600 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                    </button>
 
-                        <SecondaryButton>
-                            <span className="flex items-center gap-2">
-                                Watch Demo
-                                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-                            </span>
-                        </SecondaryButton>
-                    </motion.div>
-
-                    {/* Stats — scroll animated */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 30 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true, amount: 0.3 }}
-                        transition={{ duration: 0.7, delay: 0.5, ease: premiumEasing }}
-                        className="grid grid-cols-3 gap-8 mt-20 max-w-2xl mx-auto"
-                    >
-                        <div className="text-center">
-                            <div className="text-3xl md:text-4xl font-bold text-white mb-2">50K+</div>
-                            <div className="text-sm text-white/60">Active Users</div>
-                        </div>
-                        <div className="text-center">
-                            <div className="text-3xl md:text-4xl font-bold text-white mb-2">99.9%</div>
-                            <div className="text-sm text-white/60">Uptime</div>
-                        </div>
-                        <div className="text-center">
-                            <div className="text-3xl md:text-4xl font-bold text-white mb-2">4.9★</div>
-                            <div className="text-sm text-white/60">Rating</div>
-                        </div>
-                    </motion.div>
-                </div>
+                    <button className="inline-flex h-12 items-center justify-center rounded-full border border-neutral-800 bg-black/50 px-8 font-medium text-neutral-300 transition-all duration-300 hover:bg-neutral-900 hover:text-white backdrop-blur-sm hover:border-violet-500/50">
+                        Contact Sales
+                    </button>
+                </motion.div>
             </div>
 
-            {/* Bottom Gradient Overlay */}
-            <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black to-transparent z-5"></div>
-        </div>
+            {/* Beam/Separator Line at Top */}
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-[1px] bg-gradient-to-r from-transparent via-violet-500/50 to-transparent" />
+        </section>
     );
 }

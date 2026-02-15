@@ -1,49 +1,25 @@
 "use client";
 
 import { Code, GraduationCap, Zap, Trophy, Layers } from "lucide-react";
-import { GlowingEffect } from "./ui/glowing-effect";
-import { SparklesCore } from "./ui/sparkles";
-
-import { motion } from "framer-motion";
+import React, { useRef } from "react";
+import { useScrollReveal } from "../hooks/useScrollReveal";
 
 export function GlowingEffectDemoSecond() {
-    const premiumEasing = [0.16, 1, 0.3, 1];
+    const containerRef = useRef(null);
+    useScrollReveal(containerRef, ".animate-on-scroll");
 
     return (
-        <section className="py-20 bg-mythic-black relative">
-            {/* Sparkles overlay */}
-            <div className="absolute inset-0 z-0 pointer-events-none">
-                <SparklesCore
-                    id="glowing-effect-sparkles"
-                    background="transparent"
-                    minSize={0.6}
-                    maxSize={1.4}
-                    particleDensity={70}
-                    className="w-full h-full"
-                    particleColor="#FFFFFF"
-                />
-            </div>
+        <section ref={containerRef} className="py-20 relative">
+
             {/* Content */}
             <div className="container mx-auto px-4 md:px-6 relative z-10">
-                <div className="mb-12 text-center">
-                    <motion.h2
-                        initial={{ opacity: 0, y: 30 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8, delay: 0.2, ease: premiumEasing }}
-                        viewport={{ once: false, margin: "-100px" }}
-                        className="text-3xl md:text-5xl font-bold text-white mb-4"
-                    >
+                <div className="mb-12 text-center animate-on-scroll opacity-0 fill-mode-forwards delay-100">
+                    <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">
                         Why Choose Mythic Reverse?
-                    </motion.h2>
-                    <motion.p
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8, delay: 0.4, ease: premiumEasing }}
-                        viewport={{ once: false, margin: "-100px" }}
-                        className="text-text-secondary max-w-2xl mx-auto"
-                    >
+                    </h2>
+                    <p className="text-text-secondary max-w-2xl mx-auto">
                         Elevating digital experiences through precision, innovation, and community.
-                    </motion.p>
+                    </p>
                 </div>
 
                 <ul className="grid grid-cols-1 grid-rows-none gap-4 md:grid-cols-12 md:grid-rows-3 lg:gap-4 xl:grid-rows-2">
@@ -54,6 +30,7 @@ export function GlowingEffectDemoSecond() {
                         title="Precision Engineering"
                         description="Crafting high-performance websites and mobile apps with the latest tech stacks to scale your business."
                         color="cyan"
+                        delay="delay-200"
                     />
 
                     {/* Bottom Left: The Future of EdTech (Purple) */}
@@ -63,6 +40,7 @@ export function GlowingEffectDemoSecond() {
                         title="The Future of EdTech"
                         description="From comprehensive courses to hands-on internships, we bridge the gap between learning and industry."
                         color="purple"
+                        delay="delay-300"
                     />
 
                     {/* Middle: Join the Mythic Network (Gradient/Mixed) */}
@@ -72,6 +50,7 @@ export function GlowingEffectDemoSecond() {
                         title="Join the Mythic Network"
                         description="Where innovation meets community. Powering the next generation through global hackathons and elite tech events."
                         color="cyan"
+                        delay="delay-400"
                     >
                         <div className="mt-8 flex flex-col justify-between gap-6 h-full">
                             <div className="grid grid-cols-2 gap-4">
@@ -118,6 +97,7 @@ export function GlowingEffectDemoSecond() {
                         title="5+ Success Stories"
                         description="Delivering premium digital solutions. We've successfully launched 5 major web projects with stunning UI/UX."
                         color="amber"
+                        delay="delay-500"
                     />
 
                     {/* Bottom Right: Custom Software Solutions (Rose) */}
@@ -127,6 +107,7 @@ export function GlowingEffectDemoSecond() {
                         title="Custom Software Solutions"
                         description="Tailored software architecture designed to solve complex business challenges and ignite your brand's passion."
                         color="rose"
+                        delay="delay-600"
                     />
                 </ul>
             </div>
@@ -134,7 +115,7 @@ export function GlowingEffectDemoSecond() {
     );
 }
 
-const GridItem = ({ area, icon, title, description, children, color = "cyan" }) => {
+const GridItem = ({ area, icon, title, description, children, color = "cyan", delay = "" }) => {
 
     const colorStyles = {
         cyan: {
@@ -156,57 +137,32 @@ const GridItem = ({ area, icon, title, description, children, color = "cyan" }) 
     };
 
     const currentTheme = colorStyles[color] || colorStyles.cyan;
-    const premiumEasing = [0.16, 1, 0.3, 1];
 
     return (
-        <motion.li
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{
-                duration: 0.8,
-                delay: 0.1,
-                ease: premiumEasing
-            }}
-            viewport={{ once: false, margin: "-50px" }}
-            className={`min-h-[14rem] list-none ${area}`}
-        >
-            <div className="relative h-full rounded-2xl border p-2 md:rounded-3xl md:p-3 bg-zinc-900 border-neutral-800">
-                <GlowingEffect
-                    blur={0}
-                    borderWidth={5}
-                    spread={60}
-                    glow={true}
-                    disabled={false}
-                    proximity={64}
-                    inactiveZone={0.01}
-                />
-                <div className="relative flex h-full flex-col justify-start gap-6 overflow-hidden rounded-xl p-6 md:p-6 bg-gradient-to-br from-black to-zinc-900 border border-white/10">
-                    <motion.div
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 0.5, delay: 0.2, ease: premiumEasing }}
-                        viewport={{ once: false, margin: "-50px" }}
-                        className={`w-fit rounded-lg border ${currentTheme.border} ${currentTheme.bg} p-2`}
-                    >
+        <li className={`min-h-[14rem] list-none ${area} animate-on-scroll opacity-0 fill-mode-forwards ${delay}`}>
+            <div className="relative h-full rounded-2xl border p-2 md:rounded-3xl md:p-3 bg-zinc-900 border-neutral-800 transition-colors duration-500 hover:border-neutral-600">
+                {/* Simple CSS glow effect on hover instead of heavy JS GlowingEffect */}
+                <div className="absolute inset-0 rounded-2xl md:rounded-3xl opacity-0 hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                    style={{
+                        background: `radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,255,255,0.06), transparent 40%)`
+                    }}
+                ></div>
+
+                <div className="relative flex h-full flex-col justify-start gap-6 overflow-hidden rounded-xl p-6 md:p-6 bg-gradient-to-br from-black to-zinc-900 border border-white/10 group">
+                    <div className={`w-fit rounded-lg border ${currentTheme.border} ${currentTheme.bg} p-2 transition-transform duration-300 group-hover:scale-110`}>
                         {icon}
-                    </motion.div>
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6, delay: 0.3, ease: premiumEasing }}
-                        viewport={{ once: false, margin: "-50px" }}
-                        className="space-y-3"
-                    >
+                    </div>
+                    <div className="space-y-3">
                         <h3 className="font-sans text-xl font-semibold text-white md:text-2xl">
                             {title}
                         </h3>
                         <p className="font-sans text-sm text-text-secondary md:text-base">
                             {description}
                         </p>
-                    </motion.div>
+                    </div>
                     {children}
                 </div>
             </div>
-        </motion.li>
+        </li>
     );
 };
