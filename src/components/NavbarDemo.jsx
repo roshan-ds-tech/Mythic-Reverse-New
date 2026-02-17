@@ -63,7 +63,7 @@ function Navbar({ className }) {
                 <div className="w-px h-6 bg-white/30 mx-1 self-center" />
 
                 <motion.a
-                    href="/contact"
+                    href="/consultation#consultation-form"
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                     className="flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-violet-600 via-purple-600 to-fuchsia-600 text-white text-xs font-bold shadow-lg shadow-purple-500/20 hover:shadow-purple-500/40 transition-all duration-300 whitespace-nowrap"

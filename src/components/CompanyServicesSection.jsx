@@ -258,7 +258,7 @@ export default function CompanyServicesSection() {
                     ))}
                 </div>
 
-                <div className="relative p-12 md:p-16 rounded-3xl flex flex-col md:flex-row items-center justify-between gap-8 shadow-2xl overflow-hidden border border-violet-500/20 animate-on-scroll delay-500 opacity-0 fill-mode-forwards"
+                <div className="relative p-8 md:p-10 rounded-3xl flex flex-col md:flex-row items-center justify-between gap-6 shadow-2xl overflow-hidden border border-violet-500/20"
                     style={{
                         background: 'linear-gradient(135deg, rgba(17,17,24,1) 0%, rgba(30,20,40,1) 50%, rgba(40,25,55,1) 100%)'
                     }}
@@ -278,29 +278,30 @@ export default function CompanyServicesSection() {
                     <div className="absolute -bottom-20 -right-20 w-80 h-80 rounded-full opacity-8 blur-3xl pointer-events-none" style={{ background: 'radial-gradient(circle, rgba(217,70,239,0.3) 0%, transparent 70%)' }} />
 
                     <div className="flex-1 text-center md:text-left relative z-10">
-                        <h3 className="text-4xl md:text-5xl font-black mb-4 leading-tight">
+                        <h3 className="text-3xl md:text-4xl font-black mb-6 leading-tight">
                             Ready to Start Your
                             <span className="block bg-gradient-to-r from-violet-300 via-purple-300 to-fuchsia-300 bg-clip-text text-transparent">
                                 Dream Project?
                             </span>
                         </h3>
-                        <p className="text-lg text-neutral-400 max-w-xl leading-relaxed">
+                        <p className="text-base text-neutral-400 max-w-xl leading-relaxed">
                             Let's transform your vision into reality with cutting-edge technology, stunning design, and unmatched expertise.
                         </p>
                     </div>
 
-                    <div className="relative z-10">
+                    <div className="relative z-10 flex flex-col items-center gap-2">
                         <Button
-                            size="lg"
-                            className="group relative bg-gradient-to-r from-violet-500 via-purple-500 to-fuchsia-500 hover:from-violet-400 hover:via-purple-400 hover:to-fuchsia-400 text-white font-bold px-10 py-7 text-lg shadow-lg shadow-violet-500/30 transition-all duration-500 hover:shadow-violet-500/50 hover:scale-105 active:scale-95 border-none overflow-hidden"
+                            size="default"
+                            className="group relative h-12 flex items-center justify-center bg-gradient-to-r from-violet-600 via-purple-600 to-fuchsia-600 hover:from-violet-500 hover:via-purple-500 hover:to-fuchsia-500 text-white font-medium px-8 text-base rounded-full shadow-lg shadow-purple-500/20 transition-all duration-500 hover:shadow-purple-500/40 hover:scale-105 active:scale-95 border-none overflow-hidden"
+                            onClick={() => window.location.href = '/consultation#consultation-form'}
                         >
                             {/* Button shine effect */}
                             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent animate-float" style={{ animationDuration: '3s' }} />
                             <span className="relative z-10 flex items-center gap-2">
-                                Get Started <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                                Get Started <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                             </span>
                         </Button>
-                        <p className="text-center text-violet-400/40 text-xs mt-3 uppercase tracking-widest font-medium">
+                        <p className="text-violet-400/40 text-[10px] uppercase tracking-widest font-medium">
                             Free Consultation • No Commitment
                         </p>
                     </div>

@@ -17,9 +17,8 @@ const footerLinks = [
         label: 'Company',
         links: [
             { title: 'FAQs', href: '/faqs' },
-            { title: 'About Us', href: '/about' },
-            { title: 'Privacy Policy', href: '/privacy' },
-            { title: 'Terms of Services', href: '/terms' },
+            { title: 'About Us', href: '/about-us' },
+            { title: 'Terms & Policy', href: '/terms-and-policy' },
         ],
     },
     {

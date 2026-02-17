@@ -143,6 +143,18 @@ const Consultation = () => {
         return () => clearInterval(interval);
     }, []);
 
+    // Auto-scroll to section if hash is present
+    useEffect(() => {
+        if (window.location.hash === '#consultation-form') {
+            const element = document.getElementById('consultation-form');
+            if (element) {
+                setTimeout(() => {
+                    element.scrollIntoView({ behavior: 'smooth' });
+                }, 100);
+            }
+        }
+    }, []);
+
     const whyConsultCards = [
         {
             icon: Target,
