@@ -68,7 +68,7 @@ function Navbar({ className }) {
                     whileTap={{ scale: 0.98 }}
                     className="flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-violet-600 via-purple-600 to-fuchsia-600 text-white text-xs font-bold shadow-lg shadow-purple-500/20 hover:shadow-purple-500/40 transition-all duration-300 whitespace-nowrap"
                 >
-                    <span>CONTACT</span>
+                    <span>Contact</span>
                 </motion.a>
             </ExpandableMenu>
         </motion.div>
