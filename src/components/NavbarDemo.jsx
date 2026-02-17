@@ -4,7 +4,7 @@ import { ExpandableMenu, ExpandableMenuItem } from "@/components/ui/expandable-m
 import { cn } from "../lib/utils";
 import { motion, useScroll, useMotionValueEvent } from "framer-motion";
 import { useMobile } from "../hooks/use-mobile";
-import { Briefcase, ShoppingBag, Home, Calendar, MessageSquare } from "lucide-react";
+import { Briefcase, ShoppingBag, Home, Calendar } from "lucide-react";
 
 export function NavbarDemo() {
     return (
@@ -60,7 +60,7 @@ function Navbar({ className }) {
                 <ExpandableMenuItem setActive={setActive} active={active} item="Consultation" icon={Calendar} href="/consultation" />
 
                 {/* Vertical Separator */}
-                <div className="w-px h-6 bg-white/10 mx-1 self-center" />
+                <div className="w-px h-6 bg-white/30 mx-1 self-center" />
 
                 <motion.a
                     href="/contact"
@@ -68,7 +68,6 @@ function Navbar({ className }) {
                     whileTap={{ scale: 0.98 }}
                     className="flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-violet-600 via-purple-600 to-fuchsia-600 text-white text-xs font-bold shadow-lg shadow-purple-500/20 hover:shadow-purple-500/40 transition-all duration-300 whitespace-nowrap"
                 >
-                    <MessageSquare size={16} />
                     <span>CONTACT</span>
                 </motion.a>
             </ExpandableMenu>
