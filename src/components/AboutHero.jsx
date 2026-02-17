@@ -26,14 +26,14 @@ export function AboutHero() {
                     <AnimatedShaderBackground />
                 </div>
 
-                {/* Bright Sparkles Overlay for Hero */}
+                {/* Bright Sparkles Overlay for Hero - Layered on top of global sparkles */}
                 <div className="absolute inset-0 z-[1] pointer-events-none">
                     <SparklesCore
                         id="hero-sparkles-bright"
                         background="transparent"
-                        minSize={0.8}
-                        maxSize={1.8}
-                        particleDensity={60}
+                        minSize={1.0}
+                        maxSize={2.2}
+                        particleDensity={50}
                         className="w-full h-full"
                         particleColor="#FFFFFF"
                     />

@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { motion, useAnimation, useInView } from "framer-motion";
 import { ArrowRight, Sparkles, ChevronRight } from "lucide-react";
 import { ProjectInquiryDialog } from "./ui/project-inquiry-dialog";
-import { SparklesCore } from "./ui/sparkles";
+
 
 // --- Futuristic Particle Canvas Background ---
 const FuturisticBackground = () => {
@@ -35,8 +35,10 @@ const FuturisticBackground = () => {
         let animationFrameId;
 
         const animate = () => {
-            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            ctx.globalCompositeOperation = 'destination-out';
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.globalCompositeOperation = 'source-over';
 
             particles.forEach((particle, i) => {
                 particle.x += particle.vx;
@@ -106,7 +108,7 @@ const GridPattern = () => {
                     backgroundSize: '50px 50px',
                 }}
             />
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/30" />
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-transparent" />
         </div>
     );
 };
@@ -175,7 +177,7 @@ export function HeroSection() {
     return (
         <section
             ref={ref}
-            className="relative min-h-screen w-full overflow-hidden bg-black text-white flex items-center justify-center"
+            className="relative min-h-screen w-full bg-transparent text-white flex items-center justify-center"
         >
             <GridPattern />
 
@@ -188,20 +190,7 @@ export function HeroSection() {
 
             <FuturisticBackground />
 
-            <div className="absolute inset-0 bg-gradient-to-b from-purple-900/20 via-transparent to-transparent" />
-
-            {/* Sparkles Overlay */}
-            <div className="absolute inset-0 z-[1] pointer-events-none">
-                <SparklesCore
-                    id="about-hero-sparkles"
-                    background="transparent"
-                    minSize={0.6}
-                    maxSize={1.4}
-                    particleDensity={80}
-                    className="w-full h-full"
-                    particleColor="#FFFFFF"
-                />
-            </div>
+            <div className="absolute inset-0 bg-gradient-to-b from-purple-900/10 via-transparent to-transparent z-[1] pointer-events-none" />
 
             <motion.div
                 className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl"
@@ -284,7 +273,7 @@ export function HeroSection() {
 
             {/* Scroll indicator */}
             <motion.div
-                className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+                className="absolute bottom-8 left-0 right-0 mx-auto w-fit"
                 animate={{ y: [0, 10, 0] }}
                 transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
             >

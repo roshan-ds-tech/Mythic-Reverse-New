@@ -290,6 +290,11 @@ body {
   z-index: 1;
 }
 
+html,
+body {
+  overflow-x: hidden;
+}
+
 /* CSS Stars Background - Seamless Infinite Loop */
 .global-stars {
   position: fixed;
@@ -300,62 +305,89 @@ body {
   contain: paint;
 }
 
-.layer {
-  position: absolute;
-  top: 0;
-  left: 0;
+/* Roaming Sparkles for About Us Page */
+.global-sparkles {
+  position: fixed;
+  inset: 0;
   width: 100%;
-  height: 200vh;
-  background: transparent;
-  will-change: transform;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+  contain: paint;
 }
 
-.layer::after {
+.sparkle-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+.sparkle-layer::after {
   content: "";
   position: absolute;
-  top: 0;
-  left: 0;
+  inset: 0;
   background: transparent;
   border-radius: 50%;
 }
 
-/* Layer 1: Small (1px), slow (50s), high density (~200 stars) */
 .layer-1 {
-  animation: moveStars 50s linear infinite;
-  opacity: 0.7;
+  animation: floatSparkles 16s ease-in-out infinite;
+  opacity: 0.8;
 }
 
 .layer-1::after {
   width: 1px;
   height: 1px;
-  box-shadow:
-    20.1vw 53.5vh #fff, 7.6vw 10.4vh #fff, 36.7vw 16.4vh #fff, 14.1vw 71.4vh #fff, 11.9vw 67.1vh #fff, 88.7vw 80.7vh #fff, 95.6vw 56.0vh #fff, 22.1vw 58.2vh #fff, 16.3vw 23.0vh #fff, 98.5vw 93.7vh #fff, 81.0vw 6.6vh #fff, 46.3vw 85.6vh #fff, 79.8vw 17.6vh #fff, 17.8vw 0.2vh #fff, 78.2vw 90.1vh #fff, 56.1vw 57.5vh #fff, 8.2vw 98.7vh #fff, 78.3vw 62.0vh #fff, 39.7vw 31.7vh #fff, 52.8vw 39.7vh #fff, 13.7vw 76.3vh #fff, 5.5vw 87.4vh #fff, 58.8vw 28.8vh #fff, 73.1vw 54.6vh #fff, 81.2vw 36.7vh #fff, 38.8vw 55.0vh #fff, 11.3vw 93.6vh #fff, 73.4vw 73.7vh #fff, 12.5vw 43.6vh #fff, 61.0vw 2.6vh #fff, 62.9vw 84.4vh #fff, 16.0vw 2.4vh #fff, 74.9vw 31.0vh #fff, 32.2vw 16.3vh #fff, 47.1vw 11.2vh #fff, 0.1vw 26.2vh #fff, 49.2vw 62.8vh #fff, 85.1vw 6.4vh #fff, 79.2vw 73.7vh #fff, 38.5vw 81.9vh #fff, 40.3vw 79.6vh #fff, 64.8vw 9.6vh #fff, 68.4vw 77.6vh #fff, 23.1vw 38.6vh #fff, 23.4vw 26.1vh #fff, 46.6vw 20.6vh #fff, 17.7vw 9.4vh #fff, 54.5vw 5.4vh #fff, 92.9vw 79.0vh #fff, 85.9vw 2.2vh #fff, 91.4vw 84.3vh #fff, 66.0vw 50.7vh #fff, 46.7vw 64.8vh #fff, 76.2vw 89.0vh #fff, 68.7vw 19.9vh #fff, 75.5vw 96.1vh #fff, 42.0vw 52.9vh #fff, 0.5vw 52.8vh #fff, 93.8vw 57.8vh #fff, 33.1vw 54.0vh #fff, 89.9vw 32.1vh #fff, 47.0vw 15.6vh #fff, 94.0vw 60.3vh #fff, 42.2vw 7.3vh #fff, 53.3vw 65.4vh #fff, 84.6vw 36.6vh #fff, 10.3vw 46.3vh #fff, 78.2vw 10.4vh #fff, 81.2vw 17.2vh #fff, 69.1vw 25.2vh #fff, 54.1vw 43.7vh #fff, 41.2vw 23.2vh #fff, 67.5vw 33.8vh #fff, 85.3vw 26.2vh #fff, 31.5vw 21.9vh #fff, 50.2vw 45.8vh #fff, 20.8vw 81.9vh #fff, 42.3vw 33.0vh #fff, 9.7vw 94.2vh #fff, 89.4vw 72.2vh #fff, 85.6vw 53.2vh #fff, 80.0vw 48.6vh #fff, 96.5vw 48.3vh #fff, 73.8vw 22.0vh #fff, 9.8vw 54.0vh #fff, 25.4vw 67.2vh #fff, 92.7vw 0.2vh #fff, 64.5vw 90.4vh #fff, 1.3vw 50.8vh #fff, 4.8vw 29.2vh #fff, 72.0vw 25.6vh #fff, 62.1vw 62.0vh #fff, 89.2vw 56.7vh #fff, 19.3vw 52.3vh #fff, 99.9vw 16.4vh #fff, 58.3vw 65.2vh #fff, 20.5vw 19.6vh #fff, 55.7vw 10.4vh #fff, 7.6vw 48.7vh #fff, 37.2vw 41.1vh #fff, 48.7vw 4.6vh #fff, 48.9vw 16.3vh #fff, 99.7vw 70.0vh #fff, 65.0vw 69.2vh #fff, 3.7vw 66.3vh #fff, 61.3vw 86.7vh #fff, 24.3vw 54.1vh #fff, 93.6vw 44.4vh #fff, 72.3vw 13.4vh #fff, 38.8vw 93.3vh #fff, 11.5vw 13.3vh #fff, 99.0vw 73.5vh #fff, 46.5vw 4.1vh #fff, 89.7vw 5.1vh #fff, 27.7vw 21.6vh #fff, 16.0vw 23.6vh #fff, 24.2vw 76.6vh #fff, 93.9vw 64.2vh #fff, 37.1vw 40.2vh #fff, 17.6vw 5.4vh #fff, 59.0vw 47.8vh #fff, 69.3vw 75.0vh #fff, 71.5vw 59.8vh #fff, 61.3vw 25.9vh #fff, 44.8vw 97.7vh #fff, 51.4vw 20.2vh #fff, 91.7vw 93.1vh #fff, 52.5vw 97.6vh #fff, 11.7vw 9.2vh #fff, 3.4vw 38.9vh #fff, 30.3vw 48.0vh #fff, 33.0vw 6.4vh #fff, 67.6vw 80.2vh #fff, 32.1vw 59.2vh #fff, 41.7vw 72.4vh #fff, 1.3vw 7.0vh #fff, 46.1vw 62.0vh #fff, 9.2vw 63.4vh #fff, 8.8vw 54.3vh #fff, 99.7vw 9.6vh #fff, 62.4vw 16.6vh #fff, 24.8vw 75.5vh #fff, 10.2vw 67.4vh #fff, 22.4vw 37.6vh #fff, 82.4vw 75.4vh #fff, 89.8vw 55.2vh #fff, 70.7vw 21.4vh #fff, 22.1vw 43.8vh #fff, 73.4vw 24.7vh #fff, 30.6vw 23.0vh #fff, 40.6vw 76.2vh #fff, 4.4vw 52.0vh #fff, 40.2vw 4.4vh #fff, 46.0vw 20.6vh #fff, 43.4vw 52.9vh #fff, 32.4vw 4.3vh #fff, 15.8vw 66.3vh #fff, 85.1vw 74.9vh #fff, 34.6vw 80.1vh #fff, 19.5vw 53.1vh #fff, 47.7vw 28.6vh #fff, 3.5vw 72.5vh #fff, 17.2vw 58.4vh #fff, 69.5vw 73.5vh #fff, 19.6vw 41.2vh #fff, 56.8vw 98.0vh #fff, 68.6vw 91.1vh #fff, 81.5vw 13.4vh #fff, 82.1vw 40.6vh #fff, 25.9vw 86.4vh #fff, 0.5vw 23.0vh #fff, 54.4vw 13.9vh #fff, 59.6vw 29.8vh #fff, 50.1vw 75.7vh #fff, 89.0vw 70.6vh #fff, 99.0vw 16.8vh #fff, 97.2vw 5.1vh #fff, 58.4vw 47.8vh #fff, 95.1vw 69.8vh #fff, 19.8vw 64.2vh #fff, 99.1vw 26.3vh #fff, 68.4vw 39.4vh #fff, 53.1vw 33.3vh #fff, 53.8vw 90.6vh #fff, 51.8vw 13.5vh #fff, 93.2vw 95.0vh #fff, 90.2vw 99.8vh #fff, 37.8vw 6.9vh #fff, 21.5vw 8.7vh #fff, 24.5vw 71.3vh #fff, 99.6vw 95.2vh #fff, 58.2vw 86.8vh #fff, 75.8vw 46.3vh #fff, 46.7vw 45.3vh #fff, 57.9vw 52.3vh #fff, 87.5vw 26.7vh #fff, 6.6vw 44.2vh #fff, 14.3vw 54.9vh #fff, 50.6vw 82.5vh #fff, 96.0vw 93.2vh #fff;
+  box-shadow: 56.1vw 87.9vh #fff, 74.3vw 54.5vh #fff, 50.1vw 3.9vh #fff, 15.2vw 8.8vh #fff, 49.9vw 6.5vh #fff, 90.4vw 9.2vh #fff, 40.2vw 55.5vh #fff, 34.0vw 26.4vh #fff, 95vw 16.2vh #fff, 27.2vw 44.3vh #fff, 91.0vw 19.5vh #fff, 22.5vw 79.9vh #fff, 90.5vw 74.5vh #fff, 84.2vw 46.8vh #fff, 94.6vw 37.0vh #fff, 92.6vw 27.0vh #fff, 25.4vw 24.1vh #fff, 45.9vw 53.7vh #fff, 61.0vw 44.9vh #fff, 46.6vw 98.6vh #fff, 53.4vw 63.0vh #fff, 29.7vw 21.5vh #fff, 6.6vw 37.4vh #fff, 44.9vw 34.8vh #fff, 64.9vw 81.7vh #fff, 86.9vw 29.6vh #fff, 43.6vw 8.6vh #fff, 42.7vw 20.9vh #fff, 16.4vw 66.4vh #fff, 3.6vw 75.8vh #fff, 95vw 77.5vh #fff, 11.0vw 94.6vh #fff, 93.3vw 96.9vh #fff, 32.4vw 45.0vh #fff, 66.2vw 68.0vh #fff, 42.7vw 45.6vh #fff, 80.0vw 16.2vh #fff, 92.0vw 62.0vh #fff, 86.4vw 18.3vh #fff, 42.3vw 12.8vh #fff, 86.9vw 83.5vh #fff, 42.6vw 16.0vh #fff, 18.2vw 25.1vh #fff, 3.8vw 70.4vh #fff, 66.5vw 0.1vh #fff, 94.4vw 70.2vh #fff, 18.7vw 99.7vh #fff, 81.1vw 48.7vh #fff, 21.7vw 60.2vh #fff, 48.1vw 73.7vh #fff, 59.2vw 93.6vh #fff, 21.9vw 33.7vh #fff, 41.4vw 72.5vh #fff, 13.9vw 40.2vh #fff, 0.6vw 83.2vh #fff, 63.9vw 21.5vh #fff, 33.6vw 28.9vh #fff, 84.7vw 24.3vh #fff, 84.3vw 17.9vh #fff, 32.0vw 49.5vh #fff, 39.9vw 41.7vh #fff, 40.1vw 0.3vh #fff, 88.6vw 0.4vh #fff, 25.5vw 52.8vh #fff, 63.7vw 87.1vh #fff, 58.1vw 76.7vh #fff, 84.3vw 21.0vh #fff, 75.1vw 37.2vh #fff, 7.2vw 8.1vh #fff, 77.0vw 22.5vh #fff, 68.1vw 18.3vh #fff, 9.7vw 94.6vh #fff, 3.6vw 77.7vh #fff, 85.3vw 77.0vh #fff, 70.5vw 56.6vh #fff, 71.7vw 77.8vh #fff, 20.1vw 77.4vh #fff, 24.8vw 57.1vh #fff, 90.6vw 95.8vh #fff, 92.9vw 69.3vh #fff, 10.5vw 69.1vh #fff, 83.9vw 3.9vh #fff, 33.2vw 9.3vh #fff, 97.1vw 12.6vh #fff, 26.2vw 4.9vh #fff, 25.4vw 71.0vh #fff, 14.2vw 20.0vh #fff, 48.8vw 83.0vh #fff, 14.7vw 92.4vh #fff, 65.9vw 48.0vh #fff, 65.9vw 87.9vh #fff, 13.1vw 56.7vh #fff, 15.2vw 75.6vh #fff, 97.8vw 67.4vh #fff, 6.3vw 65.0vh #fff, 28.1vw 23.4vh #fff, 11.7vw 50.3vh #fff, 56.3vw 7.8vh #fff, 30.1vw 85.7vh #fff, 39.5vw 78.1vh #fff, 24.8vw 39.5vh #fff, 93.6vw 29.5vh #fff, 75.9vw 1.4vh #fff, 49.3vw 89.4vh #fff, 58.9vw 68.9vh #fff, 11.3vw 22.4vh #fff, 20.5vw 46.7vh #fff, 2.2vw 72.0vh #fff, 29.8vw 87.3vh #fff, 16.3vw 11.5vh #fff, 67.3vw 12.4vh #fff, 39.0vw 2.3vh #fff, 13.1vw 50.9vh #fff, 53.0vw 84.8vh #fff, 57.8vw 23.8vh #fff, 81.0vw 75.4vh #fff, 9.1vw 98.6vh #fff, 7.9vw 40.9vh #fff, 82.5vw 71.5vh #fff, 53.1vw 51.6vh #fff, 23.9vw 52.0vh #fff, 34.6vw 24.8vh #fff, 85.9vw 12.4vh #fff, 86.7vw 89.9vh #fff, 80.2vw 93.9vh #fff, 83.9vw 48.9vh #fff, 81.8vw 62.5vh #fff, 51.3vw 27.5vh #fff, 90.4vw 16.1vh #fff, 92.3vw 34.1vh #fff, 88.0vw 71.9vh #fff, 97.6vw 72.9vh #fff, 69.6vw 36.2vh #fff, 63.5vw 83.8vh #fff, 78.8vw 65.4vh #fff, 5.8vw 46.4vh #fff, 94.2vw 58.2vh #fff, 74.9vw 77.3vh #fff, 18.4vw 7.9vh #fff, 13.9vw 26.4vh #fff, 98.6vw 50.1vh #fff, 44.0vw 88.0vh #fff, 14.7vw 46.9vh #fff, 53.7vw 38.8vh #fff, 4.8vw 92.9vh #fff, 48.3vw 33.8vh #fff, 95.1vw 21.5vh #fff, 83.7vw 95.8vh #fff, 36.6vw 36.8vh #fff, 61.8vw 71.2vh #fff;
 }
 
-/* Layer 2: Medium (2px), medium speed (35s), medium density (~120 stars) */
 .layer-2 {
-  animation: moveStars 35s linear infinite;
-  opacity: 0.8;
+  animation: floatSparkles 22s ease-in-out infinite;
+  opacity: 0.9;
 }
 
 .layer-2::after {
   width: 2px;
   height: 2px;
-  box-shadow:
-    19.0vw 49.2vh #fff, 91.6vw 5.6vh #fff, 10.6vw 82.1vh #fff, 83.9vw 2.1vh #fff, 45.3vw 66.7vh #fff, 68.8vw 53.5vh #fff, 62.8vw 63.8vh #fff, 4.4vw 30.4vh #fff, 62.2vw 59.5vh #fff, 14.3vw 82.4vh #fff, 13.5vw 44.3vh #fff, 25.5vw 30.9vh #fff, 57.2vw 28.3vh #fff, 17.0vw 26.1vh #fff, 29.6vw 59.3vh #fff, 37.0vw 77.8vh #fff, 17.7vw 84.2vh #fff, 28.1vw 43.8vh #fff, 6.2vw 3.7vh #fff, 50.0vw 44.4vh #fff, 98.1vw 79.0vh #fff, 40.3vw 81.9vh #fff, 2.3vw 86.7vh #fff, 88.2vw 7.1vh #fff, 96.9vw 38.9vh #fff, 64.0vw 47.3vh #fff, 42.3vw 91.0vh #fff, 69.4vw 88.7vh #fff, 39.1vw 18.5vh #fff, 36.2vw 60.9vh #fff, 11.9vw 94.2vh #fff, 19.5vw 96.0vh #fff, 67.2vw 88.1vh #fff, 93.7vw 3.5vh #fff, 92.1vw 76.6vh #fff, 14.5vw 40.4vh #fff, 0.4vw 72.5vh #fff, 20.2vw 39.5vh #fff, 14.6vw 74.4vh #fff, 18.1vw 91.6vh #fff, 13.8vw 72.1vh #fff, 88.0vw 85.3vh #fff, 67.2vw 71.6vh #fff, 94.7vw 72.9vh #fff, 31.2vw 23.8vh #fff, 99.9vw 93.0vh #fff, 84.0vw 24.3vh #fff, 35.3vw 86.4vh #fff, 34.7vw 18.8vh #fff, 61.4vw 66.1vh #fff, 42.5vw 51.4vh #fff, 5.8vw 56.7vh #fff, 94.7vw 10.8vh #fff, 65.3vw 84.8vh #fff, 81.2vw 46.8vh #fff, 92.3vw 7.5vh #fff, 6.6vw 69.1vh #fff, 72.5vw 48.4vh #fff, 14.0vw 87.4vh #fff, 56.7vw 37.9vh #fff, 42.4vw 52.4vh #fff, 65.4vw 83.4vh #fff, 60.7vw 2.7vh #fff, 0.9vw 23.3vh #fff, 72.5vw 87.5vh #fff, 14.7vw 2.9vh #fff, 62.8vw 20.7vh #fff, 2.8vw 65.2vh #fff, 23.1vw 30.5vh #fff, 74.2vw 46.2vh #fff, 16.2vw 31.5vh #fff, 13.6vw 55.3vh #fff, 43.5vw 29.4vh #fff, 40.5vw 38.1vh #fff, 15.7vw 85.7vh #fff, 49.1vw 27.1vh #fff, 42.3vw 32.3vh #fff, 90.1vw 49.5vh #fff, 71.6vw 39.0vh #fff, 10.3vw 71.2vh #fff, 56.5vw 67.6vh #fff, 78.2vw 27.5vh #fff, 4.5vw 15.1vh #fff, 17.6vw 2.3vh #fff, 16.7vw 35.9vh #fff, 2.6vw 89.4vh #fff, 76.1vw 98.5vh #fff, 16.9vw 7.2vh #fff, 11.8vw 63.4vh #fff, 27.0vw 83.3vh #fff, 81.3vw 16.4vh #fff, 25.3vw 85.6vh #fff, 99.3vw 60.0vh #fff, 53.3vw 97.8vh #fff, 33.3vw 52.6vh #fff, 5.5vw 18.7vh #fff, 17.4vw 19.2vh #fff, 47.9vw 14.0vh #fff, 23.9vw 54.0vh #fff, 42.9vw 85.9vh #fff, 21.8vw 80.6vh #fff, 23.6vw 51.7vh #fff, 29.9vw 94.1vh #fff, 15.1vw 59.1vh #fff, 71.5vw 1.8vh #fff, 6.1vw 73.6vh #fff, 24.9vw 36.6vh #fff, 69.0vw 3.8vh #fff, 38.8vw 69.9vh #fff, 59.6vw 68.3vh #fff, 19.1vw 98.4vh #fff, 73.7vw 20.7vh #fff, 18.9vw 32.6vh #fff, 32.5vw 44.8vh #fff, 14.8vw 15.5vh #fff, 28.8vw 8.1vh #fff, 85.2vw 28.3vh #fff, 34.7vw 8.9vh #fff, 3.7vw 82.4vh #fff, 34.4vw 54.7vh #fff;
+  box-shadow: 38.3vw 87.2vh #fff, 68.8vw 58.0vh #fff, 22.7vw 53.0vh #fff, 79.1vw 63.5vh #fff, 9.6vw 58.0vh #fff, 76.9vw 45.0vh #fff, 32.8vw 68.8vh #fff, 85.6vw 20.3vh #fff, 55.6vw 37.0vh #fff, 53.2vw 21.5vh #fff, 82.1vw 83.7vh #fff, 15.9vw 3.3vh #fff, 19.6vw 82.5vh #fff, 67.3vw 99.9vh #fff, 78.7vw 69.9vh #fff, 65.7vw 52.4vh #fff, 45.7vw 96.8vh #fff, 14.8vw 15.1vh #fff, 72.8vw 97.1vh #fff, 88.6vw 48.8vh #fff, 78.4vw 62.6vh #fff, 93.4vw 20.6vh #fff, 39.7vw 72.7vh #fff, 63.2vw 25.9vh #fff, 51.0vw 76.6vh #fff, 79.9vw 86.4vh #fff, 14.5vw 2.3vh #fff, 46.5vw 11.4vh #fff, 90.7vw 11.8vh #fff, 88.5vw 79.8vh #fff, 90.3vw 93.2vh #fff, 87.6vw 11.3vh #fff, 14.5vw 43.7vh #fff, 24.1vw 44.3vh #fff, 61.5vw 93.1vh #fff, 94.6vw 96.1vh #fff, 30.3vw 90.5vh #fff, 96.7vw 56.3vh #fff, 30.0vw 39.8vh #fff, 95.5vw 46.2vh #fff, 65.8vw 57.0vh #fff, 68.1vw 95.3vh #fff, 67.2vw 65.3vh #fff, 97.6vw 64.9vh #fff, 29.7vw 34.6vh #fff, 92.7vw 0.5vh #fff, 23.2vw 99.9vh #fff, 56.2vw 76.5vh #fff, 11.6vw 36.7vh #fff, 66.2vw 73.3vh #fff, 48.7vw 7.0vh #fff, 47.3vw 19.3vh #fff, 71.3vw 45.0vh #fff, 98.9vw 96.5vh #fff, 11.3vw 25.7vh #fff, 70.8vw 93.8vh #fff, 27.7vw 96.6vh #fff, 25.2vw 30.5vh #fff, 16.4vw 21.1vh #fff, 71.8vw 21.2vh #fff, 84.5vw 93.3vh #fff, 44.4vw 97.7vh #fff, 47.6vw 27.1vh #fff, 73.5vw 42.7vh #fff, 57.0vw 97.0vh #fff, 20.8vw 24.4vh #fff, 89.6vw 98.4vh #fff, 50.9vw 75.1vh #fff, 96.3vw 16.9vh #fff, 68.6vw 49.9vh #fff, 38.7vw 18.1vh #fff, 13.4vw 12.6vh #fff, 90.6vw 87.3vh #fff, 32.1vw 95.5vh #fff, 75.9vw 66.3vh #fff, 44.4vw 3.5vh #fff, 86.5vw 23.5vh #fff, 87.8vw 19.9vh #fff, 41.1vw 48.2vh #fff, 96.8vw 51.4vh #fff, 84.4vw 6.2vh #fff, 30.9vw 74.4vh #fff, 42.9vw 22.8vh #fff, 93.3vw 61.8vh #fff, 73.7vw 92.3vh #fff, 47.8vw 13.6vh #fff, 46.0vw 60.5vh #fff, 16.7vw 31.7vh #fff, 34.9vw 17.3vh #fff, 53.1vw 36.8vh #fff, 5.0vw 70.4vh #fff, 3.5vw 49.1vh #fff, 74.0vw 40.8vh #fff, 75.2vw 90.8vh #fff, 12.9vw 32.3vh #fff, 74.8vw 33.6vh #fff, 22.5vw 84.3vh #fff, 94.4vw 43.0vh #fff, 55.8vw 7.6vh #fff, 60.5vw 86.4vh #fff;
 }
 
-/* Layer 3: Large (3px), fast (20s), low density (~80 stars) */
 .layer-3 {
-  animation: moveStars 20s linear infinite;
-  opacity: 0.9;
+  animation: floatSparkles 28s ease-in-out infinite;
+  opacity: 1;
 }
 
 .layer-3::after {
   width: 3px;
   height: 3px;
-  box-shadow:
-    81.0vw 31.7vh #fff, 46.9vw 37.7vh #fff, 92.6vw 40.4vh #fff, 76.1vw 22.6vh #fff, 20.7vw 39.0vh #fff, 71.8vw 16.7vh #fff, 75.1vw 29.9vh #fff, 80.3vw 37.2vh #fff, 23.8vw 77.8vh #fff, 43.8vw 20.6vh #fff, 8.8vw 21.1vh #fff, 43.4vw 69.1vh #fff, 33.0vw 27.6vh #fff, 28.5vw 81.9vh #fff, 17.4vw 22.6vh #fff, 55.2vw 33.2vh #fff, 23.7vw 13.1vh #fff, 84.2vw 31.2vh #fff, 55.6vw 53.5vh #fff, 24.5vw 9.1vh #fff, 18.7vw 89.8vh #fff, 74.6vw 25.3vh #fff, 55.6vw 7.6vh #fff, 72.2vw 93.3vh #fff, 54.2vw 34.1vh #fff, 98.5vw 79.7vh #fff, 99.9vw 90.3vh #fff, 88.7vw 43.6vh #fff, 89.8vw 46.6vh #fff, 27.3vw 34.6vh #fff, 70.8vw 96.5vh #fff, 73.0vw 93.1vh #fff, 84.6vw 5.0vh #fff, 97.3vw 42.1vh #fff, 10.9vw 74.9vh #fff, 69.1vw 60.7vh #fff, 38.7vw 28.9vh #fff, 21.2vw 65.3vh #fff, 66.0vw 21.8vh #fff, 42.3vw 9.6vh #fff, 51.7vw 86.6vh #fff, 0.0vw 36.5vh #fff, 50.4vw 70.2vh #fff, 49.2vw 97.3vh #fff, 38.4vw 0.5vh #fff, 85.7vw 41.3vh #fff, 71.9vw 98.2vh #fff, 84.8vw 81.0vh #fff, 17.3vw 50.6vh #fff, 2.2vw 26.3vh #fff, 98.8vw 94.6vh #fff, 97.4vw 18.3vh #fff, 63.1vw 35.4vh #fff, 55.3vw 73.0vh #fff, 55.0vw 30.0vh #fff, 50.2vw 75.4vh #fff, 68.8vw 34.8vh #fff, 75.0vw 16.7vh #fff, 52.4vw 42.4vh #fff, 49.8vw 99.7vh #fff, 34.2vw 37.6vh #fff, 63.3vw 54.5vh #fff, 16.8vw 16.9vh #fff, 47.0vw 14.9vh #fff, 25.6vw 48.6vh #fff, 43.1vw 9.0vh #fff, 10.3vw 76.9vh #fff, 18.4vw 6.2vh #fff, 93.5vw 97.0vh #fff, 15.7vw 32.7vh #fff, 79.6vw 37.0vh #fff, 69.7vw 66.3vh #fff, 9.1vw 90.7vh #fff, 3.9vw 81.5vh #fff, 61.9vw 68.7vh #fff, 9.8vw 88.3vh #fff, 42.3vw 19.2vh #fff, 4.8vw 85.4vh #fff, 23.5vw 41.8vh #fff, 34.0vw 33.3vh #fff;
+  box-shadow: 61.7vw 1.7vh #fff, 71.4vw 84.1vh #fff, 78.1vw 95.1vh #fff, 91.1vw 44.5vh #fff, 84.0vw 72.7vh #fff, 47.7vw 49.3vh #fff, 72.2vw 49.3vh #fff, 81.3vw 35.1vh #fff, 97.8vw 67.3vh #fff, 32.5vw 80.8vh #fff, 91.7vw 55.9vh #fff, 55.5vw 38.2vh #fff, 41.7vw 10.7vh #fff, 4.7vw 84.8vh #fff, 22.7vw 35.2vh #fff, 27.0vw 10.0vh #fff, 6.0vw 83.3vh #fff, 50.0vw 78.1vh #fff, 87.1vw 18.3vh #fff, 90.9vw 52.7vh #fff, 80.1vw 51.7vh #fff, 55.5vw 75.9vh #fff, 89.8vw 38.0vh #fff, 95.5vw 99.9vh #fff, 30.5vw 93.5vh #fff, 95.5vw 69.6vh #fff, 99.4vw 27.3vh #fff, 31.9vw 98.5vh #fff, 17.9vw 55.2vh #fff, 57.1vw 91.0vh #fff, 34.1vw 45.2vh #fff, 18.8vw 3.9vh #fff, 39.3vw 13.8vh #fff, 53.0vw 11.3vh #fff, 66.3vw 19.5vh #fff, 88.1vw 67.9vh #fff, 14.3vw 25.0vh #fff, 83.0vw 31.1vh #fff, 49.8vw 1.3vh #fff, 60.5vw 57.1vh #fff, 44.9vw 48.9vh #fff, 28.8vw 3.0vh #fff, 67.4vw 44.7vh #fff, 35.7vw 77.1vh #fff, 47.3vw 62.1vh #fff, 75.3vw 11.5vh #fff, 92.0vw 50.5vh #fff, 96.4vw 20.9vh #fff, 33.8vw 1.3vh #fff, 98.7vw 98.4vh #fff, 2.4vw 49.0vh #fff, 30.2vw 69.6vh #fff, 87.9vw 21.1vh #fff, 92.8vw 69.2vh #fff, 32.1vw 42.7vh #fff, 27.9vw 87.3vh #fff, 13.2vw 59.5vh #fff, 67.6vw 64.7vh #fff, 77.6vw 40.1vh #fff, 8.8vw 93.0vh #fff;
+}
+
+@keyframes floatSparkles {
+  0% {
+    transform: translate(0px, 0px);
+  }
+
+  25% {
+    transform: translate(12px, -10px);
+  }
+
+  50% {
+    transform: translate(-12px, 10px);
+  }
+
+  75% {
+    transform: translate(8px, -6px);
+  }
+
+  100% {
+    transform: translate(0px, 0px);
+  }
 }
 
 @keyframes moveStars {
@@ -370,7 +402,9 @@ body {
 
 /* Reduced Motion Support */
 @media (prefers-reduced-motion: reduce) {
-  .layer {
+
+  .layer,
+  .sparkle-layer {
     animation: none !important;
   }
 }

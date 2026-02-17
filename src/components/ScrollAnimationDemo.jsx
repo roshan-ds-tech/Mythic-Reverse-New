@@ -54,8 +54,8 @@ export function ScrollAnimationDemo() {
                 </div>
 
                 {/* Right Content: 3D Scroll Animation Component */}
-                <div className="md:w-1/2 flex justify-center md:end z-20">
-                    <div className="w-full max-w-[800px] -mr-20 md:-mr-40 scale-75 md:scale-90 origin-right">
+                <div className="md:w-1/2 flex justify-center md:justify-end z-20">
+                    <div className="w-full max-w-[800px] scale-90 md:scale-100 origin-center md:origin-right">
                         <ContainerScroll
                             titleComponent={<></>}
                         >

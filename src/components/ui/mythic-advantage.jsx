@@ -80,7 +80,7 @@ export function MythicAdvantage() {
                             animate={isInView ? { opacity: 1, y: 0 } : {}}
                             transition={{ delay: 0.1 * i }}
                         >
-                            <Card className="relative overflow-hidden bg-[#111118] border-violet-500/20 hover:border-violet-500/40 transition-all group h-full">
+                            <Card className="relative overflow-hidden bg-[#111118]/60 border-violet-500/20 hover:border-violet-500/40 transition-all group h-full backdrop-blur-sm">
                                 <div className={`absolute inset-0 bg-gradient-to-br ${item.color} opacity-0 group-hover:opacity-5 transition-opacity`} />
                                 <div className="absolute -right-10 -top-10 w-40 h-40 bg-gradient-to-br from-violet-500/10 to-transparent rounded-full blur-2xl group-hover:scale-150 transition-transform duration-500" />
 

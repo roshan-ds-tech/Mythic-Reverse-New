@@ -4,7 +4,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import { motion, useScroll, useTransform } from 'motion/react';
 import { cn } from '../../lib/utils';
 import { Building2, Rocket, TrendingUp, Award, Users, Globe } from 'lucide-react';
-import { SparklesCore } from './sparkles';
 
 // GlowEffect Component
 function GlowEffect({
@@ -139,17 +138,6 @@ function CompanyTimeline({
             className={cn('w-full font-sans md:px-10 relative overflow-hidden', className)}
             ref={containerRef}
         >
-            <div className="absolute inset-0 z-0 pointer-events-none">
-                <SparklesCore
-                    id="timeline-sparkles"
-                    background="transparent"
-                    minSize={0.6}
-                    maxSize={1.4}
-                    particleDensity={50}
-                    className="w-full h-full"
-                    particleColor="#FFFFFF"
-                />
-            </div>
             <div className="max-w-7xl mx-auto py-20 px-4 md:px-8 lg:px-10 relative z-10">
                 <motion.h2
                     initial={{ opacity: 0, y: 20 }}
