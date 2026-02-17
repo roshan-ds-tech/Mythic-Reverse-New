@@ -30,7 +30,7 @@ export function TestimonialCarouselDemo() {
             <div className="absolute inset-0 bg-transparent z-0" />
             <div className="absolute inset-0 bg-gradient-to-t from-violet-950/20 via-transparent to-transparent pointer-events-none z-[1]" />
             {/* Bottom blend to black */}
-            <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-transparent to-transparent z-[2] pointer-events-none" />
+            <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-black via-black/80 to-transparent z-[2] pointer-events-none" />
 
             <div className="relative z-10 container mx-auto px-4">
                 <div className="text-center mb-12">
