@@ -25,11 +25,24 @@ const timelineData = [
 const AboutUs = () => {
     return (
         <div className="relative min-h-screen bg-black text-white">
-            {/* Global Sparkles for About Us - Floating Roaming Stars */}
-            <div className="global-sparkles">
-                <div className="sparkle-layer layer-1"></div>
-                <div className="sparkle-layer layer-2"></div>
-                <div className="sparkle-layer layer-3"></div>
+            {/* Global Stars - Fixed Background (same as Homepage) */}
+            <div className="global-stars">
+                <div className="layer layer-1"></div>
+                <div className="layer layer-2"></div>
+                <div className="layer layer-3"></div>
+            </div>
+
+            {/* Global Sparkles - Fixed across all sections */}
+            <div style={{ position: 'fixed', inset: 0, zIndex: 1, pointerEvents: 'none' }}>
+                <SparklesCore
+                    id="aboutus-global-sparkles"
+                    background="transparent"
+                    minSize={0.8}
+                    maxSize={1.8}
+                    particleDensity={60}
+                    className="w-full h-full"
+                    particleColor="#FFFFFF"
+                />
             </div>
 
             <div className="relative z-10">
@@ -38,7 +51,6 @@ const AboutUs = () => {
 
                 {/* Feature Spotlight Section */}
                 <section className="py-20 bg-transparent flex justify-center overflow-hidden">
-                    <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-black via-black/80 to-transparent z-[1] pointer-events-none" />
                     <div className="relative z-10 w-full flex justify-center">
                         <FeaturedSpotlight />
                     </div>

@@ -96,22 +96,7 @@ const FuturisticBackground = () => {
     );
 };
 
-// --- Grid Pattern ---
-const GridPattern = () => {
-    return (
-        <div className="absolute inset-0 overflow-hidden">
-            <div
-                className="absolute inset-0"
-                style={{
-                    backgroundImage: `linear-gradient(to right, rgba(139, 92, 246, 0.1) 1px, transparent 1px),
-                                     linear-gradient(to bottom, rgba(139, 92, 246, 0.1) 1px, transparent 1px)`,
-                    backgroundSize: '50px 50px',
-                }}
-            />
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-transparent" />
-        </div>
-    );
-};
+
 
 // --- Floating Orb ---
 const FloatingOrb = ({ delay = 0, duration = 20 }) => {
@@ -179,7 +164,7 @@ export function HeroSection() {
             ref={ref}
             className="relative min-h-screen w-full bg-transparent text-white flex items-center justify-center"
         >
-            <GridPattern />
+
 
             <div className="absolute top-1/4 left-1/4">
                 <FloatingOrb delay={0} duration={25} />
@@ -190,7 +175,7 @@ export function HeroSection() {
 
             <FuturisticBackground />
 
-            <div className="absolute inset-0 bg-gradient-to-b from-purple-900/10 via-transparent to-transparent z-[1] pointer-events-none" />
+
 
             <motion.div
                 className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl"
@@ -269,7 +254,7 @@ export function HeroSection() {
             </motion.div>
 
             {/* Bottom gradient fade */}
-            <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black to-transparent z-[3]" />
+
 
             {/* Scroll indicator */}
             <motion.div
