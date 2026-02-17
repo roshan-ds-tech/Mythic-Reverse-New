@@ -19,6 +19,24 @@ const DIRECTORS_DATA = [
         name: "Sharan Shekaran",
         avatar: "images/web_images/sharan.jpeg",
         description: "Orchestrating our global strategy and partnerships. Connecting the dots between complex technologies and real-world value."
+    },
+    {
+        id: 4,
+        name: "Sarah Chen",
+        avatar: "https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1061&q=80",
+        description: "Driving innovation in AI research and semantic understanding. Pushing the boundaries of neural architectures."
+    },
+    {
+        id: 5,
+        name: "Marcus Thorne",
+        avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80",
+        description: "Leading our global infrastructure scaling initiatives. Building the backbone of the next generation web."
+    },
+    {
+        id: 6,
+        name: "Elena Rodriguez",
+        avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+        description: "Spearheading user experience and design systems. Crafting intuitive interfaces for complex reality simulations."
     }
 ]
 
