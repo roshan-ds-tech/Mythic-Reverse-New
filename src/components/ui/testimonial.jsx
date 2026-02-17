@@ -44,12 +44,12 @@ const TestimonialCarousel = forwardRef(
             <div
                 ref={ref}
                 className={cn(
-                    "h-[500px] w-full flex items-center justify-center py-20",
+                    "h-[600px] w-full flex items-center justify-center py-0",
                     className
                 )}
                 {...props}
             >
-                <div className="relative w-[300px] h-[400px] md:w-[600px] md:h-[400px]">
+                <div className="relative w-[320px] h-[600px] md:w-[900px] md:h-[500px]">
                     {testimonials.map((testimonial, index) => {
                         const isCurrentCard = index === currentIndex;
                         const isPrevCard =
@@ -122,7 +122,7 @@ const TestimonialCarousel = forwardRef(
                                     </div>
                                 )}
 
-                                <div className="p-8 md:p-12 flex flex-col md:flex-row items-center gap-8 h-full justify-center text-center md:text-left">
+                                <div className="p-8 md:p-14 flex flex-col md:flex-row items-center gap-8 md:gap-12 h-full justify-center text-center md:text-left">
                                     <div className="relative group shrink-0">
                                         <div className="absolute inset-0 bg-gradient-to-r from-violet-600 to-fuchsia-600 rounded-full blur-xl opacity-50 group-hover:opacity-75 transition-opacity duration-500"></div>
                                         <div className="relative w-32 h-32 md:w-48 md:h-48 rounded-full p-1 bg-gradient-to-br from-white/10 to-white/0 overflow-hidden backdrop-blur-sm">
@@ -134,19 +134,26 @@ const TestimonialCarousel = forwardRef(
                                         </div>
                                     </div>
 
-                                    <div className="space-y-6 max-w-sm">
+                                    <div className="space-y-8 max-w-2xl text-left">
                                         <div>
-                                            <h3 className="text-3xl font-black text-white bg-clip-text text-transparent bg-gradient-to-r from-white to-white/60 mb-2">
+                                            <h3 className="text-3xl font-black text-white bg-clip-text text-transparent bg-gradient-to-r from-white to-white/60 mb-1">
                                                 {testimonial.name}
                                             </h3>
+                                            {testimonial.role && (
+                                                <p className="text-sm font-bold text-violet-400 mb-3 tracking-widest uppercase">
+                                                    {testimonial.role}
+                                                </p>
+                                            )}
                                             <div className="h-1 w-20 bg-gradient-to-r from-violet-500 to-fuchsia-500 rounded-full mx-auto md:mx-0" />
                                         </div>
 
                                         <div className="relative">
-                                            <span className="absolute -top-4 -left-2 text-6xl text-violet-500/20 font-serif leading-none">"</span>
-                                            <p className="text-lg font-medium leading-relaxed text-zinc-400 relative z-10">
+                                            {!testimonial.role && (
+                                                <span className="absolute -top-4 -left-2 text-6xl text-violet-500/20 font-serif leading-none">"</span>
+                                            )}
+                                            <div className="text-sm md:text-base font-medium leading-relaxed text-zinc-400 relative z-10 text-left">
                                                 {testimonial.description}
-                                            </p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
