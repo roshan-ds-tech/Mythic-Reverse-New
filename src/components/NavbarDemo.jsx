@@ -4,7 +4,7 @@ import { ExpandableMenu, ExpandableMenuItem } from "@/components/ui/expandable-m
 import { cn } from "../lib/utils";
 import { motion, useScroll, useMotionValueEvent } from "framer-motion";
 import { useMobile } from "../hooks/use-mobile";
-import { Briefcase, ShoppingBag, DollarSign, Home, Bell, GraduationCap, Calendar } from "lucide-react";
+import { Briefcase, ShoppingBag, Home, Calendar, MessageSquare } from "lucide-react";
 
 export function NavbarDemo() {
     return (
@@ -53,37 +53,24 @@ function Navbar({ className }) {
             }}
             className={cn("fixed top-10 inset-x-5 max-w-fit mx-auto z-50", className)}
         >
-            <ExpandableMenu setActive={setActive}>
-                <ExpandableMenuItem setActive={setActive} active={active} item="Home" icon={Home} href="/" />
+            <div className="flex items-center gap-2">
+                <ExpandableMenu setActive={setActive}>
+                    <ExpandableMenuItem setActive={setActive} active={active} item="Home" icon={Home} href="/" />
+                    <ExpandableMenuItem setActive={setActive} active={active} item="Services" icon={Briefcase} href="/services" />
+                    <ExpandableMenuItem setActive={setActive} active={active} item="About Us" icon={ShoppingBag} href="/about-us" />
+                    <ExpandableMenuItem setActive={setActive} active={active} item="Consultation" icon={Calendar} href="/consultation" />
+                </ExpandableMenu>
 
-                <ExpandableMenuItem setActive={setActive} active={active} item="Services" icon={Briefcase} href="/services" />
-                <ExpandableMenuItem setActive={setActive} active={active} item="About Us" icon={ShoppingBag} href="/about-us" />
-                <ExpandableMenuItem setActive={setActive} active={active} item="Consultation" icon={Calendar} href="/consultation" />
-                <ExpandableMenuItem setActive={setActive} active={active} item="Internship" icon={GraduationCap}>
-                    <div className="flex flex-col space-y-4 text-sm w-48">
-                        <HoveredLink href="#">Full Stack Intern</HoveredLink>
-                        <HoveredLink href="#">Frontend Intern</HoveredLink>
-                        <HoveredLink href="#">Backend Intern</HoveredLink>
-                    </div>
-                </ExpandableMenuItem>
-                <ExpandableMenuItem setActive={setActive} active={active} item="Pricing" icon={DollarSign}>
-                    <div className="flex flex-col space-y-4 text-sm w-48">
-                        <HoveredLink href="#">Hobby</HoveredLink>
-                        <HoveredLink href="#">Individual</HoveredLink>
-                        <HoveredLink href="#">Team</HoveredLink>
-                        <HoveredLink href="#">Enterprise</HoveredLink>
-                    </div>
-                </ExpandableMenuItem>
-
-                <ExpandableMenuItem setActive={setActive} active={active} item="Notification" icon={Bell}>
-                    <div className="flex flex-col space-y-4 text-sm w-48">
-                        <HoveredLink href="#">New Updates</HoveredLink>
-                        <HoveredLink href="#">Messages</HoveredLink>
-                    </div>
-                </ExpandableMenuItem>
-
-
-            </ExpandableMenu>
+                <motion.a
+                    href="/contact"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-gradient-to-r from-violet-600 via-purple-600 to-fuchsia-600 text-white text-sm font-bold shadow-lg shadow-purple-500/20 hover:shadow-purple-500/40 transition-all duration-300"
+                >
+                    <MessageSquare size={18} />
+                    <span>Contact</span>
+                </motion.a>
+            </div>
         </motion.div>
     );
 }
