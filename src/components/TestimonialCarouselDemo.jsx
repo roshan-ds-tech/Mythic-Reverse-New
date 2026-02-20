@@ -19,7 +19,7 @@ const DIRECTORS_DATA = [
     },
     {
         id: 2,
-        name: "Roshan D S",
+        name: "Roshan DS",
         role: "Chief Technology Officer (CTO)",
         avatar: "images/web_images/roshan1.jpg",
         description: (
@@ -81,7 +81,7 @@ const DIRECTORS_DATA = [
         id: 6,
         name: "Nirmalkumar K",
         role: "Chief Development Officer (CDO)",
-        avatar: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80",
+        avatar: "images/web_images/nirmal.jpeg",
         description: (
             <div className="space-y-8">
                 <p>Nirmalkumar leads product development and execution across digital and IT projects. He ensures high-quality code standards, efficient development cycles, and scalable system implementation aligned with business objectives.</p>

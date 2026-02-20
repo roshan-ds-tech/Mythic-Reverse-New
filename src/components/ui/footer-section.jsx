@@ -5,29 +5,18 @@ import { FacebookIcon, FrameIcon, InstagramIcon, LinkedinIcon, YoutubeIcon } fro
 
 const footerLinks = [
     {
-        label: 'Product',
+        label: 'Navigation',
         links: [
-            { title: 'Features', href: '#features' },
-            { title: 'Pricing', href: '#pricing' },
-            { title: 'Testimonials', href: '#testimonials' },
-            { title: 'Integration', href: '/' },
-        ],
-    },
-    {
-        label: 'Company',
-        links: [
-            { title: 'FAQs', href: '/faqs' },
+            { title: 'Home', href: '/' },
             { title: 'About Us', href: '/about-us' },
-            { title: 'Terms & Policy', href: '/terms-and-policy' },
+            { title: 'Services', href: '/services' },
+            { title: 'Consultation', href: '/consultation' },
         ],
     },
     {
-        label: 'Resources',
+        label: 'Legal',
         links: [
-            { title: 'Blog', href: '/blog' },
-            { title: 'Changelog', href: '/changelog' },
-            { title: 'Brand', href: '/brand' },
-            { title: 'Help', href: '/help' },
+            { title: 'Terms & Policy', href: '/terms-and-policy' },
         ],
     },
     {
@@ -51,10 +40,10 @@ export function Footer() {
                     <AnimatedContainer className="space-y-4">
                         <div className="flex items-center gap-2">
                             <FrameIcon className="size-8 text-white" />
-                            <span className="font-bold text-xl text-white">Asme</span>
+                            <span className="font-bold text-xl text-white">Mythic Reverse</span>
                         </div>
                         <p className="text-zinc-500 mt-8 text-sm md:mt-0">
-                            © {new Date().getFullYear()} Asme. All rights reserved.
+                            © {new Date().getFullYear()} Mythic Reverse. All rights reserved.
                         </p>
                     </AnimatedContainer>
 

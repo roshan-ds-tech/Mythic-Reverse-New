@@ -8,37 +8,37 @@ const testimonials = [
     {
         text: "This ERP revolutionized our operations, streamlining finance and inventory. The cloud-based platform keeps us productive.",
         image: "images/web_images/rishika.jpg",
-        name: "Briana Patton",
+        name: "Rishika K",
         role: "Operations Manager",
     },
     {
         text: "Implementing this ERP was smooth and quick. The customizable, user-friendly interface made team training effortless.",
         image: "images/web_images/nihar.jpg",
-        name: "Bilal Ahmed",
+        name: "Nihar Chavan",
         role: "IT Manager",
     },
     {
         text: "The support team is exceptional, guiding us through setup and providing ongoing assistance.",
         image: "images/web_images/Keerthana K.jpg",
-        name: "Saman Malik",
+        name: "Keerthana K",
         role: "Customer Support Lead",
     },
     {
         text: "Seamless integration enhanced our business operations and efficiency. Highly recommend for its intuitive interface.",
         image: "images/web_images/hariprasad1.jpg",
-        name: "Omar Raza",
+        name: "Hariprasad",
         role: "CEO",
     },
     {
         text: "Robust features and quick support have transformed our workflow, making us significantly more efficient.",
         image: "images/web_images/Supriya Narayan.jpeg",
-        name: "Zainab Hussain",
+        name: "Supriya Narayan",
         role: "Project Manager",
     },
     {
         text: "The smooth implementation exceeded expectations. It streamlined processes, improving overall business performance.",
         image: "images/web_images/priyanka.jpg",
-        name: "Aliza Khan",
+        name: "Priyanka K",
         role: "Business Analyst",
     },
 ];

@@ -69,7 +69,21 @@ const BGPattern = ({
 // ============================================================================
 // MAIN SERVICES PAGE COMPONENT
 // ============================================================================
+// ============================================================================
+// MAIN SERVICES PAGE COMPONENT
+// ============================================================================
 export default function ServicesPage() {
+    // Define Service Assets with sanitized folder names
+    const SERVICE_ASSETS = {
+        "it": ["1.png", "2.png", "3.png", "4.png"],
+        "web-dev": ["1.png", "2.png", "3.png", "4.png"],
+        "digi": ["1.png", "2.png", "3.png", "4.png"],
+        "app-dev": ["1.png", "2.png", "3.png", "4.png"],
+        "saas": ["1.png", "2.png", "3.png", "4.png"],
+        "workshops": ["1.png", "2.png", "3.png", "4.png"],
+        "events": ["1.png", "2.png", "3.png", "4.png"],
+    };
+
     return (
         <div className="min-h-screen w-full bg-[#0B0B12] text-white overflow-x-hidden pt-20">
             {/* Page-wide subtle sparkles */}
@@ -135,6 +149,8 @@ export default function ServicesPage() {
                     "System Integration"
                 ]}
                 gradient="from-[#8B5CF6] to-[#6366F1]"
+                folderName="it"
+                imageFiles={SERVICE_ASSETS["it"]}
             />
 
             {/* Website Design & Development */}
@@ -152,6 +168,8 @@ export default function ServicesPage() {
                 ]}
                 gradient="from-[#D946EF] to-[#F97316]"
                 reverse
+                folderName="web-dev"
+                imageFiles={SERVICE_ASSETS["web-dev"]}
             />
 
             {/* Digital Marketing */}
@@ -168,6 +186,8 @@ export default function ServicesPage() {
                     "Analytics & Performance Tracking"
                 ]}
                 gradient="from-[#06B6D4] to-[#8B5CF6]"
+                folderName="digi"
+                imageFiles={SERVICE_ASSETS["digi"]}
             />
 
             {/* App Development */}
@@ -185,6 +205,8 @@ export default function ServicesPage() {
                 ]}
                 gradient="from-[#F97316] to-[#EF4444]"
                 reverse
+                folderName="app-dev"
+                imageFiles={SERVICE_ASSETS["app-dev"]}
             />
 
             {/* SaaS Platforms */}
@@ -201,6 +223,8 @@ export default function ServicesPage() {
                     "Security & Compliance"
                 ]}
                 gradient="from-[#8B5CF6] to-[#D946EF]"
+                folderName="saas"
+                imageFiles={SERVICE_ASSETS["saas"]}
             />
 
             {/* Workshops & EdTech */}
@@ -218,6 +242,8 @@ export default function ServicesPage() {
                 ]}
                 gradient="from-[#06B6D4] to-[#6366F1]"
                 reverse
+                folderName="workshops"
+                imageFiles={SERVICE_ASSETS["workshops"]}
             />
 
             {/* Events & Hackathons */}
@@ -234,6 +260,8 @@ export default function ServicesPage() {
                     "Sponsorship & Partnership Management"
                 ]}
                 gradient="from-[#D946EF] to-[#8B5CF6]"
+                folderName="events"
+                imageFiles={SERVICE_ASSETS["events"]}
             />
 
             {/* CTA Section */}
@@ -310,7 +338,7 @@ export default function ServicesPage() {
 // ============================================================================
 // SERVICE SECTION COMPONENT
 // ============================================================================
-function ServiceSection({ title, description, icon, features, gradient, reverse = false }) {
+function ServiceSection({ title, description, icon, features, gradient, reverse = false, folderName, imageFiles }) {
     const ref = useRef(null);
     const isInView = useInView(ref, { once: false, margin: "-100px" });
 
@@ -385,20 +413,44 @@ function ServiceSection({ title, description, icon, features, gradient, reverse 
                             )} />
                             <div className="relative bg-gradient-to-br from-[#111118] to-[#0B0B12] border border-white/10 rounded-3xl p-8 backdrop-blur-xl">
                                 <div className="grid grid-cols-2 gap-4">
-                                    {[...Array(4)].map((_, i) => (
-                                        <motion.div
-                                            key={i}
-                                            initial={{ opacity: 0, scale: 0.8 }}
-                                            animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                                            transition={{ duration: 0.5, delay: 0.2 + i * 0.1 }}
-                                            className={cn(
-                                                "aspect-square rounded-2xl bg-gradient-to-br p-6 flex items-center justify-center",
-                                                gradient
-                                            )}
-                                        >
-                                            <div className="w-full h-full bg-[#0B0B12]/50 rounded-xl backdrop-blur-sm" />
-                                        </motion.div>
-                                    ))}
+                                    {imageFiles && imageFiles.length > 0 ? (
+                                        imageFiles.map((file, i) => (
+                                            <motion.div
+                                                key={i}
+                                                initial={{ opacity: 0, scale: 0.8 }}
+                                                animate={isInView ? { opacity: 1, scale: 1 } : {}}
+                                                transition={{ duration: 0.5, delay: 0.2 + i * 0.1 }}
+                                                className={cn(
+                                                    "aspect-square rounded-2xl bg-gradient-to-br p-6 flex items-center justify-center",
+                                                    gradient
+                                                )}
+                                            >
+                                                <div className="w-full h-full overflow-hidden rounded-2xl">
+                                                    <img
+                                                        src={`/images/pictures/${folderName}/${file}`}
+                                                        alt={`${title} ${i + 1}`}
+                                                        className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                                                        loading="lazy"
+                                                    />
+                                                </div>
+                                            </motion.div>
+                                        ))
+                                    ) : (
+                                        [...Array(4)].map((_, i) => (
+                                            <motion.div
+                                                key={i}
+                                                initial={{ opacity: 0, scale: 0.8 }}
+                                                animate={isInView ? { opacity: 1, scale: 1 } : {}}
+                                                transition={{ duration: 0.5, delay: 0.2 + i * 0.1 }}
+                                                className={cn(
+                                                    "aspect-square rounded-2xl bg-gradient-to-br p-6 flex items-center justify-center",
+                                                    gradient
+                                                )}
+                                            >
+                                                <div className="w-full h-full bg-[#0B0B12]/50 rounded-xl backdrop-blur-sm" />
+                                            </motion.div>
+                                        ))
+                                    )}
                                 </div>
                             </div>
                         </div>
