@@ -5,7 +5,7 @@ import { Stars } from "@react-three/drei"
 import * as THREE from "three"
 import { cn } from "../../lib/utils"
 import { Button } from "./button"
-import { Sparkles } from "lucide-react"
+import { } from "lucide-react"
 import { SparklesCore } from "./sparkles"
 
 const COLORS = ["#8B5CF6", "#A855F7", "#7C3AED"]; // Purple shades only
@@ -234,7 +234,6 @@ function MythicReverseHero({
                         animate="visible"
                         className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm mb-8"
                     >
-                        <Sparkles className="w-4 h-4 text-purple-400" />
                         <span className="text-sm text-white/80 tracking-wider font-medium">
                             {agencyName}
                         </span>

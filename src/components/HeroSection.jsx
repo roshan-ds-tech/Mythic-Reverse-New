@@ -1,7 +1,8 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
+import { useNavigate } from 'react-router-dom';
 import { motion, useAnimation, useInView } from "framer-motion";
-import { ArrowRight, Sparkles, ChevronRight } from "lucide-react";
+import { ArrowRight, ChevronRight } from "lucide-react";
 import { ProjectInquiryDialog } from "./ui/project-inquiry-dialog";
 
 
@@ -129,6 +130,7 @@ export function HeroSection() {
     const isInView = useInView(ref, { once: true });
     const controls = useAnimation();
     const [dialogOpen, setDialogOpen] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (isInView) {
@@ -189,7 +191,6 @@ export function HeroSection() {
                         variants={itemVariants}
                         className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-purple-500/30 bg-purple-500/10 backdrop-blur-sm"
                     >
-                        <Sparkles className="w-4 h-4 text-purple-400" />
                         <span className="text-sm font-medium text-purple-300">
                             Mythic Reverse Studio
                         </span>
@@ -233,7 +234,10 @@ export function HeroSection() {
                             <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                         </button>
 
-                        <button className="inline-flex h-14 items-center justify-center rounded-full border-2 border-purple-500/50 text-white hover:bg-purple-500/10 px-8 font-semibold text-lg backdrop-blur-sm transition-all duration-300 w-full sm:w-auto">
+                        <button
+                            onClick={() => navigate('/services')}
+                            className="inline-flex h-14 items-center justify-center rounded-full border-2 border-purple-500/50 text-white hover:bg-purple-500/10 px-8 font-semibold text-lg backdrop-blur-sm transition-all duration-300 w-full sm:w-auto"
+                        >
                             View Our Work
                         </button>
                     </motion.div>

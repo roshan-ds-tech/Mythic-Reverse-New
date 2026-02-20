@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useRef } from "react";
-import { Monitor, Smartphone, Database, CheckCircle2, ArrowRight, Sparkles } from "lucide-react";
+import { Monitor, Smartphone, Database, CheckCircle2, ArrowRight } from "lucide-react";
 import ServicesOrbitalDisplay from "./ServicesOrbitalDisplay";
 import { useScrollReveal } from "../hooks/useScrollReveal";
 
@@ -218,7 +218,6 @@ export default function CompanyServicesSection() {
             <div className="container mx-auto max-w-7xl relative z-10">
                 <div className="text-center mb-8 animate-on-scroll delay-100 opacity-0 fill-mode-forwards">
                     <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 text-neutral-300 font-medium mb-4 border border-white/10">
-                        <Sparkles className="w-4 h-4 text-purple-400" />
                         OUR SERVICES
                     </div>
                     <h2 className="text-5xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-white via-neutral-200 to-neutral-400 bg-clip-text text-transparent">

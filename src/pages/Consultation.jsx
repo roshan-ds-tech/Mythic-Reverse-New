@@ -5,7 +5,6 @@ import { motion, useMotionValue, useTransform, animate, AnimatePresence } from '
 import {
     ArrowRight,
     CheckCircle,
-    Sparkles,
     Target,
     Lightbulb,
     Rocket,
@@ -254,8 +253,6 @@ const Consultation = () => {
                             transition={{ delay: 0.2, duration: 0.8 }}
                         >
                             <AnimatedGradientText>
-                                <Sparkles className="h-4 w-4 text-[#8B5CF6]" />
-                                <span className="mx-2 h-4 w-px bg-white/20" />
                                 <span className="inline animate-gradient bg-gradient-to-r from-[#8B5CF6] via-[#D946EF] to-[#8B5CF6] bg-[length:var(--bg-size)_100%] bg-clip-text text-transparent">
                                     Strategic IT Consulting
                                 </span>
@@ -814,7 +811,7 @@ const Consultation = () => {
                                     viewport={{ once: true }}
                                     transition={{ delay: 0.2, duration: 0.8 }}
                                 >
-                                    <Sparkles className="h-16 w-16 text-[#8B5CF6] mx-auto mb-6" />
+                                    {/* Sparkles icon removed */}
                                 </motion.div>
 
                                 <motion.h2

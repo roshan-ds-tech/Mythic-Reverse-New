@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 
 export function CTASection() {
@@ -25,7 +25,6 @@ export function CTASection() {
                     transition={{ duration: 0.5 }}
                     className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-violet-500/30 bg-violet-500/10 mb-8 backdrop-blur-sm"
                 >
-                    <Sparkles className="w-4 h-4 text-violet-400" />
                     <span className="text-sm font-medium text-violet-200">Ready to Scale?</span>
                 </motion.div>
 

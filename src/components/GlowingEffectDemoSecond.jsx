@@ -2,10 +2,12 @@
 
 import { Code, GraduationCap, Zap, Trophy, Layers } from "lucide-react";
 import React, { useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import { useScrollReveal } from "../hooks/useScrollReveal";
 
 export function GlowingEffectDemoSecond() {
     const containerRef = useRef(null);
+    const navigate = useNavigate();
     useScrollReveal(containerRef, ".animate-on-scroll");
 
     return (
@@ -83,7 +85,10 @@ export function GlowingEffectDemoSecond() {
                                 </li>
                             </ul>
 
-                            <button className="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-cyan-500/20 to-purple-500/20 border border-cyan-500/50 text-white font-medium hover:from-cyan-500/30 hover:to-purple-500/30 transition-all flex items-center justify-center gap-2 group shadow-[0_0_15px_rgba(6,182,212,0.15)]">
+                            <button
+                                onClick={() => navigate('/about-us')}
+                                className="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-cyan-500/20 to-purple-500/20 border border-cyan-500/50 text-white font-medium hover:from-cyan-500/30 hover:to-purple-500/30 transition-all flex items-center justify-center gap-2 group shadow-[0_0_15px_rgba(6,182,212,0.15)] cursor-pointer"
+                            >
                                 Explore Network
                                 <Zap className="w-4 h-4 group-hover:scale-110 transition-transform text-cyan-400" />
                             </button>

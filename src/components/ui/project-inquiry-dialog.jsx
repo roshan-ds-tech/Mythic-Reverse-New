@@ -4,7 +4,7 @@ import { Input } from './input';
 import { Textarea } from './textarea';
 import { Label } from './label';
 import { motion } from 'framer-motion';
-import { X, Send, Sparkles } from 'lucide-react';
+import { X, Send } from 'lucide-react';
 
 export function ProjectInquiryDialog({ open, onOpenChange }) {
     const [formData, setFormData] = useState({
@@ -54,7 +54,6 @@ export function ProjectInquiryDialog({ open, onOpenChange }) {
 
                 <DialogHeader>
                     <div className="flex items-center gap-2 justify-center sm:justify-start">
-                        <Sparkles className="h-6 w-6 text-purple-500" />
                         <DialogTitle>Start Your Project</DialogTitle>
                     </div>
                     <DialogDescription>

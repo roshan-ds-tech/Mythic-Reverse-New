@@ -132,7 +132,7 @@ export default function ServicesPage() {
                 subtext="Empowering businesses with cutting-edge"
                 animatedWords={['IT solutions', 'digital marketing', 'innovation', 'technology']}
                 ctaText="Get Started"
-                ctaHref="#it-solutions"
+                ctaHref="/consultation#consultation-form"
             />
 
             {/* IT Solutions Section */}
