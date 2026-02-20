@@ -696,11 +696,11 @@ const Consultation = () => {
                                             )}
                                         </div>
 
-                                        <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                                        <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="flex justify-center mt-8">
                                             <Button
                                                 type="submit"
                                                 disabled={isSubmitting}
-                                                className="w-full relative group overflow-hidden bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] hover:from-[#7C3AED] hover:to-[#C026D3] text-white font-medium py-6 text-lg rounded-xl shadow-lg shadow-[#8B5CF6]/25 hover:shadow-xl hover:shadow-[#8B5CF6]/40 transition-all disabled:opacity-50"
+                                                className="w-auto px-12 relative group overflow-hidden bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] hover:from-[#7C3AED] hover:to-[#C026D3] text-white font-medium py-6 text-lg rounded-full shadow-lg shadow-[#8B5CF6]/25 hover:shadow-xl hover:shadow-[#8B5CF6]/40 transition-all disabled:opacity-50"
                                             >
                                                 <motion.div
                                                     className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent"

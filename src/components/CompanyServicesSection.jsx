@@ -2,6 +2,7 @@
 
 import React, { useState, useRef } from "react";
 import { Monitor, Smartphone, Database, CheckCircle2, ArrowRight } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import ServicesOrbitalDisplay from "./ServicesOrbitalDisplay";
 import { useScrollReveal } from "../hooks/useScrollReveal";
 
@@ -57,7 +58,8 @@ const SERVICES = [
         color: "from-purple-500 to-pink-500", // Changed to Purple/Pink
         textAccent: "text-purple-400",
         borderAccent: "group-hover:border-purple-500/50",
-        bgAccent: "group-hover:shadow-purple-500/10"
+        bgAccent: "group-hover:shadow-purple-500/10",
+        link: "/services#web-dev"
     },
     {
         id: "02",
@@ -74,7 +76,8 @@ const SERVICES = [
         color: "from-cyan-500 to-blue-500", // Kept Cyan/Blue but distinct
         textAccent: "text-cyan-400",
         borderAccent: "group-hover:border-cyan-500/50",
-        bgAccent: "group-hover:shadow-cyan-500/10"
+        bgAccent: "group-hover:shadow-cyan-500/10",
+        link: "/services#app-dev"
     },
     {
         id: "03",
@@ -91,7 +94,8 @@ const SERVICES = [
         color: "from-emerald-500 to-teal-500", // Changed to Emerald/Teal
         textAccent: "text-emerald-400",
         borderAccent: "group-hover:border-emerald-500/50",
-        bgAccent: "group-hover:shadow-emerald-500/10"
+        bgAccent: "group-hover:shadow-emerald-500/10",
+        link: "/services#saas"
     }
 ];
 
@@ -179,6 +183,12 @@ function ServiceCard({ service, index, isActive, onClick }) {
                 </div>
 
                 <div
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        if (service.link) {
+                            window.location.href = service.link;
+                        }
+                    }}
                     className={cn(
                         "flex items-center gap-2 font-medium text-sm relative z-10 transition-all duration-300 transform translate-x-0 group-hover:translate-x-1",
                         "opacity-0 group-hover:opacity-100",

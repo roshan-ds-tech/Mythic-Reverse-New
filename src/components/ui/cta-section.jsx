@@ -1,10 +1,11 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-
+import { ProjectInquiryDialog } from "./project-inquiry-dialog";
 
 export function CTASection() {
+    const [isDialogOpen, setIsDialogOpen] = useState(false);
     return (
         <section className="relative w-full overflow-hidden py-32 md:py-40">
 
@@ -65,17 +66,18 @@ export function CTASection() {
                     transition={{ duration: 0.5, delay: 0.3 }}
                     className="flex flex-col sm:flex-row items-center justify-center gap-4"
                 >
-                    <button className="group relative inline-flex h-12 items-center justify-center overflow-hidden rounded-full bg-gradient-to-r from-violet-600 via-purple-600 to-fuchsia-600 px-8 font-medium text-white transition-all duration-300 hover:scale-105 hover:shadow-[0_0_20px_rgba(139,92,246,0.5)]">
+                    <button
+                        onClick={() => setIsDialogOpen(true)}
+                        className="group relative inline-flex h-12 items-center justify-center overflow-hidden rounded-full bg-gradient-to-r from-violet-600 via-purple-600 to-fuchsia-600 px-8 font-medium text-white transition-all duration-300 hover:scale-105 hover:shadow-[0_0_20px_rgba(139,92,246,0.5)]"
+                    >
                         <span className="mr-2">Get Started Now</span>
                         <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
                         <div className="absolute inset-0 -z-10 bg-gradient-to-r from-violet-600 via-purple-600 to-fuchsia-600 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
                     </button>
-
-                    <button className="inline-flex h-12 items-center justify-center rounded-full border border-neutral-800 bg-black/50 px-8 font-medium text-neutral-300 transition-all duration-300 hover:bg-neutral-900 hover:text-white backdrop-blur-sm hover:border-violet-500/50">
-                        Contact Sales
-                    </button>
                 </motion.div>
             </div>
+
+            <ProjectInquiryDialog open={isDialogOpen} onOpenChange={setIsDialogOpen} />
 
             {/* Beam/Separator Line at Top */}
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-[1px] bg-gradient-to-r from-transparent via-violet-500/50 to-transparent" />

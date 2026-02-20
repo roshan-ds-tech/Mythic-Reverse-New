@@ -61,9 +61,9 @@ export function ProjectInquiryDialog({ open, onOpenChange }) {
                     </DialogDescription>
                 </DialogHeader>
 
-                <form onSubmit={handleSubmit} className="space-y-6 p-6 pt-2">
+                <form onSubmit={handleSubmit} className="space-y-3 p-6 pt-0">
                     {/* Name & Email Row */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         <div className="space-y-2">
                             <Label htmlFor="name" className="text-neutral-300">
                                 Full Name <span className="text-red-500">*</span>
@@ -75,7 +75,7 @@ export function ProjectInquiryDialog({ open, onOpenChange }) {
                                 value={formData.name}
                                 onChange={handleChange}
                                 required
-                                className="bg-white/5 border-white/10 text-white placeholder:text-neutral-500 focus:border-purple-500 focus:ring-purple-500/20"
+                                className="h-9 bg-white/5 border-white/10 text-white placeholder:text-neutral-500 focus:border-purple-500 focus:ring-purple-500/20"
                             />
                         </div>
 
@@ -91,7 +91,7 @@ export function ProjectInquiryDialog({ open, onOpenChange }) {
                                 value={formData.email}
                                 onChange={handleChange}
                                 required
-                                className="bg-white/5 border-white/10 text-white placeholder:text-neutral-500 focus:border-purple-500 focus:ring-purple-500/20"
+                                className="h-9 bg-white/5 border-white/10 text-white placeholder:text-neutral-500 focus:border-purple-500 focus:ring-purple-500/20"
                             />
                         </div>
                     </div>
@@ -107,12 +107,12 @@ export function ProjectInquiryDialog({ open, onOpenChange }) {
                             placeholder="Acme Inc."
                             value={formData.company}
                             onChange={handleChange}
-                            className="bg-white/5 border-white/10 text-white placeholder:text-neutral-500 focus:border-purple-500 focus:ring-purple-500/20"
+                            className="h-9 bg-white/5 border-white/10 text-white placeholder:text-neutral-500 focus:border-purple-500 focus:ring-purple-500/20"
                         />
                     </div>
 
                     {/* Project Type & Budget Row */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         <div className="space-y-2">
                             <Label htmlFor="projectType" className="text-neutral-300">
                                 Project Type
@@ -122,7 +122,7 @@ export function ProjectInquiryDialog({ open, onOpenChange }) {
                                 name="projectType"
                                 value={formData.projectType}
                                 onChange={handleChange}
-                                className="flex h-10 w-full rounded-md border border-white/10 bg-white/5 px-3 py-2 text-sm text-white placeholder:text-neutral-500 focus:border-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-500/20"
+                                className="flex h-9 w-full rounded-md border border-white/10 bg-white/5 px-3 py-2 text-sm text-white placeholder:text-neutral-500 focus:border-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-500/20"
                             >
                                 <option value="" className="bg-neutral-900">Select type</option>
                                 <option value="web-app" className="bg-neutral-900">Web Application</option>
@@ -142,7 +142,7 @@ export function ProjectInquiryDialog({ open, onOpenChange }) {
                                 name="budget"
                                 value={formData.budget}
                                 onChange={handleChange}
-                                className="flex h-10 w-full rounded-md border border-white/10 bg-white/5 px-3 py-2 text-sm text-white placeholder:text-neutral-500 focus:border-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-500/20"
+                                className="flex h-9 w-full rounded-md border border-white/10 bg-white/5 px-3 py-2 text-sm text-white placeholder:text-neutral-500 focus:border-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-500/20"
                             >
                                 <option value="" className="bg-neutral-900">Select range</option>
                                 <option value="<10k" className="bg-neutral-900">&lt; $10,000</option>
@@ -164,7 +164,7 @@ export function ProjectInquiryDialog({ open, onOpenChange }) {
                             placeholder="e.g., 3-6 months"
                             value={formData.timeline}
                             onChange={handleChange}
-                            className="bg-white/5 border-white/10 text-white placeholder:text-neutral-500 focus:border-purple-500 focus:ring-purple-500/20"
+                            className="h-9 bg-white/5 border-white/10 text-white placeholder:text-neutral-500 focus:border-purple-500 focus:ring-purple-500/20"
                         />
                     </div>
 
@@ -180,8 +180,8 @@ export function ProjectInquiryDialog({ open, onOpenChange }) {
                             value={formData.description}
                             onChange={handleChange}
                             required
-                            rows={4}
-                            className="bg-white/5 border-white/10 text-white placeholder:text-neutral-500 focus:border-purple-500 focus:ring-purple-500/20 resize-none"
+                            rows={3}
+                            className="bg-white/5 border-white/10 text-white placeholder:text-neutral-500 focus:border-purple-500 focus:ring-purple-500/20 resize-none min-h-[80px]"
                         />
                     </div>
 
@@ -190,7 +190,7 @@ export function ProjectInquiryDialog({ open, onOpenChange }) {
                         type="submit"
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
-                        className="w-full h-12 bg-gradient-to-r from-violet-600 via-purple-600 to-fuchsia-600 text-white font-medium rounded-full flex items-center justify-center gap-2 hover:shadow-lg hover:shadow-purple-500/50 transition-shadow"
+                        className="w-full h-10 mt-2 bg-gradient-to-r from-violet-600 via-purple-600 to-fuchsia-600 text-white font-medium rounded-full flex items-center justify-center gap-2 hover:shadow-lg hover:shadow-purple-500/50 transition-shadow"
                     >
                         <Send className="h-4 w-4" />
                         Send Inquiry

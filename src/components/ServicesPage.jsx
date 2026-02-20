@@ -170,6 +170,7 @@ export default function ServicesPage() {
                 reverse
                 folderName="web-dev"
                 imageFiles={SERVICE_ASSETS["web-dev"]}
+                id="web-dev"
             />
 
             {/* Digital Marketing */}
@@ -207,6 +208,7 @@ export default function ServicesPage() {
                 reverse
                 folderName="app-dev"
                 imageFiles={SERVICE_ASSETS["app-dev"]}
+                id="app-dev"
             />
 
             {/* SaaS Platforms */}
@@ -225,6 +227,7 @@ export default function ServicesPage() {
                 gradient="from-[#8B5CF6] to-[#D946EF]"
                 folderName="saas"
                 imageFiles={SERVICE_ASSETS["saas"]}
+                id="saas"
             />
 
             {/* Workshops & EdTech */}
@@ -338,12 +341,12 @@ export default function ServicesPage() {
 // ============================================================================
 // SERVICE SECTION COMPONENT
 // ============================================================================
-function ServiceSection({ title, description, icon, features, gradient, reverse = false, folderName, imageFiles }) {
+function ServiceSection({ id, title, description, icon, features, gradient, reverse = false, folderName, imageFiles }) {
     const ref = useRef(null);
     const isInView = useInView(ref, { once: false, margin: "-100px" });
 
     return (
-        <section ref={ref} className="relative py-32 overflow-hidden">
+        <section id={id} ref={ref} className="relative py-32 overflow-hidden">
             <BGPattern
                 variant="grid"
                 mask="fade-edges"
