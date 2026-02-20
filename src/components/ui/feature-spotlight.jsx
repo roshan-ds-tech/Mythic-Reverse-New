@@ -157,7 +157,7 @@ export function FeaturedSpotlight() {
                         }}
                     />
                     <img
-                        src="images/web_images/group1.jpg"
+                        src="images/web_images/group1.avif"
                         alt="Team collaboration"
                         className="h-full w-full object-cover transition-all duration-1000"
                         style={{

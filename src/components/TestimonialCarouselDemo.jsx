@@ -6,7 +6,7 @@ const DIRECTORS_DATA = [
         id: 1,
         name: "Prasannakumar K",
         role: "Chief Executive Officer (CEO)",
-        avatar: "images/web_images/Prasanna Kumar.jpg",
+        avatar: "images/web_images/Prasanna Kumar.avif",
         description: (
             <div className="space-y-8">
                 <p>Prasannakumar provides strategic leadership and sets the long-term vision of the company. He drives innovation, builds strong partnerships, and ensures sustainable growth while maintaining a strong organizational culture.</p>
@@ -21,7 +21,7 @@ const DIRECTORS_DATA = [
         id: 2,
         name: "Roshan DS",
         role: "Chief Technology Officer (CTO)",
-        avatar: "images/web_images/roshan1.jpg",
+        avatar: "images/web_images/roshan1.avif",
         description: (
             <div className="space-y-8">
                 <p>Roshan leads the company’s technology roadmap, overseeing product development, digital transformation, and technical innovation. He ensures scalable, secure, and future-ready solutions that support business expansion.</p>
@@ -36,7 +36,7 @@ const DIRECTORS_DATA = [
         id: 3,
         name: "Sharan S",
         role: "Chief Financial Officer (CFO)",
-        avatar: "images/web_images/sharan.jpeg",
+        avatar: "images/web_images/sharan.avif",
         description: (
             <div className="space-y-8">
                 <p>Sharan manages financial strategy, planning, and resource allocation. He ensures financial stability, risk management, and transparency while supporting long-term investment and growth initiatives.</p>
@@ -81,7 +81,7 @@ const DIRECTORS_DATA = [
         id: 6,
         name: "Nirmalkumar K",
         role: "Chief Development Officer (CDO)",
-        avatar: "images/web_images/nirmal.jpeg",
+        avatar: "images/web_images/nirmal.avif",
         description: (
             <div className="space-y-8">
                 <p>Nirmalkumar leads product development and execution across digital and IT projects. He ensures high-quality code standards, efficient development cycles, and scalable system implementation aligned with business objectives.</p>

@@ -8,7 +8,7 @@ const testimonials = [
         name: "Tamar Mendelson",
         designation: "Restaurant Critic",
         src:
-            "images/web_images/Prasanna Kumar.jpg",
+            "images/web_images/Prasanna Kumar.avif",
     },
     {
         quote:
@@ -16,7 +16,7 @@ const testimonials = [
         name: "Joe Charlescraft",
         designation: "Frequent Visitor",
         src:
-            "images/web_images/roshan1.jpg",
+            "images/web_images/roshan1.avif",
     },
     {
         quote:
@@ -24,7 +24,7 @@ const testimonials = [
         name: "Martina Edelweist",
         designation: "Satisfied Customer",
         src:
-            "images/web_images/sharan.jpeg",
+            "images/web_images/sharan.avif",
     },
 
 ];

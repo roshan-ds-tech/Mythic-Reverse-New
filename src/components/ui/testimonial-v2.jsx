@@ -7,37 +7,37 @@ import { SparklesCore } from "./sparkles";
 const testimonials = [
     {
         text: "This ERP revolutionized our operations, streamlining finance and inventory. The cloud-based platform keeps us productive.",
-        image: "images/web_images/rishika.jpg",
+        image: "images/web_images/rishika.avif",
         name: "Rishika K",
         role: "Operations Manager",
     },
     {
         text: "Implementing this ERP was smooth and quick. The customizable, user-friendly interface made team training effortless.",
-        image: "images/web_images/nihar.jpg",
+        image: "images/web_images/nihar.avif",
         name: "Nihar Chavan",
         role: "IT Manager",
     },
     {
         text: "The support team is exceptional, guiding us through setup and providing ongoing assistance.",
-        image: "images/web_images/Keerthana K.jpg",
+        image: "images/web_images/Keerthana K.avif",
         name: "Keerthana K",
         role: "Customer Support Lead",
     },
     {
         text: "Seamless integration enhanced our business operations and efficiency. Highly recommend for its intuitive interface.",
-        image: "images/web_images/hariprasad1.jpg",
+        image: "images/web_images/hariprasad1.avif",
         name: "Hariprasad",
         role: "CEO",
     },
     {
         text: "Robust features and quick support have transformed our workflow, making us significantly more efficient.",
-        image: "images/web_images/Supriya Narayan.jpeg",
+        image: "images/web_images/Supriya Narayan.avif",
         name: "Supriya Narayan",
         role: "Project Manager",
     },
     {
         text: "The smooth implementation exceeded expectations. It streamlined processes, improving overall business performance.",
-        image: "images/web_images/priyanka.jpg",
+        image: "images/web_images/priyanka.avif",
         name: "Priyanka K",
         role: "Business Analyst",
     },
