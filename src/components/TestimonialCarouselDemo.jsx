@@ -8,7 +8,7 @@ const DIRECTORS_DATA = [
         role: "Chief Executive Officer (CEO)",
         avatar: "images/web_images/Prasanna Kumar.avif",
         description: (
-            <div className="space-y-8">
+            <div className="space-y-4 md:space-y-8">
                 <p>Prasannakumar provides strategic leadership and sets the long-term vision of the company. He drives innovation, builds strong partnerships, and ensures sustainable growth while maintaining a strong organizational culture.</p>
                 <div>
                     <strong className="text-violet-400 block mb-1 text-xs uppercase tracking-wider">Core Skills</strong>
@@ -23,7 +23,7 @@ const DIRECTORS_DATA = [
         role: "Chief Technology Officer (CTO)",
         avatar: "images/web_images/roshan1.avif",
         description: (
-            <div className="space-y-8">
+            <div className="space-y-4 md:space-y-8">
                 <p>Roshan leads the company’s technology roadmap, overseeing product development, digital transformation, and technical innovation. He ensures scalable, secure, and future-ready solutions that support business expansion.</p>
                 <div>
                     <strong className="text-violet-400 block mb-1 text-xs uppercase tracking-wider">Core Skills</strong>
@@ -38,7 +38,7 @@ const DIRECTORS_DATA = [
         role: "Chief Financial Officer (CFO)",
         avatar: "images/web_images/sharan.avif",
         description: (
-            <div className="space-y-8">
+            <div className="space-y-4 md:space-y-8">
                 <p>Sharan manages financial strategy, planning, and resource allocation. He ensures financial stability, risk management, and transparency while supporting long-term investment and growth initiatives.</p>
                 <div>
                     <strong className="text-violet-400 block mb-1 text-xs uppercase tracking-wider">Core Skills</strong>
@@ -53,7 +53,7 @@ const DIRECTORS_DATA = [
         role: "Chief Operating Officer (COO)",
         avatar: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80",
         description: (
-            <div className="space-y-8">
+            <div className="space-y-4 md:space-y-8">
                 <p>Premdharshan oversees daily operations and ensures efficient execution of business strategies. He focuses on operational excellence, performance optimization, and building strong internal systems for sustainable success.</p>
                 <div>
                     <strong className="text-violet-400 block mb-1 text-xs uppercase tracking-wider">Core Skills</strong>
@@ -68,7 +68,7 @@ const DIRECTORS_DATA = [
         role: "Chief Marketing Officer (CMO)",
         avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
         description: (
-            <div className="space-y-8">
+            <div className="space-y-4 md:space-y-8">
                 <p>Vivek leads the company’s marketing and brand strategy, driving customer engagement, market expansion, and revenue growth. He ensures strong brand positioning and impactful marketing campaigns across platforms.</p>
                 <div>
                     <strong className="text-violet-400 block mb-1 text-xs uppercase tracking-wider">Core Skills</strong>
@@ -83,7 +83,7 @@ const DIRECTORS_DATA = [
         role: "Chief Development Officer (CDO)",
         avatar: "images/web_images/nirmal.avif",
         description: (
-            <div className="space-y-8">
+            <div className="space-y-4 md:space-y-8">
                 <p>Nirmalkumar leads product development and execution across digital and IT projects. He ensures high-quality code standards, efficient development cycles, and scalable system implementation aligned with business objectives.</p>
                 <div>
                     <strong className="text-violet-400 block mb-1 text-xs uppercase tracking-wider">Core Skills</strong>

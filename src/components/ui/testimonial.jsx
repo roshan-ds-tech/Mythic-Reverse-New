@@ -122,10 +122,10 @@ const TestimonialCarousel = forwardRef(
                                     </div>
                                 )}
 
-                                <div className="p-8 md:p-14 flex flex-col md:flex-row items-center gap-8 md:gap-12 h-full justify-center text-center md:text-left">
+                                <div className="p-6 md:p-14 flex flex-col md:flex-row items-center gap-4 md:gap-12 h-full justify-center text-center md:text-left">
                                     <div className="relative group shrink-0">
                                         <div className="absolute inset-0 bg-gradient-to-r from-violet-600 to-fuchsia-600 rounded-full blur-xl opacity-50 group-hover:opacity-75 transition-opacity duration-500"></div>
-                                        <div className="relative w-32 h-32 md:w-48 md:h-48 rounded-full p-1 bg-gradient-to-br from-white/10 to-white/0 overflow-hidden backdrop-blur-sm">
+                                        <div className="relative w-28 h-28 md:w-48 md:h-48 rounded-full p-1 bg-gradient-to-br from-white/10 to-white/0 overflow-hidden backdrop-blur-sm">
                                             <img
                                                 src={testimonial.avatar}
                                                 alt={testimonial.name}
