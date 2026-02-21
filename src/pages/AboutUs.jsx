@@ -85,17 +85,17 @@ const AboutUs = () => {
                                 {
                                     icon: Mail,
                                     label: 'Email',
-                                    value: 'hello@mythicreverse.io',
+                                    value: 'hello@mythicreverse.in',
                                 },
                                 {
                                     icon: Phone,
                                     label: 'Phone',
-                                    value: '+1 (555) 000-0000',
+                                    value: '+91 1234567890',
                                 },
                                 {
                                     icon: MapPin,
                                     label: 'Location',
-                                    value: 'San Francisco, CA',
+                                    value: 'Bangalore, Karnataka',
                                     className: 'col-span-2',
                                 }
                             ]}
@@ -103,11 +103,11 @@ const AboutUs = () => {
                             <form className="w-full space-y-8">
                                 <div className="space-y-3">
                                     <Label htmlFor="name" className="text-zinc-500 uppercase tracking-widest text-xs font-bold px-1">Full Name</Label>
-                                    <Input id="name" placeholder="John Doe" className="bg-white/[0.03] border-white/10 text-white h-14 px-6 rounded-2xl focus:border-purple-500/50 focus:ring-2 focus:ring-purple-500/20 transition-all duration-300 placeholder:text-zinc-700" />
+                                    <Input id="name" placeholder="Your Name" className="bg-white/[0.03] border-white/10 text-white h-14 px-6 rounded-2xl focus:border-purple-500/50 focus:ring-2 focus:ring-purple-500/20 transition-all duration-300 placeholder:text-zinc-700" />
                                 </div>
                                 <div className="space-y-3">
                                     <Label htmlFor="email" className="text-zinc-500 uppercase tracking-widest text-xs font-bold px-1">Email Address</Label>
-                                    <Input id="email" type="email" placeholder="john@example.com" className="bg-white/[0.03] border-white/10 text-white h-14 px-6 rounded-2xl focus:border-purple-500/50 focus:ring-2 focus:ring-purple-500/20 transition-all duration-300 placeholder:text-zinc-700" />
+                                    <Input id="email" type="email" placeholder="Your Email" className="bg-white/[0.03] border-white/10 text-white h-14 px-6 rounded-2xl focus:border-purple-500/50 focus:ring-2 focus:ring-purple-500/20 transition-all duration-300 placeholder:text-zinc-700" />
                                 </div>
                                 <div className="space-y-3">
                                     <Label htmlFor="message" className="text-zinc-500 uppercase tracking-widest text-xs font-bold px-1">Your Vision</Label>
