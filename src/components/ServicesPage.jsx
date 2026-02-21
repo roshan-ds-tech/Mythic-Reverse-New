@@ -6,6 +6,8 @@ import MythicReverseHero from './ui/mythic-reverse-hero';
 import { SparklesCore } from './ui/sparkles';
 import Lenis from 'lenis';
 import { Footer } from './ui/footer-section';
+import { useNavigate } from 'react-router-dom';
+import { ProjectInquiryDialog } from "./ui/project-inquiry-dialog";
 
 // ============================================================================
 // BG PATTERN COMPONENT
@@ -73,6 +75,9 @@ const BGPattern = ({
 // MAIN SERVICES PAGE COMPONENT
 // ============================================================================
 export default function ServicesPage() {
+    const navigate = useNavigate();
+    const [dialogOpen, setDialogOpen] = useState(false);
+
     // Define Service Assets with sanitized folder names
     const SERVICE_ASSETS = {
         "it": ["1.png", "2.png", "3.png", "4.png"],
@@ -322,11 +327,17 @@ export default function ServicesPage() {
                             transition={{ duration: 0.6, delay: 0.5 }}
                             className="flex flex-wrap gap-4 justify-center"
                         >
-                            <button className="group px-10 py-5 bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] rounded-full font-bold text-lg hover:shadow-2xl hover:shadow-[#8B5CF6]/50 transition-all duration-300 flex items-center gap-2">
+                            <button
+                                onClick={() => setDialogOpen(true)}
+                                className="group px-10 py-5 bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] rounded-full font-bold text-lg hover:shadow-2xl hover:shadow-[#8B5CF6]/50 transition-all duration-300 flex items-center gap-2"
+                            >
                                 Start Your Project
                                 <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
                             </button>
-                            <button className="px-10 py-5 bg-white/5 backdrop-blur-xl border border-white/10 rounded-full font-bold text-lg hover:bg-white/10 transition-all duration-300">
+                            <button
+                                onClick={() => navigate('/consultation#consultation-form')}
+                                className="px-10 py-5 bg-white/5 backdrop-blur-xl border border-white/10 rounded-full font-bold text-lg hover:bg-white/10 transition-all duration-300"
+                            >
                                 Schedule Consultation
                             </button>
                         </motion.div>
@@ -334,6 +345,7 @@ export default function ServicesPage() {
                 </div>
             </section>
             <Footer />
+            <ProjectInquiryDialog open={dialogOpen} onOpenChange={setDialogOpen} />
         </div>
     );
 }

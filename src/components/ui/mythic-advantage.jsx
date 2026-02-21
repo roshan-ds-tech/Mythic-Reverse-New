@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { motion, useInView, useScroll, useTransform } from 'framer-motion';
-import { Zap, Code, Award, TrendingUp, Sparkles } from 'lucide-react';
+import { Zap, Code, Award, TrendingUp } from 'lucide-react';
 import { Card, CardContent } from './card';
 
 export function MythicAdvantage() {
@@ -61,7 +61,7 @@ export function MythicAdvantage() {
                     className="text-center mb-16"
                 >
                     <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-violet-500/10 border border-violet-500/20 mb-6">
-                        <Sparkles className="w-4 h-4 text-violet-400" />
+
                         <span className="text-sm text-violet-300">What Sets Us Apart</span>
                     </div>
                     <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
