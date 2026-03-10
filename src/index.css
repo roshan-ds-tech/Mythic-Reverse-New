@@ -416,3 +416,7 @@ body {
     animation: none !important;
   }
 }
+
+@custom-variant dark (&:is(.dark *));
+
+@custom-variant dark (&:is(.dark *));

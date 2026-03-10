@@ -37,7 +37,7 @@ const ExpandableMenuItem = ({
     icon: Icon,
     children,
     href,
-    activeColor = "text-neutral-900 dark:text-white",
+    activeColor = "text-white",
 }) => {
     const isSelected = active === item;
     const Component = href ? motion.a : motion.button;
@@ -53,9 +53,9 @@ const ExpandableMenuItem = ({
                 transition={{ delay: 0.1, type: "spring", bounce: 0, duration: 0.6 }}
                 className={cn(
                     "relative flex items-center rounded-xl py-2 text-sm font-medium transition-colors duration-300 cursor-pointer",
-                    isSelected
-                        ? cn("bg-neutral-100 dark:bg-neutral-800", activeColor)
-                        : "text-neutral-500 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-800 hover:text-neutral-900 dark:hover:text-white"
+                        isSelected
+                        ? cn("bg-white/10", activeColor)
+                        : "text-neutral-400 hover:bg-white/5 hover:text-white"
                 )}
             >
                 <Icon size={20} />
@@ -87,7 +87,7 @@ const ExpandableMenuItem = ({
                     }}
                 >
                     {active === item && (
-                        <div className="bg-white dark:bg-black backdrop-blur-sm rounded-2xl overflow-hidden border border-black/[0.2] dark:border-white/[0.2] shadow-xl">
+                        <div className="bg-black/40 backdrop-blur-md rounded-2xl overflow-hidden shadow-xl border border-white/10 hover:border-white/20 transition-colors">
                             <div className="p-4">
                                 {children}
                             </div>
@@ -108,7 +108,7 @@ const ExpandableMenu = ({
         <nav
             onMouseLeave={() => setActive(null)}
             className={cn(
-                "flex flex-wrap items-center gap-2 rounded-2xl border bg-white dark:bg-black p-1 shadow-sm border-black/[0.2] dark:border-white/[0.2]",
+                "flex flex-wrap items-center gap-2 rounded-2xl bg-black/40 backdrop-blur-md p-1 shadow-sm border border-white/10 hover:border-white/20 transition-colors",
                 className
             )}
         >

@@ -4,7 +4,7 @@ import { ExpandableMenu, ExpandableMenuItem } from "@/components/ui/expandable-m
 import { cn } from "../lib/utils";
 import { motion, useScroll, useMotionValueEvent } from "framer-motion";
 import { useMobile } from "../hooks/use-mobile";
-import { Briefcase, ShoppingBag, Home, Calendar } from "lucide-react";
+import { Briefcase, ShoppingBag, Home, Calendar, GraduationCap } from "lucide-react";
 
 export function NavbarDemo() {
     return (
@@ -57,6 +57,7 @@ function Navbar({ className }) {
                 <ExpandableMenuItem setActive={setActive} active={active} item="Home" icon={Home} href="/" />
                 <ExpandableMenuItem setActive={setActive} active={active} item="Services" icon={Briefcase} href="/services" />
                 <ExpandableMenuItem setActive={setActive} active={active} item="About Us" icon={ShoppingBag} href="/about-us" />
+                <ExpandableMenuItem setActive={setActive} active={active} item="Courses" icon={GraduationCap} href="/courses" />
                 <ExpandableMenuItem setActive={setActive} active={active} item="Consultation" icon={Calendar} href="/consultation" />
 
                 {/* Vertical Separator */}
