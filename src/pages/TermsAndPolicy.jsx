@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { SparklesCore } from "../components/ui/sparkles";
 import { Footer } from "../components/ui/footer-section";
-import { ScrollText, Shield, FileText, Cookie, Scale, Globe } from 'lucide-react';
+import { ScrollText, Shield, FileText, Cookie, Scale, Globe, GraduationCap } from 'lucide-react';
 
 // Animation Variants
 const containerVariants = {
@@ -36,6 +36,7 @@ const TermsAndPolicy = () => {
         { id: 'about', title: 'About', icon: FileText },
         { id: 'terms', title: 'Terms of Service', icon: ScrollText },
         { id: 'privacy', title: 'Privacy Policy', icon: Shield },
+        { id: 'courses', title: 'Courses Policy', icon: GraduationCap },
         { id: 'compliance', title: 'Compliance', icon: Scale },
         { id: 'cookies', title: 'Cookies', icon: Cookie },
         { id: 'disclaimer', title: 'Disclaimer', icon: Globe },
@@ -339,6 +340,233 @@ const TermsAndPolicy = () => {
                                                     <li>Data portability</li>
                                                 </ul>
                                             </Section>
+                                        </div>
+                                    </motion.div>
+                                </div>
+
+                                {/* Courses Policy */}
+                                <div id="courses" className="scroll-mt-24">
+                                    <motion.div
+                                        variants={containerVariants}
+                                        initial="hidden"
+                                        whileInView="visible"
+                                        viewport={{ once: true, margin: "-100px" }}
+                                        className="bg-gradient-to-br from-white/5 to-white/0 backdrop-blur-xl border border-white/10 rounded-3xl p-8 md:p-12"
+                                    >
+                                        <motion.div variants={itemVariants} className="flex items-center gap-3 mb-8">
+                                            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-violet-600 to-purple-600 flex items-center justify-center">
+                                                <GraduationCap className="w-6 h-6" />
+                                            </div>
+                                            <h2 className="text-3xl md:text-4xl font-black bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400 uppercase">
+                                                COURSES POLICY TERMS & CONDITIONS
+                                            </h2>
+                                        </motion.div>
+
+                                        <div className="space-y-8">
+                                            <motion.p variants={itemVariants} className="text-gray-300 leading-relaxed font-semibold">
+                                                MythicReverse – Online Tech Training Programs
+                                            </motion.p>
+                                            
+                                            <Section title="1. Acceptance of Terms">
+                                                <p>By enrolling in any course offered by MythicReverse ("Institute", "We", "Us"), the student ("You", "Student") agrees to be legally bound by these Terms & Conditions.</p>
+                                                <p>Enrollment in the course constitutes full acceptance of these terms.</p>
+                                                <p>If you do not agree, you must not enroll in the program.</p>
+                                            </Section>
+
+                                            <Section title="2. Nature of Program">
+                                                <p>MythicReverse provides online technical training programs including but not limited to:</p>
+                                                <ul className="list-disc list-inside space-y-2 ml-4">
+                                                    <li>Programming Languages</li>
+                                                    <li>Data Structures & Algorithms (DSA)</li>
+                                                    <li>Full Stack Web Development</li>
+                                                    <li>App Development (Flutter / React Native)</li>
+                                                </ul>
+                                                <p className="mt-4">All programs are delivered online.</p>
+                                                <p>The course is a skill development and training program only.</p>
+                                            </Section>
+
+                                            <Section title="3. Enrollment & Minimum Batch Requirement">
+                                                <h4 className="text-lg font-bold text-violet-400 mb-2">3.1 Minimum Requirement</h4>
+                                                <p>Each course requires a minimum number of enrolled students to commence.</p>
+                                                
+                                                <h4 className="text-lg font-bold text-violet-400 mb-2 mt-4">3.2 If Requirement Not Met</h4>
+                                                <p>If the minimum enrollment requirement is not met within 25 days from the enrollment window opening date:</p>
+                                                <ul className="list-disc list-inside space-y-2 ml-4">
+                                                    <li>The course will not commence.</li>
+                                                    <li>The full course fee paid by the student will be refunded.</li>
+                                                </ul>
+
+                                                <h4 className="text-lg font-bold text-violet-400 mb-2 mt-4">3.3 If Requirement Met</h4>
+                                                <p>If the minimum enrollment requirement is met:</p>
+                                                <ul className="list-disc list-inside space-y-2 ml-4">
+                                                    <li>The official course commencement date will be intimated to students via registered email.</li>
+                                                    <li>Students are responsible for checking their email communications.</li>
+                                                </ul>
+                                            </Section>
+
+                                            <Section title="4. Refund Policy">
+                                                <h4 className="text-lg font-bold text-violet-400 mb-2">4.1 Before Course Commencement</h4>
+                                                <p>If minimum enrollment is not met within 25 days, full refund will be issued to the original payment method.</p>
+                                                
+                                                <h4 className="text-lg font-bold text-violet-400 mb-2 mt-4">4.2 After Course Commencement</h4>
+                                                <p>Once the course has commenced:</p>
+                                                <ul className="list-disc list-inside space-y-2 ml-4">
+                                                    <li>No refunds shall be provided under any circumstances.</li>
+                                                    <li>Fees are non-transferable and non-refundable.</li>
+                                                </ul>
+
+                                                <h4 className="text-lg font-bold text-violet-400 mb-2 mt-4">4.3 Failure to Attend</h4>
+                                                <p>Non-attendance, partial attendance, or withdrawal after commencement does not entitle the student to any refund.</p>
+                                            </Section>
+
+                                            <Section title="5. No Job Guarantee">
+                                                <h4 className="text-lg font-bold text-violet-400 mb-2">5.1 What We Provide</h4>
+                                                <ul className="list-disc list-inside space-y-2 ml-4">
+                                                    <li>Skill training</li>
+                                                    <li>Real-world project exposure</li>
+                                                    <li>Interview preparation guidance</li>
+                                                    <li>Post-interview assistance</li>
+                                                </ul>
+
+                                                <h4 className="text-lg font-bold text-violet-400 mb-2 mt-4">5.2 No Guarantee</h4>
+                                                <p>Enrollment in this course does NOT guarantee:</p>
+                                                <ul className="list-disc list-inside space-y-2 ml-4">
+                                                    <li>Job placement</li>
+                                                    <li>Internship placement</li>
+                                                    <li>Salary assurance</li>
+                                                    <li>Selection in any company</li>
+                                                </ul>
+
+                                                <h4 className="text-lg font-bold text-violet-400 mb-2 mt-4">5.3 Employment Outcomes</h4>
+                                                <p>Employment outcomes depend entirely on:</p>
+                                                <ul className="list-disc list-inside space-y-2 ml-4">
+                                                    <li>Individual performance</li>
+                                                    <li>Skill level</li>
+                                                    <li>Market conditions</li>
+                                                    <li>Employer selection criteria</li>
+                                                </ul>
+
+                                                <h4 className="text-lg font-bold text-violet-400 mb-2 mt-4">5.4 Acknowledgment</h4>
+                                                <p>Students expressly acknowledge and accept that there is no job guarantee associated with this program.</p>
+                                            </Section>
+
+                                            <Section title="6. Student Responsibilities">
+                                                <p>Students agree to:</p>
+                                                <ul className="list-disc list-inside space-y-2 ml-4">
+                                                    <li>Participate actively in training sessions</li>
+                                                    <li>Complete assignments and projects</li>
+                                                    <li>Maintain professional conduct</li>
+                                                    <li>Not misuse course materials</li>
+                                                    <li>Not share proprietary course content</li>
+                                                </ul>
+                                                <p className="mt-4">Any misconduct may result in termination of access without refund.</p>
+                                            </Section>
+
+                                            <Section title="7. Intellectual Property">
+                                                <p>All course materials including:</p>
+                                                <ul className="list-disc list-inside space-y-2 ml-4">
+                                                    <li>Videos</li>
+                                                    <li>Notes</li>
+                                                    <li>Source code</li>
+                                                    <li>Projects</li>
+                                                    <li>Study materials</li>
+                                                </ul>
+                                                <p className="mt-4">Are the intellectual property of MythicReverse.</p>
+                                                <p>Unauthorized copying, sharing, redistribution, or resale is strictly prohibited.</p>
+                                                <p>Legal action may be initiated in case of violation.</p>
+                                            </Section>
+
+                                            <Section title="8. Limitation of Liability">
+                                                <p>MythicReverse shall not be liable for:</p>
+                                                <ul className="list-disc list-inside space-y-2 ml-4">
+                                                    <li>Internet connectivity issues</li>
+                                                    <li>Technical disruptions beyond control</li>
+                                                    <li>Student's inability to secure employment</li>
+                                                    <li>Indirect or consequential damages</li>
+                                                </ul>
+                                            </Section>
+
+                                            <Section title="9. Modification of Terms">
+                                                <p>MythicReverse reserves the right to modify these terms at any time. Updated terms will be posted on the official website.</p>
+                                                <p>Continued enrollment constitutes acceptance of revised terms.</p>
+                                            </Section>
+
+                                            <motion.div variants={itemVariants} className="pt-8 border-t border-white/10 mt-8">
+                                                <h3 className="text-2xl font-bold text-white mb-6">PRIVACY POLICY: Online Tech Training</h3>
+                                                
+                                                <div className="space-y-6">
+                                                    <div>
+                                                        <h4 className="text-lg font-bold text-violet-400 mb-2">1. Information We Collect</h4>
+                                                        <ul className="list-disc list-inside space-y-1 ml-4 text-gray-300">
+                                                            <li>Name</li>
+                                                            <li>Email address</li>
+                                                            <li>Phone number</li>
+                                                            <li>Payment details</li>
+                                                            <li>Course activity data</li>
+                                                        </ul>
+                                                    </div>
+
+                                                    <div>
+                                                        <h4 className="text-lg font-bold text-violet-400 mb-2">2. Purpose of Data Collection</h4>
+                                                        <p className="text-gray-300 mb-2">We collect data to:</p>
+                                                        <ul className="list-disc list-inside space-y-1 ml-4 text-gray-300">
+                                                            <li>Process enrollments</li>
+                                                            <li>Deliver course materials</li>
+                                                            <li>Communicate course updates</li>
+                                                            <li>Issue certificates</li>
+                                                            <li>Improve services</li>
+                                                        </ul>
+                                                    </div>
+
+                                                    <div>
+                                                        <h4 className="text-lg font-bold text-violet-400 mb-2">3. Payment Information</h4>
+                                                        <p className="text-gray-300">Payments are processed through secure third-party payment gateways.</p>
+                                                        <p className="text-gray-300">We do not store full card or banking details.</p>
+                                                    </div>
+
+                                                    <div>
+                                                        <h4 className="text-lg font-bold text-violet-400 mb-2">4. Data Protection</h4>
+                                                        <p className="text-gray-300">We implement reasonable security measures to protect personal data from unauthorized access.</p>
+                                                    </div>
+
+                                                    <div>
+                                                        <h4 className="text-lg font-bold text-violet-400 mb-2">5. Data Sharing</h4>
+                                                        <p className="text-gray-300 mb-2">We do not sell or rent personal data. Data may only be shared:</p>
+                                                        <ul className="list-disc list-inside space-y-1 ml-4 text-gray-300">
+                                                            <li>With payment processors</li>
+                                                            <li>If required by law</li>
+                                                        </ul>
+                                                    </div>
+
+                                                    <div>
+                                                        <h4 className="text-lg font-bold text-violet-400 mb-2">6. Communication Consent</h4>
+                                                        <p className="text-gray-300 mb-2">By enrolling, students consent to receive:</p>
+                                                        <ul className="list-disc list-inside space-y-1 ml-4 text-gray-300">
+                                                            <li>Course-related emails</li>
+                                                            <li>Announcements</li>
+                                                            <li>Updates</li>
+                                                        </ul>
+                                                        <p className="text-gray-300 mt-2">Students may opt-out of promotional communications.</p>
+                                                    </div>
+
+                                                    <div>
+                                                        <h4 className="text-lg font-bold text-violet-400 mb-2">7. Data Retention</h4>
+                                                        <p className="text-gray-300">Personal information may be retained for operational, legal, and compliance purposes.</p>
+                                                    </div>
+                                                </div>
+                                            </motion.div>
+
+                                            <motion.div variants={itemVariants} className="bg-violet-900/20 border border-violet-500/30 rounded-2xl p-6 mt-8">
+                                                <h3 className="text-xl font-bold text-white mb-4">STUDENT DECLARATION & CONSENT</h3>
+                                                <p className="text-gray-300 italic mb-4">Before enrollment, students must acknowledge:</p>
+                                                <blockquote className="border-l-4 border-violet-500 pl-4 py-2 bg-black/20 rounded-r-lg text-gray-200">
+                                                    "I understand that this course is a skill development program. I understand that job placement is not guaranteed and depends on my individual performance and market conditions. I agree to the refund policy and all Terms & Conditions."
+                                                </blockquote>
+                                                <p className="text-sm text-violet-300 mt-4 font-medium flex items-center gap-2">
+                                                    <span className="w-4 h-4 rounded border border-violet-400 inline-flex items-center justify-center">✓</span>
+                                                    A checkbox confirmation must be required before payment.
+                                                </p>
+                                            </motion.div>
                                         </div>
                                     </motion.div>
                                 </div>

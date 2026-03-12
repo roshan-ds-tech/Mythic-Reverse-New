@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState, useCallback, useMemo, forwardRef, useImperativeHandle } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from "framer-motion";
 import { BookOpen, Sparkles, Zap, Star, ArrowRight, Play } from 'lucide-react';
 import { Button } from '../components/ui/button';
@@ -563,38 +564,42 @@ function CoursesHeroSection() {
               </Badge>
 
               <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight">
-                Master the art of
+                1 Hour a Day.
                 <br />
-                <RotatingText
-                  texts={["Development", "Design", "AI & ML", "Web3", "Innovation"]}
-                  mainClassName="text-purple-400 inline-flex"
-                  staggerFrom="first"
-                  initial={{ y: "100%", opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  exit={{ y: "-120%", opacity: 0 }}
-                  staggerDuration={0.03}
-                  splitLevelClassName="overflow-hidden"
-                  transition={{ type: "spring", damping: 40, stiffness: 800 }}
-                  rotationInterval={3000}
-                />
+                <span className="text-purple-400">45 Days.</span>
               </h1>
 
-              <p className="text-lg md:text-xl text-gray-300 max-w-2xl">
-                Embark on a cosmic journey through cutting-edge courses designed to elevate your skills. 
-                Learn from industry experts and join a community of stellar learners.
+              <p className="text-xl md:text-2xl font-medium text-gray-200">
+                Where Beginners Become Builders.
               </p>
 
-              <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                <Button size="lg" className="bg-purple-600 hover:bg-purple-700 text-white group">
-                  <BookOpen className="w-5 h-5 mr-2 group-hover:rotate-12 transition-transform" />
-                  Explore Courses
-                </Button>
-                <Button size="lg" variant="outline" className="border-purple-500/50 text-purple-300 hover:bg-purple-500/10">
-                  <Zap className="w-5 h-5 mr-2" />
-                  Free Trial
-                </Button>
+              <div className="space-y-4 text-lg text-gray-400 max-w-2xl leading-relaxed">
+                <p>
+                  MythicReverse is India's most focused developer training academy. Five AI-powered courses designed for complete beginners. One dedicated hour per day, every day for 45 days — using the same AI tools that professional developers use at top tech companies.
+                </p>
+                <p>
+                  You don't need a degree. You don't need experience. You need one hour and the discipline to show up every day.
+                </p>
               </div>
 
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 pt-6 mb-8 max-w-3xl">
+                <Card className="bg-purple-500/10 border-purple-500/20 backdrop-blur-md p-4 text-center hover:border-purple-500/40 transition-colors">
+                  <div className="text-3xl font-bold text-white mb-1">1 hr</div>
+                  <div className="text-sm font-medium text-purple-300 tracking-wide">Per Day</div>
+                </Card>
+                <Card className="bg-purple-500/10 border-purple-500/20 backdrop-blur-md p-4 text-center hover:border-purple-500/40 transition-colors">
+                  <div className="text-3xl font-bold text-white mb-1">45</div>
+                  <div className="text-sm font-medium text-purple-300 tracking-wide">Days per Course</div>
+                </Card>
+                <Card className="bg-purple-500/10 border-purple-500/20 backdrop-blur-md p-4 text-center hover:border-purple-500/40 transition-colors">
+                  <div className="text-3xl font-bold text-white mb-1">5</div>
+                  <div className="text-sm font-medium text-purple-300 tracking-wide">Courses</div>
+                </Card>
+                <Card className="bg-purple-500/10 border-purple-500/20 backdrop-blur-md p-4 text-center hover:border-purple-500/40 transition-colors">
+                  <div className="text-3xl font-bold text-white mb-1">9</div>
+                  <div className="text-sm font-medium text-purple-300 tracking-wide">AI Tools</div>
+                </Card>
+              </div>
 
             </motion.div>
 
@@ -627,80 +632,58 @@ const stats = [
   { label: "Completion Rate", value: "95%" },
 ];
 
-const categories = ["All", "Development", "Design", "Business", "Marketing", "Data Science"];
+const categories = ["All", "Development", "Security"];
 
 const featuredCourses = [
   {
     id: "1",
-    title: "Advanced React Patterns",
-    description: "Master modern React development with advanced patterns and best practices",
-    level: "Advanced",
-    duration: "12 weeks",
-    students: 2500,
-    category: "Development"
+    title: "Programming Languages",
+    description: "Learn 13 languages, Cursor, and Copilot",
+    level: "Beginner",
+    duration: "45 Days",
+    students: "10K+",
+    category: "Development",
+    link: "/courses/programming-languages"
   },
   {
     id: "2",
-    title: "Full-Stack Web Engineering",
-    description: "Build complete web applications from frontend to backend using modern frameworks",
-    level: "Intermediate",
-    duration: "16 weeks",
-    students: 1800,
-    category: "Development"
+    title: "Ethical Hacking & Cybersecurity",
+    description: "Kali Linux, Metasploit, Burp Suite",
+    level: "Beginner",
+    duration: "45 Days",
+    students: "5K+",
+    category: "Security",
+    link: "/courses/ethical-hacking"
   },
   {
     id: "3",
-    title: "UI/UX Design Fundamentals",
-    description: "Learn the principles of creating beautiful and functional user interfaces",
+    title: "Full Stack Web Development",
+    description: "React, Node.js, PostgreSQL, Vercel",
     level: "Beginner",
-    duration: "8 weeks",
-    students: 3200,
-    category: "Design"
+    duration: "45 Days",
+    students: "8K+",
+    category: "Development",
+    link: "/courses/full-stack-web-dev"
   },
   {
     id: "4",
-    title: "Interactive Prototyping Mastery",
-    description: "Take your design skills further with advanced motion and interactive components",
-    level: "Advanced",
-    duration: "6 weeks",
-    students: 1540,
-    category: "Design"
+    title: "App Development with Flutter",
+    description: "Dart, Flutter, Firebase, Android/iOS",
+    level: "Beginner",
+    duration: "45 Days",
+    students: "6K+",
+    category: "Development",
+    link: "/courses/flutter-app-dev"
   },
   {
     id: "5",
-    title: "Startup Lifecycle & Management",
-    description: "Understand the key stages of building, scaling, and managing a successful modern business",
-    level: "Intermediate",
-    duration: "10 weeks",
-    students: 2100,
-    category: "Business"
-  },
-  {
-    id: "6",
-    title: "Digital Marketing Strategy",
-    description: "Learn how to build effective campaigns across SEO, social media, and paid channels",
+    title: "App Development with React Native",
+    description: "Expo, Supabase, EAS Build",
     level: "Beginner",
-    duration: "6 weeks",
-    students: 4500,
-    category: "Marketing"
-  },
-  {
-    id: "7",
-    title: "Data Analysis with Python",
-    description: "Extract insights from raw data using Pandas, NumPy, and visualization libraries",
-    level: "Beginner",
-    duration: "8 weeks",
-    students: 5600,
-    category: "Data Science"
-  },
-  {
-    id: "8",
-    title: "Machine Learning Foundations",
-    description: "Core concepts of predictive modeling, supervised and unsupervised learning",
-    level: "Intermediate",
-    duration: "14 weeks",
-    students: 3100,
-    category: "Data Science"
+    duration: "45 Days",
+    students: "4K+",
+    category: "Development",
+    link: "/courses/react-native-app-dev"
   }
 ];
 
@@ -782,6 +765,13 @@ function ExploreSection() {
                       className="relative group bg-black/40 backdrop-blur-md border border-purple-500/20 hover:border-purple-500/50 transition-all duration-300 overflow-hidden h-full"
                     >
                       <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-violet-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                        
+                      {course.link ? (
+                        <Link to={course.link} className="absolute inset-0 z-10">
+                          <span className="sr-only">View course details</span>
+                        </Link>
+                      ) : null}
+
                       <div className="relative p-8 space-y-6 h-full flex flex-col">
                         <div className="flex items-start justify-between">
                           <Badge
@@ -807,7 +797,7 @@ function ExploreSection() {
                           </span>
                           <span className="flex items-center gap-2 font-medium">
                             <Zap className="w-4 h-4 text-purple-400" />
-                            {course.students.toLocaleString()} students
+                            {course.students} students
                           </span>
                         </div>
                       </div>
@@ -824,10 +814,195 @@ function ExploreSection() {
   );
 }
 
+const coursesData = [
+  { code: "C-01", price: "Rs. 8,999 / lang", course: "Programming Languages", stack: "13 languages · Cursor · Copilot" },
+  { code: "C-02", price: "Rs. 14,999", course: "Ethical Hacking & Cybersecurity", stack: "Kali Linux · Metasploit · Burp Suite", link: "/courses/ethical-hacking" },
+  { code: "C-03", price: "Rs. 19,499", course: "Full Stack Web Development", stack: "React · Node.js · PostgreSQL · Vercel" },
+  { code: "C-04", price: "Rs. 19,499", course: "App Development with Flutter", stack: "Dart · Flutter · Firebase · Android/iOS" },
+  { code: "C-05", price: "Rs. 19,499", course: "App Development with React Native", stack: "Expo · Supabase · EAS Build" }
+];
+
+function FiveCoursesSection() {
+  return (
+    <section className="relative z-20 py-24 bg-black border-t border-purple-500/20">
+      <div className="container mx-auto px-4 md:px-6 lg:px-8 max-w-6xl">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="space-y-12"
+        >
+          <div className="overflow-x-auto">
+            <table className="w-full text-left border-collapse min-w-[800px]">
+              <thead>
+                <tr className="border-b border-purple-500/20 text-gray-400 text-sm tracking-wider">
+                  <th className="py-4 px-6 font-medium">CODE</th>
+                  <th className="py-4 px-6 font-medium">PRICE</th>
+                  <th className="py-4 px-6 font-medium">COURSE</th>
+                  <th className="py-4 px-6 font-medium">STACK</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-white/5">
+                {coursesData.map((course, idx) => (
+                  <tr 
+                    key={idx} 
+                    className={`hover:bg-white/5 transition-colors group ${course.link ? 'cursor-pointer' : ''}`}
+                    onClick={() => course.link && (window.location.href = course.link)}
+                  >
+                    <td className="py-6 px-6 text-purple-400 font-mono text-sm">{course.code}</td>
+                    <td className="py-6 px-6 text-white font-medium whitespace-nowrap">{course.price}</td>
+                    <td className="py-6 px-6 text-white font-bold text-lg group-hover:text-purple-300 transition-colors">{course.course}</td>
+                    <td className="py-6 px-6 text-gray-400">{course.stack}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          <Card className="bg-gradient-to-r from-purple-500/10 to-violet-500/10 border-purple-500/30 p-6 lg:p-8 flex flex-col md:flex-row items-center justify-between text-center md:text-left gap-6 backdrop-blur-sm">
+            <div>
+              <h4 className="text-2xl font-bold text-white mb-2">Bundle all 5 courses</h4>
+              <p className="text-gray-300 text-lg">Rs. 64,499 <span className="text-green-400 font-medium">(save Rs. 17,996)</span> <span className="hidden md:inline">·</span><br className="md:hidden" /> Priority support · Internship review guaranteed</p>
+            </div>
+            <Button size="lg" className="bg-purple-600 hover:bg-purple-700 text-white whitespace-nowrap px-8">
+              Enroll in Bundle
+            </Button>
+          </Card>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
+const scheduleData = [
+  { time: "0:00 – 0:10", phase: "CONCEPT", task: "Watch or read the day's topic. Ask Claude AI or ChatGPT 2–3 questions until you can explain it back in your own words.", tools: "Claude AI / ChatGPT" },
+  { time: "0:10 – 0:45", phase: "BUILD", task: "Code the day's task hands-on using Cursor and GitHub Copilot. This is the most important part. No skipping.", tools: "Cursor + Copilot" },
+  { time: "0:45 – 0:55", phase: "AI REVIEW", task: "Paste your code into Claude AI. Ask: What did I do wrong? What can be improved? Fix the top 1–2 issues only.", tools: "Claude AI" },
+  { time: "0:55 – 1:00", phase: "GIT COMMIT", task: "Push your work to GitHub with a commit message describing what you built today.", tools: "GitHub" }
+];
+
+function SixtyMinutesSection() {
+  return (
+    <section className="relative z-20 py-24 bg-black border-t border-purple-500/20">
+      <div className="container mx-auto px-4 md:px-6 lg:px-8 max-w-5xl">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="space-y-12"
+        >
+          <div className="text-center space-y-6 max-w-3xl mx-auto">
+            <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-purple-400 to-violet-400 bg-clip-text text-transparent">
+              How Your 60 Minutes Work Every Day
+            </h2>
+            <p className="text-xl text-gray-400 leading-relaxed">
+              Every single day of every course follows the same 4-block structure. It is tight by design. When the hour is up, you stop. Consistency over intensity.
+            </p>
+          </div>
+
+          <div className="grid gap-4 mt-12">
+            {scheduleData.map((item, idx) => (
+              <Card key={idx} className="bg-white/5 border border-purple-500/20 backdrop-blur-md hover:border-purple-500/40 transition-colors p-6 md:p-8 grid md:grid-cols-4 gap-6 items-start md:items-center">
+                <div className="md:col-span-1">
+                  <Badge variant="outline" className="border-purple-500/30 bg-purple-500/10 text-purple-300 font-mono text-sm mb-3 md:mb-0 block w-fit">
+                    {item.time}
+                  </Badge>
+                  <div className="font-bold text-white mt-3 tracking-wide text-xl">{item.phase}</div>
+                </div>
+                <div className="md:col-span-2 text-gray-300 text-lg leading-relaxed">
+                  {item.task}
+                </div>
+                <div className="md:col-span-1 flex items-center gap-2 text-sm font-medium text-violet-400 md:justify-end mt-2 md:mt-0">
+                  <Zap className="w-5 h-5 flex-shrink-0" />
+                  <span>{item.tools}</span>
+                </div>
+              </Card>
+            ))}
+          </div>
+
+          <div className="mt-16 bg-purple-900/10 border border-purple-500/30 rounded-2xl p-8 md:p-12 text-center max-w-4xl mx-auto relative overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-r from-purple-500/5 via-violet-500/5 to-transparent blur-3xl -z-10" />
+            <h3 className="text-purple-400 font-bold tracking-widest uppercase text-sm mb-6">The Rule</h3>
+            <p className="text-2xl md:text-4xl font-semibold text-white leading-tight">
+              AI writes the scaffold.<br className="mb-2" />
+              <span className="text-gray-400 text-xl md:text-2xl block mt-4 font-normal">You read every line. You explain every line. You own every line.</span>
+            </p>
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
+const aiToolsData = [
+  { tool: "Cursor", desc: "Your main code editor. AI built into the core — inline code generation, multi-file edits, codebase chat.", cost: "Free tier" },
+  { tool: "GitHub Copilot", desc: "Completes code as you type. Ghost-text for entire functions. Free for students via GitHub Education.", cost: "Free for students" },
+  { tool: "v0 by Vercel", desc: "Describe any UI in plain English and get production-quality React and Tailwind code instantly.", cost: "Free tier" },
+  { tool: "Claude AI", desc: "Architecture decisions, deep debugging, concept explanations, and thorough code reviews.", cost: "Free tier" },
+  { tool: "ChatGPT", desc: "Quick questions, quizzes, explaining errors in plain English, and generating practice exercises.", cost: "Free tier" },
+  { tool: "Windsurf", desc: "An agentic IDE that plans, writes, runs, and fixes multi-step tasks across multiple files.", cost: "Free tier" },
+  { tool: "Bolt.new", desc: "Full-stack project scaffolding in your browser. Zero local install needed on Day 1.", cost: "Free tier" },
+  { tool: "Google Stitch", desc: "Design app screens from text descriptions. Powered by Gemini 2.5 Pro. Export to Figma or HTML/CSS.", cost: "Free (Google Labs)" },
+  { tool: "Google Antigravity", desc: "Multiple autonomous AI agents working in your editor, terminal, and browser simultaneously.", cost: "Free preview" }
+];
+
+function AIToolsSection() {
+  return (
+    <section className="relative z-20 py-24 bg-black border-t border-purple-500/20 pb-32">
+      <SparklesBackground />
+      <div className="container mx-auto px-4 md:px-6 lg:px-8 max-w-6xl relative z-30">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="space-y-16"
+        >
+          <div className="text-center space-y-6 max-w-4xl mx-auto">
+            <h2 className="text-4xl md:text-5xl font-bold text-white leading-tight">
+              9 AI Tools Built Into <span className="text-purple-400">Every Course</span>
+            </h2>
+            <p className="text-xl text-gray-400 leading-relaxed">
+              Every tool listed below has a free tier. The total cost of all 9 AI tools on your first day is <strong className="text-white">Rs. 0</strong>. You do not need to pay for any of them to complete any course.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {aiToolsData.map((item, idx) => (
+              <Card key={idx} className="bg-black/40 backdrop-blur-md border border-purple-500/20 p-8 hover:border-purple-500/50 transition-all duration-300 group flex flex-col h-full relative overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-violet-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="relative flex-1">
+                  <div className="flex items-center justify-between mb-4">
+                    <h3 className="text-2xl font-bold text-white group-hover:text-purple-400 transition-colors pr-4">{item.tool}</h3>
+                    <Sparkles className="w-6 h-6 text-purple-500/30 group-hover:text-purple-400 transition-colors flex-shrink-0" />
+                  </div>
+                  <p className="text-gray-400 text-base leading-relaxed mb-8">
+                    {item.desc}
+                  </p>
+                </div>
+                <div className="relative mt-auto pt-6 border-t border-white/5">
+                  <Badge variant="outline" className="border-green-500/30 bg-green-500/10 text-green-400 rounded-md px-3 py-1 font-medium text-sm w-fit">
+                    {item.cost}
+                  </Badge>
+                </div>
+              </Card>
+            ))}
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
 export default function CoursesPage() {
   return (
     <div className="bg-black min-h-screen">
       <CoursesHeroSection />
+      <FiveCoursesSection />
+      <SixtyMinutesSection />
+      <AIToolsSection />
       <ExploreSection />
       <Footer />
     </div>
