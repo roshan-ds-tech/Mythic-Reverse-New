@@ -8,6 +8,10 @@ import ServicesPage from "./components/ServicesPage";
 import Consultation from "./pages/Consultation";
 import TermsAndPolicy from "./pages/TermsAndPolicy";
 import Courses from "./pages/Courses";
+import EthicalHackingCourse from "./pages/EthicalHackingCourse";
+import FullStackWebDevCourse from "./pages/FullStackWebDevCourse";
+import FlutterAppDevCourse from "./pages/FlutterAppDevCourse";
+import ReactNativeAppDevCourse from "./pages/ReactNativeAppDevCourse";
 
 function App() {
   return (
@@ -21,6 +25,10 @@ function App() {
         <Route path="/consultation" element={<Consultation />} />
         <Route path="/terms-and-policy" element={<TermsAndPolicy />} />
         <Route path="/courses" element={<Courses />} />
+        <Route path="/courses/ethical-hacking" element={<EthicalHackingCourse />} />
+        <Route path="/courses/full-stack-web-dev" element={<FullStackWebDevCourse />} />
+        <Route path="/courses/flutter-app-dev" element={<FlutterAppDevCourse />} />
+        <Route path="/courses/react-native-app-dev" element={<ReactNativeAppDevCourse />} />
       </Routes>
     </Router>
   )
