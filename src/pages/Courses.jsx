@@ -790,15 +790,21 @@ function ExploreSection() {
                             {course.description}
                           </p>
                         </div>
-                        <div className="flex items-center justify-between text-sm text-gray-300 pt-6 border-t border-purple-500/20 mt-auto">
-                          <span className="flex items-center gap-2 font-medium">
-                            <BookOpen className="w-4 h-4 text-purple-400" />
-                            {course.duration}
-                          </span>
-                          <span className="flex items-center gap-2 font-medium">
-                            <Zap className="w-4 h-4 text-purple-400" />
-                            {course.students} students
-                          </span>
+                        <div className="flex flex-col gap-5 pt-6 border-t border-purple-500/20 mt-auto">
+                          <div className="flex items-center justify-between text-sm text-gray-300">
+                            <span className="flex items-center gap-2 font-medium">
+                              <BookOpen className="w-4 h-4 text-purple-400" />
+                              {course.duration}
+                            </span>
+                            <span className="flex items-center gap-2 font-medium">
+                              <Zap className="w-4 h-4 text-purple-400" />
+                              {course.students} students
+                            </span>
+                          </div>
+                          <Button className="w-full bg-purple-600/80 text-white font-semibold transition-all duration-300 group-hover:bg-purple-600 group-hover:shadow-[0_0_20px_rgba(168,85,247,0.4)]">
+                            Enroll Now
+                            <ArrowRight className="w-4 h-4 ml-2 transition-transform duration-300 group-hover:translate-x-1" />
+                          </Button>
                         </div>
                       </div>
                     </Card>
@@ -815,7 +821,7 @@ function ExploreSection() {
 }
 
 const coursesData = [
-  { code: "C-01", price: "Rs. 8,999 / lang", course: "Programming Languages", stack: "13 languages · Cursor · Copilot" },
+  { code: "C-01", price: "Rs. 8,999 / lang", course: "Programming Languages", stack: "13 languages · Cursor · Copilot", link: "/courses/programming-languages" },
   { code: "C-02", price: "Rs. 14,999", course: "Ethical Hacking & Cybersecurity", stack: "Kali Linux · Metasploit · Burp Suite", link: "/courses/ethical-hacking" },
   { code: "C-03", price: "Rs. 19,499", course: "Full Stack Web Development", stack: "React · Node.js · PostgreSQL · Vercel" },
   { code: "C-04", price: "Rs. 19,499", course: "App Development with Flutter", stack: "Dart · Flutter · Firebase · Android/iOS" },

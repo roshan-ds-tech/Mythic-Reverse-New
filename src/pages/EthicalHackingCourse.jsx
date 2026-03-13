@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { ShieldAlert, Terminal, Lock, Layout, Clock, Code2, AlertTriangle, ChevronRight, ShoppingCart } from 'lucide-react';
 import { Badge } from '../components/ui/badge';
 import { Card } from '../components/ui/card';
 import { Button } from '../components/ui/button';
 import { Footer } from '../components/ui/footer-section';
+import StudentRegistrationModal from '../components/StudentRegistrationModal';
 
 const syllabusData = [
   { day: "01", topic: "Kali Linux Setup", build: "Install VM. Run 10 terminal commands", tools: "Claude AI", highlight: false },
@@ -55,6 +56,8 @@ const syllabusData = [
 ];
 
 export default function EthicalHackingCourse() {
+  const [isRegistrationDialogOpen, setIsRegistrationDialogOpen] = useState(false);
+
   return (
     <div className="bg-black min-h-screen pt-24">
       {/* Hero Section */}
@@ -97,7 +100,11 @@ export default function EthicalHackingCourse() {
             </div>
             
             <div className="pt-2">
-              <Button size="lg" className="bg-purple-600 hover:bg-purple-700 text-white font-semibold px-8 py-6 h-auto text-lg w-full sm:w-auto shadow-lg shadow-purple-500/20 group">
+              <Button 
+                onClick={() => setIsRegistrationDialogOpen(true)}
+                size="lg" 
+                className="bg-purple-600 hover:bg-purple-700 text-white font-semibold px-8 py-6 h-auto text-lg w-full sm:w-auto shadow-lg shadow-purple-500/20 group"
+              >
                 <ShoppingCart className="w-5 h-5 mr-2 group-hover:-rotate-12 transition-transform" />
                 Buy Now — Rs. 14,999
               </Button>
@@ -225,6 +232,12 @@ export default function EthicalHackingCourse() {
       </section>
 
       <Footer />
+      
+      <StudentRegistrationModal 
+        isOpen={isRegistrationDialogOpen} 
+        onClose={() => setIsRegistrationDialogOpen(false)} 
+        courseName="Ethical Hacking & Cybersecurity" 
+      />
     </div>
   );
 }

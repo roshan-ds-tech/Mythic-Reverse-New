@@ -12,6 +12,7 @@ import EthicalHackingCourse from "./pages/EthicalHackingCourse";
 import FullStackWebDevCourse from "./pages/FullStackWebDevCourse";
 import FlutterAppDevCourse from "./pages/FlutterAppDevCourse";
 import ReactNativeAppDevCourse from "./pages/ReactNativeAppDevCourse";
+import ProgrammingLanguagesCourse from "./pages/ProgrammingLanguagesCourse";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
         <Route path="/courses/full-stack-web-dev" element={<FullStackWebDevCourse />} />
         <Route path="/courses/flutter-app-dev" element={<FlutterAppDevCourse />} />
         <Route path="/courses/react-native-app-dev" element={<ReactNativeAppDevCourse />} />
+        <Route path="/courses/programming-languages" element={<ProgrammingLanguagesCourse />} />
       </Routes>
     </Router>
   )
