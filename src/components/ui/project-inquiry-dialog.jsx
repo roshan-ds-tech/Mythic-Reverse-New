@@ -3,8 +3,10 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } f
 import { Input } from './input';
 import { Textarea } from './textarea';
 import { Label } from './label';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './select';
 import { motion } from 'framer-motion';
-import { X, Send } from 'lucide-react';
+import { X, Send, CheckCircle } from 'lucide-react';
+import { supabase } from '../../lib/supabase';
 
 export function ProjectInquiryDialog({ open, onOpenChange }) {
     const [formData, setFormData] = useState({
@@ -16,21 +18,40 @@ export function ProjectInquiryDialog({ open, onOpenChange }) {
         timeline: '',
         description: ''
     });
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [isSubmitted, setIsSubmitted] = useState(false);
+    const [submitError, setSubmitError] = useState('');
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log('Form submitted:', formData);
-        // Handle form submission here
-        onOpenChange(false);
-        setFormData({
-            name: '',
-            email: '',
-            company: '',
-            projectType: '',
-            budget: '',
-            timeline: '',
-            description: ''
-        });
+        setIsSubmitting(true);
+        setSubmitError('');
+
+        const { error } = await supabase
+            .from('client_inquiries')
+            .insert([{
+                full_name: formData.name,
+                email: formData.email,
+                company: formData.company,
+                project_type: formData.projectType,
+                budget_range: formData.budget,
+                timeline: formData.timeline,
+                project_description: formData.description
+            }]);
+
+        setIsSubmitting(false);
+
+        if (error) {
+            console.error(error);
+            setSubmitError('Something went wrong. Please try again.');
+        } else {
+            setIsSubmitted(true);
+            setFormData({ name: '', email: '', company: '', projectType: '', budget: '', timeline: '', description: '' });
+            setTimeout(() => {
+                setIsSubmitted(false);
+                onOpenChange(false);
+            }, 2500);
+        }
     };
 
     const handleChange = (e) => {
@@ -62,6 +83,14 @@ export function ProjectInquiryDialog({ open, onOpenChange }) {
                 </DialogHeader>
 
                 <form onSubmit={handleSubmit} className="space-y-3 p-6 pt-0">
+                    {isSubmitted ? (
+                        <div className="flex flex-col items-center justify-center gap-3 py-8 text-center">
+                            <CheckCircle className="h-14 w-14 text-purple-400" />
+                            <h3 className="text-xl font-bold text-white">Inquiry Sent!</h3>
+                            <p className="text-neutral-400 text-sm">Thanks! We'll get back to you within 24 hours.</p>
+                        </div>
+                    ) : (
+                        <>
                     {/* Name & Email Row */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         <div className="space-y-2">
@@ -117,39 +146,43 @@ export function ProjectInquiryDialog({ open, onOpenChange }) {
                             <Label htmlFor="projectType" className="text-neutral-300">
                                 Project Type
                             </Label>
-                            <select
-                                id="projectType"
-                                name="projectType"
-                                value={formData.projectType}
-                                onChange={handleChange}
-                                className="flex h-9 w-full rounded-md border border-white/10 bg-white/5 px-3 py-2 text-sm text-white placeholder:text-neutral-500 focus:border-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-500/20"
+                            <Select
+                                value={formData.projectType || undefined}
+                                onValueChange={(value) => setFormData({ ...formData, projectType: value })}
                             >
-                                <option value="" className="bg-neutral-900">Select type</option>
-                                <option value="web-app" className="bg-neutral-900">Web Application</option>
-                                <option value="mobile-app" className="bg-neutral-900">Mobile App</option>
-                                <option value="website" className="bg-neutral-900">Website</option>
-                                <option value="ecommerce" className="bg-neutral-900">E-commerce</option>
-                                <option value="other" className="bg-neutral-900">Other</option>
-                            </select>
+                                <SelectTrigger className="h-9 bg-white/5 border-white/10 text-white placeholder:text-neutral-500 focus:border-purple-500 focus:ring-purple-500/20">
+                                    <SelectValue placeholder="Select type" />
+                                </SelectTrigger>
+                                <SelectContent className="bg-neutral-900 border-white/10 text-white">
+                                    <SelectItem value="website">Website Development</SelectItem>
+                                    <SelectItem value="saas">SaaS Development</SelectItem>
+                                    <SelectItem value="app">App Development</SelectItem>
+                                    <SelectItem value="marketing">Digital Marketing</SelectItem>
+                                    <SelectItem value="edtech">EdTech Solutions</SelectItem>
+                                    <SelectItem value="consulting">IT Consulting</SelectItem>
+                                </SelectContent>
+                            </Select>
                         </div>
 
                         <div className="space-y-2">
                             <Label htmlFor="budget" className="text-neutral-300">
                                 Budget Range
                             </Label>
-                            <select
-                                id="budget"
-                                name="budget"
-                                value={formData.budget}
-                                onChange={handleChange}
-                                className="flex h-9 w-full rounded-md border border-white/10 bg-white/5 px-3 py-2 text-sm text-white placeholder:text-neutral-500 focus:border-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-500/20"
+                            <Select
+                                value={formData.budget || undefined}
+                                onValueChange={(value) => setFormData({ ...formData, budget: value })}
                             >
-                                <option value="" className="bg-neutral-900">Select range</option>
-                                <option value="<10k" className="bg-neutral-900">&lt; $10,000</option>
-                                <option value="10k-50k" className="bg-neutral-900">$10,000 - $50,000</option>
-                                <option value="50k-100k" className="bg-neutral-900">$50,000 - $100,000</option>
-                                <option value=">100k" className="bg-neutral-900">&gt; $100,000</option>
-                            </select>
+                                <SelectTrigger className="h-9 bg-white/5 border-white/10 text-white placeholder:text-neutral-500 focus:border-purple-500 focus:ring-purple-500/20">
+                                    <SelectValue placeholder="Select range" />
+                                </SelectTrigger>
+                                <SelectContent className="bg-neutral-900 border-white/10 text-white">
+                                    <SelectItem value="5k-10k">$5,000 - $10,000</SelectItem>
+                                    <SelectItem value="10k-25k">$10,000 - $25,000</SelectItem>
+                                    <SelectItem value="25k-50k">$25,000 - $50,000</SelectItem>
+                                    <SelectItem value="50k-100k">$50,000 - $100,000</SelectItem>
+                                    <SelectItem value="100k+">$100,000+</SelectItem>
+                                </SelectContent>
+                            </Select>
                         </div>
                     </div>
 
@@ -188,17 +221,25 @@ export function ProjectInquiryDialog({ open, onOpenChange }) {
                     {/* Submit Button */}
                     <motion.button
                         type="submit"
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
-                        className="w-full h-10 mt-2 bg-gradient-to-r from-violet-600 via-purple-600 to-fuchsia-600 text-white font-medium rounded-full flex items-center justify-center gap-2 hover:shadow-lg hover:shadow-purple-500/50 transition-shadow"
+                        disabled={isSubmitting}
+                        whileHover={{ scale: isSubmitting ? 1 : 1.02 }}
+                        whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
+                        className="w-full h-10 mt-2 bg-gradient-to-r from-violet-600 via-purple-600 to-fuchsia-600 text-white font-medium rounded-full flex items-center justify-center gap-2 hover:shadow-lg hover:shadow-purple-500/50 transition-shadow disabled:opacity-60"
                     >
-                        <Send className="h-4 w-4" />
-                        Send Inquiry
+                        {isSubmitting ? (
+                            <motion.div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full" animate={{ rotate: 360 }} transition={{ duration: 1, repeat: Infinity, ease: 'linear' }} />
+                        ) : (
+                            <><Send className="h-4 w-4" />Send Inquiry</>
+                        )}
                     </motion.button>
+
+                    {submitError && <p className="text-red-400 text-xs text-center">{submitError}</p>}
 
                     <p className="text-xs text-center text-neutral-500">
                         We'll get back to you within 24 hours
                     </p>
+                    </>
+                    )}
                 </form>
             </DialogContent>
         </Dialog>

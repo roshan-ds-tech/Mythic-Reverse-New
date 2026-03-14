@@ -28,6 +28,7 @@ import { TextGenerateEffect } from '../components/ui/text-generate-effect';
 import AnimatedShaderBackground from '../components/ui/animated-shader-background';
 import { SparklesCore } from '../components/ui/sparkles';
 import { Footer } from '../components/ui/footer-section';
+import { supabase } from '../lib/supabase';
 
 // Count Animation Component
 function CountAnimation({
@@ -91,6 +92,7 @@ const Consultation = () => {
         company: '',
         projectType: '',
         budget: '',
+        timeline: '',
         message: ''
     });
     const [errors, setErrors] = useState({});
@@ -130,9 +132,27 @@ const Consultation = () => {
         if (!validateForm()) return;
 
         setIsSubmitting(true);
-        await new Promise(resolve => setTimeout(resolve, 2000));
+
+        const { error } = await supabase
+            .from('client_inquiries')
+            .insert([{
+                full_name: formData.name,
+                email: formData.email,
+                company: formData.company,
+                project_type: formData.projectType,
+                budget_range: formData.budget,
+                timeline: formData.timeline,
+                project_description: formData.message
+            }]);
+
         setIsSubmitting(false);
-        setIsSubmitted(true);
+
+        if (error) {
+            console.error(error);
+            setErrors(prev => ({ ...prev, submit: 'Something went wrong. Please try again.' }));
+        } else {
+            setIsSubmitted(true);
+        }
     };
 
     useEffect(() => {
@@ -658,20 +678,34 @@ const Consultation = () => {
                                             </div>
                                         </div>
 
-                                        <div className="space-y-2">
-                                            <Label htmlFor="budget" className="text-white">Budget Range</Label>
-                                            <Select value={formData.budget} onValueChange={(value) => handleInputChange('budget', value)}>
-                                                <SelectTrigger className="bg-[#0B0B12] border-white/10 text-white focus:border-[#8B5CF6] focus:ring-[#8B5CF6]">
-                                                    <SelectValue placeholder="Select budget range" />
-                                                </SelectTrigger>
-                                                <SelectContent className="bg-[#111118] border-white/10">
-                                                    <SelectItem value="5k-10k">$5,000 - $10,000</SelectItem>
-                                                    <SelectItem value="10k-25k">$10,000 - $25,000</SelectItem>
-                                                    <SelectItem value="25k-50k">$25,000 - $50,000</SelectItem>
-                                                    <SelectItem value="50k-100k">$50,000 - $100,000</SelectItem>
-                                                    <SelectItem value="100k+">$100,000+</SelectItem>
-                                                </SelectContent>
-                                            </Select>
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                            <div className="space-y-2">
+                                                <Label htmlFor="budget" className="text-white">Budget Range</Label>
+                                                <Select value={formData.budget} onValueChange={(value) => handleInputChange('budget', value)}>
+                                                    <SelectTrigger className="bg-[#0B0B12] border-white/10 text-white focus:border-[#8B5CF6] focus:ring-[#8B5CF6]">
+                                                        <SelectValue placeholder="Select budget range" />
+                                                    </SelectTrigger>
+                                                    <SelectContent className="bg-[#111118] border-white/10">
+                                                        <SelectItem value="5k-10k">$5,000 - $10,000</SelectItem>
+                                                        <SelectItem value="10k-25k">$10,000 - $25,000</SelectItem>
+                                                        <SelectItem value="25k-50k">$25,000 - $50,000</SelectItem>
+                                                        <SelectItem value="50k-100k">$50,000 - $100,000</SelectItem>
+                                                        <SelectItem value="100k+">$100,000+</SelectItem>
+                                                    </SelectContent>
+                                                </Select>
+                                            </div>
+
+                                            <div className="space-y-2">
+                                                <Label htmlFor="timeline" className="text-white">Desired Timeline</Label>
+                                                <Input
+                                                    id="timeline"
+                                                    type="text"
+                                                    placeholder="e.g., 3-6 months"
+                                                    value={formData.timeline}
+                                                    onChange={(e) => handleInputChange('timeline', e.target.value)}
+                                                    className="bg-[#0B0B12] border-white/10 text-white placeholder:text-[#A1A1AA] focus:border-[#8B5CF6] focus:ring-[#8B5CF6] transition-all"
+                                                />
+                                            </div>
                                         </div>
 
                                         <div className="space-y-2">
@@ -725,6 +759,15 @@ const Consultation = () => {
                                                 </span>
                                             </Button>
                                         </motion.div>
+                                        {errors.submit && (
+                                            <motion.p
+                                                initial={{ opacity: 0, y: -10 }}
+                                                animate={{ opacity: 1, y: 0 }}
+                                                className="text-red-400 text-sm text-center mt-2"
+                                            >
+                                                {errors.submit}
+                                            </motion.p>
+                                        )}
                                     </form>
                                 </motion.div>
                             ) : (

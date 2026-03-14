@@ -1006,10 +1006,10 @@ export default function CoursesPage() {
   return (
     <div className="bg-black min-h-screen">
       <CoursesHeroSection />
+      <ExploreSection />
       <FiveCoursesSection />
       <SixtyMinutesSection />
       <AIToolsSection />
-      <ExploreSection />
       <Footer />
     </div>
   );
