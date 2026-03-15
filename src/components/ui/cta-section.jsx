@@ -7,11 +7,11 @@ import { ProjectInquiryDialog } from "./project-inquiry-dialog";
 export function CTASection() {
     const [isDialogOpen, setIsDialogOpen] = useState(false);
     return (
-        <section className="relative w-full overflow-hidden py-32 md:py-40">
+        <section className="relative w-full overflow-hidden py-16 sm:py-32 md:py-40">
 
             {/* Ambient Purple Glow */}
             <div className="absolute inset-0 bg-gradient-to-t from-violet-950/20 via-black/40 to-black/80 pointer-events-none" />
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[40rem] h-[20rem] bg-violet-600/20 blur-[120px] rounded-full pointer-events-none" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[40rem] h-[20rem] bg-violet-600/20 blur-[120px] rounded-full pointer-events-none hidden sm:block" />
 
 
 
@@ -35,7 +35,7 @@ export function CTASection() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: 0.1 }}
-                    className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight text-white mb-6 relative"
+                    className="text-2xl sm:text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight text-white mb-4 sm:mb-6 relative"
                 >
                     Build Something <br className="hidden md:block" />
                     <span className="relative whitespace-nowrap">
@@ -52,7 +52,7 @@ export function CTASection() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: 0.2 }}
-                    className="text-lg md:text-xl text-neutral-400 max-w-2xl mx-auto mb-10 leading-relaxed"
+                    className="text-base sm:text-lg md:text-xl text-neutral-400 max-w-2xl mx-auto mb-8 sm:mb-10 leading-relaxed"
                 >
                     Join a community of innovators and start building the future today.
                     Your journey to excellence begins with a single step.

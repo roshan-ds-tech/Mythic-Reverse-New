@@ -219,7 +219,7 @@ export default function CompanyServicesSection() {
     return (
         <section
             ref={containerRef}
-            className="w-full min-h-screen py-24 px-4 relative overflow-hidden"
+            className="w-full min-h-screen py-16 sm:py-24 px-3 sm:px-4 relative overflow-hidden"
         >
 
             {/* Subtle static glow */}
@@ -230,10 +230,10 @@ export default function CompanyServicesSection() {
                     <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 text-neutral-300 font-medium mb-4 border border-white/10">
                         OUR SERVICES
                     </div>
-                    <h2 className="text-5xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-white via-neutral-200 to-neutral-400 bg-clip-text text-transparent">
+                    <h2 className="text-3xl sm:text-5xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-white via-neutral-200 to-neutral-400 bg-clip-text text-transparent">
                         What We Offer
                     </h2>
-                    <p className="text-xl text-neutral-400 max-w-3xl mx-auto">
+                    <p className="text-base sm:text-xl text-neutral-400 max-w-3xl mx-auto">
                         Delivering cutting-edge digital solutions with classic social media blue aesthetics and clean, trustworthy design
                     </p>
                 </div>
@@ -255,7 +255,7 @@ export default function CompanyServicesSection() {
                     ))}
                 </div>
 
-                <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6 mb-12 sm:mb-20">
                     {stats.map((stat, index) => (
                         <StatCounter
                             key={index}
@@ -267,7 +267,7 @@ export default function CompanyServicesSection() {
                     ))}
                 </div>
 
-                <div className="relative p-8 md:p-10 rounded-3xl flex flex-col md:flex-row items-center justify-between gap-6 shadow-2xl overflow-hidden border border-violet-500/20"
+                <div className="relative p-4 sm:p-8 md:p-10 rounded-3xl flex flex-col md:flex-row items-center justify-between gap-4 sm:gap-6 shadow-2xl overflow-hidden border border-violet-500/20"
                     style={{
                         background: 'linear-gradient(135deg, rgba(17,17,24,1) 0%, rgba(30,20,40,1) 50%, rgba(40,25,55,1) 100%)'
                     }}
@@ -287,7 +287,7 @@ export default function CompanyServicesSection() {
                     <div className="absolute -bottom-20 -right-20 w-80 h-80 rounded-full opacity-8 blur-3xl pointer-events-none" style={{ background: 'radial-gradient(circle, rgba(217,70,239,0.3) 0%, transparent 70%)' }} />
 
                     <div className="flex-1 text-center md:text-left relative z-10">
-                        <h3 className="text-3xl md:text-4xl font-black mb-6 leading-tight">
+                        <h3 className="text-2xl sm:text-3xl md:text-4xl font-black mb-4 sm:mb-6 leading-tight">
                             Ready to Start Your
                             <span className="block bg-gradient-to-r from-violet-300 via-purple-300 to-fuchsia-300 bg-clip-text text-transparent">
                                 Dream Project?

@@ -171,7 +171,7 @@ export function HeroSection() {
                     {/* Headline */}
                     <motion.h1
                         variants={itemVariants}
-                        className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight"
+                        className="text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight"
                     >
                         <span className="block bg-gradient-to-r from-white via-purple-200 to-purple-400 bg-clip-text text-transparent">
                             Delivering
@@ -184,7 +184,7 @@ export function HeroSection() {
                     {/* Subheadline */}
                     <motion.p
                         variants={itemVariants}
-                        className="text-lg sm:text-xl md:text-2xl font-light text-gray-300 max-w-3xl leading-relaxed"
+                        className="text-base sm:text-lg md:text-2xl font-light text-gray-300 max-w-3xl leading-relaxed"
                     >
                         We are a design and technology collective. We build products, platforms,
                         and experiences that define the next generation of the web.
@@ -197,7 +197,7 @@ export function HeroSection() {
                     >
                         <button
                             onClick={() => setDialogOpen(true)}
-                            className="group relative inline-flex h-14 items-center justify-center overflow-hidden rounded-full bg-purple-600 hover:bg-purple-700 text-white px-8 font-semibold text-lg transition-all duration-300 shadow-lg shadow-purple-500/50 hover:shadow-purple-500/70 w-full sm:w-auto"
+                            className="group relative inline-flex h-12 sm:h-14 items-center justify-center overflow-hidden rounded-full bg-purple-600 hover:bg-purple-700 text-white px-6 sm:px-8 font-semibold text-base sm:text-lg transition-all duration-300 shadow-lg shadow-purple-500/50 hover:shadow-purple-500/70 w-full sm:w-auto"
                         >
                             <span className="relative z-10 flex items-center gap-2">
                                 Start Your Project
@@ -208,7 +208,7 @@ export function HeroSection() {
 
                         <button
                             onClick={() => navigate('/services')}
-                            className="inline-flex h-14 items-center justify-center rounded-full border-2 border-purple-500/50 text-white hover:bg-purple-500/10 px-8 font-semibold text-lg backdrop-blur-sm transition-all duration-300 w-full sm:w-auto"
+                            className="inline-flex h-12 sm:h-14 items-center justify-center rounded-full border-2 border-purple-500/50 text-white hover:bg-purple-500/10 px-6 sm:px-8 font-semibold text-base sm:text-lg backdrop-blur-sm transition-all duration-300 w-full sm:w-auto"
                         >
                             View Our Work
                         </button>
@@ -217,7 +217,7 @@ export function HeroSection() {
                     {/* Status indicators */}
                     <motion.div
                         variants={itemVariants}
-                        className="flex items-center gap-8 pt-8 text-sm text-gray-400"
+                        className="flex flex-col sm:flex-row items-center gap-3 sm:gap-8 pt-6 sm:pt-8 text-sm text-gray-400"
                     >
                         <div className="flex items-center gap-2">
                             <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />

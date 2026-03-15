@@ -52,7 +52,7 @@ const ExpandableMenuItem = ({
                 custom={isSelected}
                 transition={{ delay: 0.1, type: "spring", bounce: 0, duration: 0.6 }}
                 className={cn(
-                    "relative flex items-center rounded-xl py-2 text-sm font-medium transition-colors duration-300 cursor-pointer",
+                    "relative flex items-center rounded-xl py-2 text-sm font-medium transition-colors duration-300 cursor-pointer min-h-[44px] min-w-[44px] justify-center",
                         isSelected
                         ? cn("bg-white/10", activeColor)
                         : "text-neutral-400 hover:bg-white/5 hover:text-white"
@@ -108,7 +108,7 @@ const ExpandableMenu = ({
         <nav
             onMouseLeave={() => setActive(null)}
             className={cn(
-                "flex flex-wrap items-center gap-2 rounded-2xl bg-black/40 backdrop-blur-sm p-1 shadow-sm border border-white/10 hover:border-white/20 transition-colors",
+                "flex flex-wrap items-center gap-1 sm:gap-2 rounded-2xl bg-black/40 backdrop-blur-sm p-1 shadow-sm border border-white/10 hover:border-white/20 transition-colors",
                 className
             )}
         >

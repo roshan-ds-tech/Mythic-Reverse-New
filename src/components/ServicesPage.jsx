@@ -273,7 +273,7 @@ export default function ServicesPage() {
             />
 
             {/* CTA Section */}
-            <section className="relative py-32 overflow-hidden">
+            <section className="relative py-16 sm:py-32 overflow-hidden">
                 <BGPattern
                     variant="dots"
                     mask="fade-edges"
@@ -283,13 +283,13 @@ export default function ServicesPage() {
 
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0B0B12] via-transparent to-[#0B0B12]" />
 
-                <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
+                <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 text-center">
                     <motion.div
                         initial={{ opacity: 0, scale: 0.9 }}
                         whileInView={{ opacity: 1, scale: 1 }}
                         viewport={{ once: false, margin: "-100px" }}
                         transition={{ duration: 0.8 }}
-                        className="bg-gradient-to-br from-[#111118] to-[#0B0B12] border border-white/10 rounded-3xl p-12 md:p-16 backdrop-blur-sm"
+                        className="bg-gradient-to-br from-[#111118] to-[#0B0B12] border border-white/10 rounded-3xl p-6 sm:p-12 md:p-16 backdrop-blur-sm"
                     >
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
@@ -297,7 +297,7 @@ export default function ServicesPage() {
                             viewport={{ once: false, margin: "-100px" }}
                             transition={{ duration: 0.6, delay: 0.2 }}
                         >
-                            <Zap className="w-16 h-16 text-[#8B5CF6] mx-auto mb-6 animate-glow" />
+                            <Zap className="w-12 h-12 sm:w-16 sm:h-16 text-[#8B5CF6] mx-auto mb-4 sm:mb-6 animate-glow" />
                         </motion.div>
 
                         <motion.h2
@@ -305,7 +305,7 @@ export default function ServicesPage() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: false, margin: "-100px" }}
                             transition={{ duration: 0.6, delay: 0.3 }}
-                            className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-white to-[#A1A1AA] bg-clip-text text-transparent"
+                            className="text-2xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 bg-gradient-to-r from-white to-[#A1A1AA] bg-clip-text text-transparent"
                         >
                             Ready to Transform Your Business?
                         </motion.h2>
@@ -315,7 +315,7 @@ export default function ServicesPage() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: false, margin: "-100px" }}
                             transition={{ duration: 0.6, delay: 0.4 }}
-                            className="text-xl text-[#A1A1AA] mb-8 max-w-2xl mx-auto"
+                            className="text-base sm:text-xl text-[#A1A1AA] mb-6 sm:mb-8 max-w-2xl mx-auto"
                         >
                             Let's collaborate to bring your vision to life with innovative solutions tailored to your unique needs.
                         </motion.p>
@@ -325,18 +325,18 @@ export default function ServicesPage() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: false, margin: "-100px" }}
                             transition={{ duration: 0.6, delay: 0.5 }}
-                            className="flex flex-wrap gap-4 justify-center"
+                            className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center"
                         >
                             <button
                                 onClick={() => setDialogOpen(true)}
-                                className="group px-10 py-5 bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] rounded-full font-bold text-lg hover:shadow-2xl hover:shadow-[#8B5CF6]/50 transition-all duration-300 flex items-center gap-2"
+                                className="group px-6 py-4 sm:px-10 sm:py-5 bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] rounded-full font-bold text-base sm:text-lg hover:shadow-2xl hover:shadow-[#8B5CF6]/50 transition-all duration-300 flex items-center justify-center gap-2 w-full sm:w-auto"
                             >
                                 Start Your Project
-                                <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
+                                <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6 group-hover:translate-x-1 transition-transform" />
                             </button>
                             <button
                                 onClick={() => navigate('/consultation#consultation-form')}
-                                className="px-10 py-5 bg-white/5 backdrop-blur-xl border border-white/10 rounded-full font-bold text-lg hover:bg-white/10 transition-all duration-300"
+                                className="px-6 py-4 sm:px-10 sm:py-5 bg-white/5 backdrop-blur-xl border border-white/10 rounded-full font-bold text-base sm:text-lg hover:bg-white/10 transition-all duration-300 w-full sm:w-auto"
                             >
                                 Schedule Consultation
                             </button>
@@ -358,7 +358,7 @@ function ServiceSection({ id, title, description, icon, features, gradient, reve
     const isInView = useInView(ref, { once: false, margin: "-100px" });
 
     return (
-        <section id={id} ref={ref} className="relative py-32 overflow-hidden">
+        <section id={id} ref={ref} className="relative py-16 sm:py-32 overflow-hidden">
             <BGPattern
                 variant="grid"
                 mask="fade-edges"
@@ -366,9 +366,9 @@ function ServiceSection({ id, title, description, icon, features, gradient, reve
                 fill="rgba(139, 92, 246, 0.05)"
             />
 
-            <div className="relative z-10 max-w-7xl mx-auto px-6">
+            <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6">
                 <div className={cn(
-                    "grid md:grid-cols-2 gap-12 items-center",
+                    "grid md:grid-cols-2 gap-8 md:gap-12 items-center",
                     reverse && "md:grid-flow-dense"
                 )}>
                     {/* Content */}
@@ -379,17 +379,17 @@ function ServiceSection({ id, title, description, icon, features, gradient, reve
                         className={reverse ? "md:col-start-2" : ""}
                     >
                         <div className={cn(
-                            "inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-br mb-6",
+                            "inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-br mb-4 sm:mb-6",
                             gradient
                         )}>
                             {icon}
                         </div>
 
-                        <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-white to-[#A1A1AA] bg-clip-text text-transparent">
+                        <h2 className="text-2xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 bg-gradient-to-r from-white to-[#A1A1AA] bg-clip-text text-transparent">
                             {title}
                         </h2>
 
-                        <p className="text-lg text-[#A1A1AA] mb-8 leading-relaxed">
+                        <p className="text-base sm:text-lg text-[#A1A1AA] mb-6 sm:mb-8 leading-relaxed">
                             {description}
                         </p>
 

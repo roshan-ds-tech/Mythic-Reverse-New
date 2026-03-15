@@ -224,7 +224,7 @@ function MythicReverseHero({
 
             <motion.div
                 style={{ y, scale }}
-                className="relative z-10 container mx-auto px-6 md:px-8"
+                className="relative z-10 container mx-auto px-4 sm:px-6 md:px-8"
             >
                 <div className="max-w-5xl mx-auto text-center">
                     <motion.div
@@ -244,7 +244,7 @@ function MythicReverseHero({
                         variants={fadeUpVariants}
                         initial="hidden"
                         animate="visible"
-                        className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-8 tracking-tight"
+                        className="text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-bold mb-6 sm:mb-8 tracking-tight"
                     >
                         <span className="bg-clip-text text-transparent bg-gradient-to-b from-white via-white/95 to-white/70 drop-shadow-2xl">
                             {headline}
@@ -256,7 +256,7 @@ function MythicReverseHero({
                         variants={fadeUpVariants}
                         initial="hidden"
                         animate="visible"
-                        className="text-lg md:text-xl text-white/70 mb-12 leading-relaxed max-w-3xl mx-auto font-light"
+                        className="text-base sm:text-lg md:text-xl text-white/70 mb-8 sm:mb-12 leading-relaxed max-w-3xl mx-auto font-light"
                     >
                         {subtext}
                         {animatedWords.length > 0 && (
@@ -290,7 +290,7 @@ function MythicReverseHero({
                             <Button
                                 asChild
                                 size="lg"
-                                className="group relative px-10 py-6 bg-white/10 hover:bg-white/15 text-white font-semibold text-lg backdrop-blur-md border-0 transition-all duration-300"
+                                className="group relative px-6 py-4 sm:px-10 sm:py-6 bg-white/10 hover:bg-white/15 text-white font-semibold text-base sm:text-lg backdrop-blur-md border-0 transition-all duration-300"
                             >
                                 <a href={ctaHref} className="flex items-center gap-2">
                                     {ctaText}
@@ -317,7 +317,7 @@ function MythicReverseHero({
                         variants={fadeUpVariants}
                         initial="hidden"
                         animate="visible"
-                        className="mt-16 flex flex-wrap items-center justify-center gap-8 text-sm text-white/50"
+                        className="mt-8 sm:mt-16 flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3 sm:gap-8 text-sm text-white/50"
                     >
                         {["Immersive Design", "Advanced Tech", "Creative Innovation"].map((item, i) => (
                             <div key={i} className="flex items-center gap-2">
@@ -329,7 +329,7 @@ function MythicReverseHero({
                 </div>
             </motion.div>
 
-            <div className="absolute inset-0 pointer-events-none overflow-hidden z-[3]">
+            <div className="absolute inset-0 pointer-events-none overflow-hidden z-[3] hidden sm:block">
                 <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-600/10 rounded-full blur-3xl animate-pulse" />
                 <div
                     className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-pink-600/10 rounded-full blur-3xl animate-pulse"

@@ -48,7 +48,7 @@ export function AboutHero() {
                 <div className="relative z-10 text-center flex flex-col items-center gap-4">
                     <div className="animate-fade-in-up delay-100 opacity-0 fill-mode-forwards">
                         <HyperText
-                            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black tracking-tighter bg-clip-text text-transparent bg-gradient-to-b from-white to-white/40 whitespace-nowrap"
+                            className="text-2xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-black tracking-tighter bg-clip-text text-transparent bg-gradient-to-b from-white to-white/40"
                             text="MYTHIC REVERSE"
                             duration={50}
                         />
@@ -56,7 +56,7 @@ export function AboutHero() {
 
                     <div className="animate-fade-in-up delay-300 opacity-0 fill-mode-forwards">
                         <HyperText
-                            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black tracking-tighter bg-clip-text text-transparent bg-gradient-to-b from-white to-white/40 whitespace-nowrap"
+                            className="text-2xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-black tracking-tighter bg-clip-text text-transparent bg-gradient-to-b from-white to-white/40"
                             text="DEVELOPMENT STUDIO"
                             duration={50}
                         />

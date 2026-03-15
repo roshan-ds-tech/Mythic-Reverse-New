@@ -32,7 +32,7 @@ const footerLinks = [
 
 export function Footer() {
     return (
-        <footer className="relative w-full border-t border-purple-500/30 px-6 py-12 lg:py-16 shadow-[0_-1px_15px_-5px_theme(colors.purple.500/30%)] overflow-hidden">
+        <footer className="relative w-full border-t border-purple-500/30 px-4 sm:px-6 py-8 sm:py-12 lg:py-16 shadow-[0_-1px_15px_-5px_theme(colors.purple.500/30%)] overflow-hidden">
             <div className="bg-purple-500/30 absolute top-0 left-1/2 -translate-x-1/2 h-px w-1/3 rounded-full blur-[2px]" />
 
             <div className="max-w-7xl mx-auto">
@@ -47,10 +47,10 @@ export function Footer() {
                         </p>
                     </AnimatedContainer>
 
-                    <div className="mt-10 grid grid-cols-2 gap-8 md:grid-cols-4 xl:col-span-2 xl:mt-0">
+                    <div className="mt-8 sm:mt-10 grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8 md:grid-cols-4 xl:col-span-2 xl:mt-0">
                         {footerLinks.map((section, index) => (
                             <AnimatedContainer key={section.label} delay={0.1 + index * 0.1}>
-                                <div className="mb-10 md:mb-0">
+                                <div className="mb-6 sm:mb-10 md:mb-0">
                                     <h3 className="text-sm font-semibold text-white">{section.label}</h3>
                                     <ul className="text-zinc-400 mt-4 space-y-2 text-sm">
                                         {section.links.map((link) => (
