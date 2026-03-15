@@ -55,6 +55,14 @@ function ServicesOrbitalDisplay({ servicesData }) {
     const [expandedItems, setExpandedItems] = useState({});
     const [autoRotate, setAutoRotate] = useState(true);
     const [activeNodeId, setActiveNodeId] = useState(null);
+    const [isMobile, setIsMobile] = useState(false);
+
+    React.useEffect(() => {
+        const checkMobile = () => setIsMobile(window.innerWidth < 640);
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
 
     // Use refs instead of state for values that don't need to trigger re-renders
     const rotationAngleRef = useRef(0);
@@ -110,7 +118,7 @@ function ServicesOrbitalDisplay({ servicesData }) {
 
     const calculateNodePosition = (index, total) => {
         const angle = (index / total) * 360;
-        const radius = 200;
+        const radius = isMobile ? 125 : 200;
         const radian = (angle * Math.PI) / 180;
 
         const x = radius * Math.cos(radian);
@@ -221,7 +229,7 @@ function ServicesOrbitalDisplay({ servicesData }) {
                         </div>
 
                         {/* Orbit Ring */}
-                        <div className="absolute w-96 h-96 rounded-full border border-violet-500/50 pointer-events-none"></div>
+                        <div className={cn("absolute rounded-full border border-violet-500/50 pointer-events-none", isMobile ? "w-[250px] h-[250px]" : "w-96 h-96")}></div>
 
                         {/* Rotating container with CSS animation */}
                         <div

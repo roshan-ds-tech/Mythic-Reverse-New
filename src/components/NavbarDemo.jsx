@@ -55,9 +55,9 @@ function Navbar({ className }) {
         >
             <ExpandableMenu setActive={setActive}>
                 <ExpandableMenuItem setActive={setActive} active={active} item="Home" icon={Home} href="/" />
-                <ExpandableMenuItem setActive={setActive} active={active} item="Services" icon={Briefcase} href="/services" />
                 <ExpandableMenuItem setActive={setActive} active={active} item="About Us" icon={ShoppingBag} href="/about-us" />
                 <ExpandableMenuItem setActive={setActive} active={active} item="Courses" icon={GraduationCap} href="/courses" />
+                <ExpandableMenuItem setActive={setActive} active={active} item="Services" icon={Briefcase} href="/services" />
                 <ExpandableMenuItem setActive={setActive} active={active} item="Consultation" icon={Calendar} href="/consultation" />
 
                 {/* Vertical Separator */}

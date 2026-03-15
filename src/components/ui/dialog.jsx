@@ -1,9 +1,10 @@
-import * as React from "react"
+import React, { forwardRef, useEffect } from "react"
+import { createPortal } from "react-dom"
 import { cn } from "@/lib/utils"
 import { motion, AnimatePresence } from "framer-motion"
 
 const Dialog = ({ open, onOpenChange, children }) => {
-    React.useEffect(() => {
+    useEffect(() => {
         if (open) {
             document.body.style.overflow = 'hidden';
         } else {
@@ -14,10 +15,13 @@ const Dialog = ({ open, onOpenChange, children }) => {
         };
     }, [open]);
 
-    return (
+    // Avoid SSR crashes if applicable
+    if (typeof document === 'undefined') return null;
+
+    return createPortal(
         <AnimatePresence>
             {open && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center">
+                <div className="fixed inset-0 z-[100] flex items-center justify-center">
                     {/* Animated Backdrop */}
                     <motion.div
                         initial={{ opacity: 0 }}
@@ -39,11 +43,12 @@ const Dialog = ({ open, onOpenChange, children }) => {
                     </motion.div>
                 </div>
             )}
-        </AnimatePresence>
+        </AnimatePresence>,
+        document.body
     );
 };
 
-const DialogContent = React.forwardRef(({ className, children, ...props }, ref) => (
+const DialogContent = forwardRef(({ className, children, ...props }, ref) => (
     <div
         ref={ref}
         className={cn(
@@ -78,7 +83,7 @@ const DialogHeader = ({ className, ...props }) => (
 );
 DialogHeader.displayName = "DialogHeader";
 
-const DialogTitle = React.forwardRef(({ className, ...props }, ref) => (
+const DialogTitle = forwardRef(({ className, ...props }, ref) => (
     <h2
         ref={ref}
         className={cn(
@@ -90,7 +95,7 @@ const DialogTitle = React.forwardRef(({ className, ...props }, ref) => (
 ));
 DialogTitle.displayName = "DialogTitle";
 
-const DialogDescription = React.forwardRef(({ className, ...props }, ref) => (
+const DialogDescription = forwardRef(({ className, ...props }, ref) => (
     <p
         ref={ref}
         className={cn("text-sm text-neutral-400", className)}
