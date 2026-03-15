@@ -14,11 +14,11 @@ export function FeaturedSpotlight() {
         >
             {/* Ambient Gradient Shadows */}
             <div
-                className="absolute left-0 top-1/2 -translate-y-1/2 w-64 h-64 bg-violet-600/20 rounded-full blur-[100px] pointer-events-none transition-opacity duration-700 mix-blend-screen"
+                className="absolute left-0 top-1/2 -translate-y-1/2 w-64 h-64 bg-violet-600/20 rounded-full blur-[40px] pointer-events-none transition-opacity duration-700 mix-blend-screen"
                 style={{ opacity: isHovered ? 0.6 : 0.2 }}
             />
             <div
-                className="absolute right-0 top-1/2 -translate-y-1/2 w-80 h-80 bg-fuchsia-600/10 rounded-full blur-[120px] pointer-events-none transition-opacity duration-700 mix-blend-screen"
+                className="absolute right-0 top-1/2 -translate-y-1/2 w-80 h-80 bg-fuchsia-600/10 rounded-full blur-[50px] pointer-events-none transition-opacity duration-700 mix-blend-screen"
                 style={{ opacity: isHovered ? 0.5 : 0.1 }}
             />
             {/* Left: Text Block */}

@@ -79,7 +79,7 @@ function TiltCard({ title, description, icon: Icon, className, hoverColor = "hov
                 <h3 className="mb-3 text-xl font-bold text-white">{title}</h3>
                 <p className="text-[#A1A1AA] leading-relaxed">{description}</p>
             </div>
-            <div className="absolute -right-8 -top-8 h-32 w-32 rounded-full bg-[#8B5CF6]/5 blur-3xl transition-all duration-500 group-hover:bg-[#8B5CF6]/10" />
+            <div className="absolute -right-8 -top-8 h-32 w-32 rounded-full bg-[#8B5CF6]/5 blur-lg transition-all duration-500 group-hover:bg-[#8B5CF6]/10" />
         </motion.div>
     );
 }
@@ -245,7 +245,7 @@ const Consultation = () => {
                     background="transparent"
                     minSize={0.6}
                     maxSize={1.4}
-                    particleDensity={70}
+                    particleDensity={25}
                     className="w-full h-full"
                     particleColor="#FFFFFF"
                 />
@@ -580,7 +580,7 @@ const Consultation = () => {
                             {!isSubmitted ? (
                                 <motion.div
                                     key="form"
-                                    className="relative overflow-hidden rounded-3xl border border-white/10 bg-[#111118]/80 backdrop-blur-xl p-8 md:p-12"
+                                    className="relative overflow-hidden rounded-3xl border border-white/10 bg-[#111118]/80 backdrop-blur-sm p-8 md:p-12"
                                     initial={{ opacity: 0, y: 40 }}
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
@@ -773,7 +773,7 @@ const Consultation = () => {
                             ) : (
                                 <motion.div
                                     key="success"
-                                    className="relative overflow-hidden rounded-3xl border border-[#8B5CF6]/30 bg-[#111118]/80 backdrop-blur-xl p-12 text-center"
+                                    className="relative overflow-hidden rounded-3xl border border-[#8B5CF6]/30 bg-[#111118]/80 backdrop-blur-sm p-12 text-center"
                                     initial={{ opacity: 0, scale: 0.8 }}
                                     animate={{ opacity: 1, scale: 1 }}
                                     transition={{ duration: 0.8 }}

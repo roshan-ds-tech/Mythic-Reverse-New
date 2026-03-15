@@ -33,7 +33,7 @@ const AnimatedShaderBackground = ({ className, ...props }) => {
         uniform float iTime;
         uniform vec2 iResolution;
 
-        #define NUM_OCTAVES 5
+        #define NUM_OCTAVES 3
 
         float rand(vec2 n) {
           return fract(sin(dot(n, vec2(12.9898, 4.1414))) * 43758.5453);
@@ -110,7 +110,7 @@ const AnimatedShaderBackground = ({ className, ...props }) => {
       const width = container.clientWidth;
       const height = container.clientHeight;
       renderer.setSize(width, height);
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
       if (material) {
         material.uniforms.iResolution.value.set(width, height);
       }
@@ -123,11 +123,16 @@ const AnimatedShaderBackground = ({ className, ...props }) => {
     // Animation Loop
     let animationFrameId;
     const startTime = performance.now();
+    const fpsInterval = 1000 / 30; // Throttle to 30fps
+    let lastFrameTime = 0;
 
-    const render = () => {
+    const render = (currentTime) => {
+      animationFrameId = requestAnimationFrame(render);
+      const elapsed = currentTime - lastFrameTime;
+      if (elapsed < fpsInterval) return;
+      lastFrameTime = currentTime - (elapsed % fpsInterval);
       material.uniforms.iTime.value = (performance.now() - startTime) * 0.001;
       renderer.render(scene, camera);
-      animationFrameId = requestAnimationFrame(render);
     };
     render();
 

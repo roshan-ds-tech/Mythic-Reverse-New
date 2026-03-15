@@ -36,7 +36,7 @@ export function AboutHero() {
                         background="transparent"
                         minSize={1.0}
                         maxSize={2.2}
-                        particleDensity={50}
+                        particleDensity={20}
                         className="w-full h-full"
                         particleColor="#FFFFFF"
                     />

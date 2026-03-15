@@ -419,4 +419,39 @@ body {
 
 @custom-variant dark (&:is(.dark *));
 
+/* Global Performance: content-visibility for off-screen sections */
+section {
+  content-visibility: auto;
+}
+
+.global-stars {
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+/* Mobile Performance Overrides */
+@media (max-width: 768px) {
+  /* Disable star layer animations - saves 350+ box-shadow repaints */
+  .layer-1,
+  .layer-2,
+  .layer-3 {
+    animation: none !important;
+  }
+
+  /* Hide the heaviest star layer entirely */
+  .layer-3 {
+    display: none;
+  }
+
+  /* Disable sparkle floating animations */
+  .sparkle-layer {
+    animation: none !important;
+  }
+
+  /* Reduce hero section height */
+  .hero-scroll-container {
+    height: 300vh;
+  }
+}
+
 @custom-variant dark (&:is(.dark *));

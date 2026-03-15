@@ -48,7 +48,7 @@ export function MythicAdvantage() {
     return (
         <section ref={ref} className="relative py-32 overflow-hidden">
             <div className="absolute inset-0">
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[50rem] h-[50rem] bg-[radial-gradient(circle,rgba(139,92,246,0.1),transparent_70%)] blur-3xl" />
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[50rem] h-[50rem] bg-[radial-gradient(circle,rgba(139,92,246,0.1),transparent_70%)] blur-xl" />
             </div>
 
             <motion.div
@@ -82,7 +82,7 @@ export function MythicAdvantage() {
                         >
                             <Card className="relative overflow-hidden bg-[#111118]/60 border-violet-500/20 hover:border-violet-500/40 transition-all group h-full backdrop-blur-sm">
                                 <div className={`absolute inset-0 bg-gradient-to-br ${item.color} opacity-0 group-hover:opacity-5 transition-opacity`} />
-                                <div className="absolute -right-10 -top-10 w-40 h-40 bg-gradient-to-br from-violet-500/10 to-transparent rounded-full blur-2xl group-hover:scale-150 transition-transform duration-500" />
+                                <div className="absolute -right-10 -top-10 w-40 h-40 bg-gradient-to-br from-violet-500/10 to-transparent rounded-full blur-lg group-hover:scale-150 transition-transform duration-500" />
 
                                 <CardContent className="p-8 relative z-10">
                                     <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${item.color} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}>

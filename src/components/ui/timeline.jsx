@@ -172,7 +172,7 @@ function CompanyTimeline({
                                 <div className="relative h-10 w-10 rounded-full flex items-center justify-center overflow-hidden">
                                     <GlowEffect
                                         colors={['#8b5cf6', '#d946ef', '#6366f1', '#a855f7']}
-                                        mode="rotate"
+                                        mode="static"
                                         blur="medium"
                                         duration={3}
                                         className="opacity-60"
@@ -200,7 +200,7 @@ function CompanyTimeline({
                             <motion.div
                                 whileHover={{ scale: 1.02 }}
                                 transition={{ duration: 0.2 }}
-                                className="relative rounded-2xl p-6 md:p-8 backdrop-blur-xl bg-zinc-900/50 border border-zinc-800/50 shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden group"
+                                className="relative rounded-2xl p-6 md:p-8 backdrop-blur-sm bg-zinc-900/50 border border-zinc-800/50 shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden group"
                             >
                                 <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                     <GlowEffect

@@ -113,8 +113,14 @@ function Entropy({ className = "", size = 400 }) {
 
     let time = 0;
     let animationId;
+    const fpsInterval = 1000 / 30;
+    let lastFrameTime = 0;
     
-    function animate() {
+    function animate(currentTime) {
+      animationId = requestAnimationFrame(animate);
+      const elapsed = currentTime - lastFrameTime;
+      if (elapsed < fpsInterval) return;
+      lastFrameTime = currentTime - (elapsed % fpsInterval);
       ctx.clearRect(0, 0, size, size);
 
       if (time % 30 === 0) {
@@ -142,7 +148,7 @@ function Entropy({ className = "", size = 400 }) {
       animationId = requestAnimationFrame(animate);
     }
 
-    animate();
+    animate(0);
 
     return () => {
       if (animationId) {
@@ -394,7 +400,7 @@ function CosmicBackground() {
     canvas.height = window.innerHeight;
 
     const stars = [];
-    for (let i = 0; i < 200; i++) {
+    for (let i = 0; i < 80; i++) {
       stars.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
@@ -403,7 +409,13 @@ function CosmicBackground() {
       });
     }
 
-    function animate() {
+    let animStars;
+    const fpsIntervalStars = 1000 / 30;
+    let lastStarsTime = 0;
+    function animate(currentTime) {
+      animStars = requestAnimationFrame(animate);
+      if (currentTime - lastStarsTime < fpsIntervalStars) return;
+      lastStarsTime = currentTime;
       if (!ctx || !canvas) return;
       ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -421,10 +433,10 @@ function CosmicBackground() {
         }
       });
 
-      requestAnimationFrame(animate);
+      animStars = requestAnimationFrame(animate);
     }
 
-    animate();
+    animate(0);
 
     const handleResize = () => {
       canvas.width = window.innerWidth;
@@ -432,7 +444,10 @@ function CosmicBackground() {
     };
 
     window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      cancelAnimationFrame(animStars);
+    };
   }, []);
 
   return <canvas ref={canvasRef} className="absolute inset-0 z-0" />;
@@ -448,8 +463,6 @@ function SparklesBackground() {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    let animationFrameId;
-
     const updateSize = () => {
       const parent = canvas.parentElement;
       if (parent) {
@@ -460,7 +473,7 @@ function SparklesBackground() {
     updateSize();
 
     const sparkles = [];
-    const numSparkles = 250; // Further increased amount for dense visibility
+    const numSparkles = 120; // Optimized from 250
     for (let i = 0; i < numSparkles; i++) {
       sparkles.push({
         x: Math.random() * canvas.width,
@@ -473,7 +486,13 @@ function SparklesBackground() {
       });
     }
 
-    function animate() {
+    let animationFrameId;
+    const fpsIntervalSp = 1000 / 30;
+    let lastSpTime = 0;
+    function animate(currentTime) {
+      animationFrameId = requestAnimationFrame(animate);
+      if (currentTime - lastSpTime < fpsIntervalSp) return;
+      lastSpTime = currentTime;
       if (!ctx || !canvas) return;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -509,7 +528,7 @@ function SparklesBackground() {
       animationFrameId = requestAnimationFrame(animate);
     }
 
-    animate();
+    animate(0);
 
     const resizeObserver = new ResizeObserver(() => {
       updateSize();
@@ -831,7 +850,8 @@ const coursesData = [
 function FiveCoursesSection() {
   return (
     <section className="relative z-20 py-24 bg-black border-t border-purple-500/20">
-      <div className="container mx-auto px-4 md:px-6 lg:px-8 max-w-6xl">
+      <SparklesBackground />
+      <div className="container mx-auto px-4 md:px-6 lg:px-8 max-w-6xl relative z-10">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -891,7 +911,8 @@ const scheduleData = [
 function SixtyMinutesSection() {
   return (
     <section className="relative z-20 py-24 bg-black border-t border-purple-500/20">
-      <div className="container mx-auto px-4 md:px-6 lg:px-8 max-w-5xl">
+      <SparklesBackground />
+      <div className="container mx-auto px-4 md:px-6 lg:px-8 max-w-5xl relative z-10">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

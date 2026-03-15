@@ -289,7 +289,7 @@ export default function ServicesPage() {
                         whileInView={{ opacity: 1, scale: 1 }}
                         viewport={{ once: false, margin: "-100px" }}
                         transition={{ duration: 0.8 }}
-                        className="bg-gradient-to-br from-[#111118] to-[#0B0B12] border border-white/10 rounded-3xl p-12 md:p-16 backdrop-blur-xl"
+                        className="bg-gradient-to-br from-[#111118] to-[#0B0B12] border border-white/10 rounded-3xl p-12 md:p-16 backdrop-blur-sm"
                     >
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
@@ -423,10 +423,10 @@ function ServiceSection({ id, title, description, icon, features, gradient, reve
                     >
                         <div className="relative">
                             <div className={cn(
-                                "absolute inset-0 bg-gradient-to-br rounded-3xl blur-3xl opacity-30",
+                                "absolute inset-0 bg-gradient-to-br rounded-3xl blur-xl opacity-30",
                                 gradient
                             )} />
-                            <div className="relative bg-gradient-to-br from-[#111118] to-[#0B0B12] border border-white/10 rounded-3xl p-8 backdrop-blur-xl">
+                            <div className="relative bg-gradient-to-br from-[#111118] to-[#0B0B12] border border-white/10 rounded-3xl p-8 backdrop-blur-sm">
                                 <div className="grid grid-cols-2 gap-4">
                                     {imageFiles && imageFiles.length > 0 ? (
                                         imageFiles.map((file, i) => (

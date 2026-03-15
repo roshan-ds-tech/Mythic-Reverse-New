@@ -108,7 +108,7 @@ const ExpandableMenu = ({
         <nav
             onMouseLeave={() => setActive(null)}
             className={cn(
-                "flex flex-wrap items-center gap-2 rounded-2xl bg-black/40 backdrop-blur-md p-1 shadow-sm border border-white/10 hover:border-white/20 transition-colors",
+                "flex flex-wrap items-center gap-2 rounded-2xl bg-black/40 backdrop-blur-sm p-1 shadow-sm border border-white/10 hover:border-white/20 transition-colors",
                 className
             )}
         >

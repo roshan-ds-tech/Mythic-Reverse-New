@@ -22,7 +22,7 @@ const FuturisticBackground = () => {
 
         const particles = [];
 
-        for (let i = 0; i < 100; i++) {
+        for (let i = 0; i < 40; i++) {
             particles.push({
                 x: Math.random() * canvas.width,
                 y: Math.random() * canvas.height,
@@ -59,7 +59,7 @@ const FuturisticBackground = () => {
                     const dy = particle.y - otherParticle.y;
                     const distance = Math.sqrt(dx * dx + dy * dy);
 
-                    if (distance < 150) {
+                    if (distance < 100) {
                         ctx.beginPath();
                         ctx.moveTo(particle.x, particle.y);
                         ctx.lineTo(otherParticle.x, otherParticle.y);
@@ -99,30 +99,7 @@ const FuturisticBackground = () => {
 
 
 
-// --- Floating Orb ---
-const FloatingOrb = ({ delay = 0, duration = 20 }) => {
-    return (
-        <motion.div
-            className="absolute rounded-full blur-3xl"
-            style={{
-                background: 'radial-gradient(circle, rgba(139, 92, 246, 0.4) 0%, transparent 70%)',
-                width: '400px',
-                height: '400px',
-            }}
-            animate={{
-                x: [0, 100, -50, 0],
-                y: [0, -100, 50, 0],
-                scale: [1, 1.2, 0.8, 1],
-            }}
-            transition={{
-                duration,
-                repeat: Infinity,
-                delay,
-                ease: 'easeInOut',
-            }}
-        />
-    );
-};
+
 
 // --- Main Hero Section ---
 export function HeroSection() {
@@ -168,12 +145,7 @@ export function HeroSection() {
         >
 
 
-            <div className="absolute top-1/4 left-1/4">
-                <FloatingOrb delay={0} duration={25} />
-            </div>
-            <div className="absolute bottom-1/4 right-1/4">
-                <FloatingOrb delay={5} duration={30} />
-            </div>
+
 
             <FuturisticBackground />
 
