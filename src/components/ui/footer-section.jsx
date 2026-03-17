@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 import { motion, useReducedMotion } from 'motion/react';
-import { FacebookIcon, FrameIcon, InstagramIcon, LinkedinIcon, YoutubeIcon } from 'lucide-react';
+import { FrameIcon, InstagramIcon, LinkedinIcon, YoutubeIcon } from 'lucide-react';
 
 const footerLinks = [
     {
@@ -22,10 +22,9 @@ const footerLinks = [
     {
         label: 'Social Links',
         links: [
-            { title: 'Facebook', href: '#', icon: FacebookIcon },
-            { title: 'Instagram', href: '#', icon: InstagramIcon },
-            { title: 'Youtube', href: '#', icon: YoutubeIcon },
-            { title: 'LinkedIn', href: '#', icon: LinkedinIcon },
+            { title: 'Instagram', href: 'https://www.instagram.com/mythicreverse?utm_source=qr&igsh=YnZkbnRramU0eW9i', icon: InstagramIcon },
+            { title: 'Youtube', href: 'https://youtube.com/@mythicreverse?si=QpIZR8mza033CVeQ', icon: YoutubeIcon },
+            { title: 'LinkedIn', href: 'https://www.linkedin.com/company/mythic-reverse/', icon: LinkedinIcon },
         ],
     },
 ];

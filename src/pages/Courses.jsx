@@ -15,7 +15,7 @@ function Entropy({ className = "", size = 400 }) {
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    
+
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
@@ -115,7 +115,7 @@ function Entropy({ className = "", size = 400 }) {
     let animationId;
     const fpsInterval = 1000 / 30;
     let lastFrameTime = 0;
-    
+
     function animate(currentTime) {
       animationId = requestAnimationFrame(animate);
       const elapsed = currentTime - lastFrameTime;
@@ -513,7 +513,7 @@ function SparklesBackground() {
         const r = sparkle.isWhite ? 255 : 216;
         const g = sparkle.isWhite ? 255 : 180;
         const b = sparkle.isWhite ? 255 : 254;
-        
+
         ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${sparkle.alpha})`;
         ctx.beginPath();
         ctx.arc(sparkle.x, sparkle.y, sparkle.size, 0, Math.PI * 2);
@@ -533,7 +533,7 @@ function SparklesBackground() {
     const resizeObserver = new ResizeObserver(() => {
       updateSize();
     });
-    
+
     if (canvas.parentElement) {
       resizeObserver.observe(canvas.parentElement);
     }
@@ -720,7 +720,7 @@ function ExploreSection() {
     <div className="relative z-20 pb-32 pt-8">
       <SparklesBackground />
       <div className="container mx-auto px-4 md:px-6 lg:px-8 relative z-30">
-        
+
         {/* Stats Section */}
         {stats && stats.length > 0 && (
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 w-full max-w-4xl mx-auto mb-32 animate-in fade-in slide-in-from-bottom-4 duration-1000">
@@ -784,7 +784,7 @@ function ExploreSection() {
                       className="relative group bg-black/40 backdrop-blur-md border border-purple-500/20 hover:border-purple-500/50 transition-all duration-300 overflow-hidden h-full"
                     >
                       <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-violet-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                        
+
                       {course.link ? (
                         <Link to={course.link} className="absolute inset-0 z-10">
                           <span className="sr-only">View course details</span>
@@ -840,7 +840,7 @@ function ExploreSection() {
 }
 
 const coursesData = [
-  { code: "C-01", price: "Rs. 8,999 / lang", course: "Programming Languages", stack: "13 languages · Cursor · Copilot", link: "/courses/programming-languages" },
+  { code: "C-01", price: "Rs. 1 / lang", course: "Programming Languages", stack: "13 languages · Cursor · Copilot", link: "/courses/programming-languages" },
   { code: "C-02", price: "Rs. 14,999", course: "Ethical Hacking & Cybersecurity", stack: "Kali Linux · Metasploit · Burp Suite", link: "/courses/ethical-hacking" },
   { code: "C-03", price: "Rs. 19,499", course: "Full Stack Web Development", stack: "React · Node.js · PostgreSQL · Vercel" },
   { code: "C-04", price: "Rs. 19,499", course: "App Development with Flutter", stack: "Dart · Flutter · Firebase · Android/iOS" },
@@ -852,7 +852,7 @@ function FiveCoursesSection() {
     <section className="relative z-20 py-24 bg-black border-t border-purple-500/20">
       <SparklesBackground />
       <div className="container mx-auto px-4 md:px-6 lg:px-8 max-w-6xl relative z-10">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -871,8 +871,8 @@ function FiveCoursesSection() {
               </thead>
               <tbody className="divide-y divide-white/5">
                 {coursesData.map((course, idx) => (
-                  <tr 
-                    key={idx} 
+                  <tr
+                    key={idx}
                     className={`hover:bg-white/5 transition-colors group ${course.link ? 'cursor-pointer' : ''}`}
                     onClick={() => course.link && (window.location.href = course.link)}
                   >
@@ -913,7 +913,7 @@ function SixtyMinutesSection() {
     <section className="relative z-20 py-24 bg-black border-t border-purple-500/20">
       <SparklesBackground />
       <div className="container mx-auto px-4 md:px-6 lg:px-8 max-w-5xl relative z-10">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -980,7 +980,7 @@ function AIToolsSection() {
     <section className="relative z-20 py-24 bg-black border-t border-purple-500/20 pb-32">
       <SparklesBackground />
       <div className="container mx-auto px-4 md:px-6 lg:px-8 max-w-6xl relative z-30">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}

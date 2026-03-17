@@ -52,7 +52,7 @@ const DialogContent = forwardRef(({ className, children, ...props }, ref) => (
     <div
         ref={ref}
         className={cn(
-            "relative bg-gradient-to-br from-neutral-900 via-neutral-950 to-black border border-white/10 rounded-2xl shadow-2xl w-full max-w-lg mx-4 max-h-[90vh] overflow-y-auto",
+            "relative bg-gradient-to-br from-neutral-900 via-neutral-950 to-black border border-white/10 rounded-2xl shadow-2xl w-[calc(100%-2rem)] sm:w-full max-w-lg max-h-[90vh] overflow-y-auto",
             "scrollbar-hide",
             className
         )}

@@ -236,7 +236,8 @@ export default function EthicalHackingCourse() {
       <StudentRegistrationModal 
         isOpen={isRegistrationDialogOpen} 
         onClose={() => setIsRegistrationDialogOpen(false)} 
-        courseName="Ethical Hacking & Cybersecurity" 
+        courseName="Ethical Hacking & Cybersecurity"
+        coursePrice={14999}
       />
     </div>
   );

@@ -218,7 +218,8 @@ export default function ReactNativeAppDevCourse() {
       <StudentRegistrationModal 
         isOpen={isRegistrationDialogOpen} 
         onClose={() => setIsRegistrationDialogOpen(false)} 
-        courseName="App Development with React Native" 
+        courseName="App Development with React Native"
+        coursePrice={19499}
       />
     </div>
   );

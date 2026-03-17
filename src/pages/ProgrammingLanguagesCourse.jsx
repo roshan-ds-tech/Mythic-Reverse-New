@@ -101,7 +101,7 @@ export default function ProgrammingLanguagesCourse() {
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 py-8">
               <Card className="bg-white/5 border border-purple-500/20 backdrop-blur-md p-5 flex flex-col gap-2">
                 <div className="text-gray-400 text-sm font-medium uppercase tracking-wider">Price</div>
-                <div className="text-2xl font-bold text-white">Rs. 8,999<br /><span className="text-base text-gray-300 font-normal">per language</span></div>
+                <div className="text-2xl font-bold text-white">Rs. 1<br /><span className="text-base text-gray-300 font-normal">per language</span></div>
               </Card>
               <Card className="bg-white/5 border border-purple-500/20 backdrop-blur-md p-5 flex flex-col gap-2">
                 <div className="text-gray-400 text-sm font-medium uppercase tracking-wider">Duration</div>
@@ -124,7 +124,7 @@ export default function ProgrammingLanguagesCourse() {
                 className="bg-purple-600 hover:bg-purple-700 text-white font-semibold px-8 py-6 h-auto text-lg w-full sm:w-auto shadow-lg shadow-purple-500/20 group"
               >
                 <ShoppingCart className="w-5 h-5 mr-2 group-hover:-rotate-12 transition-transform" />
-                Buy Now — Rs. 8,999
+                Buy Now — Rs. 1
               </Button>
             </div>
 
@@ -292,8 +292,8 @@ export default function ProgrammingLanguagesCourse() {
                 key={lang}
                 onClick={() => setSelectedLanguage(lang)}
                 className={`flex items-center justify-between p-4 border rounded-xl cursor-pointer transition-all ${selectedLanguage === lang
-                    ? 'border-purple-500 bg-purple-500/10'
-                    : 'border-white/10 bg-white/5 hover:border-purple-500/50'
+                  ? 'border-purple-500 bg-purple-500/10'
+                  : 'border-white/10 bg-white/5 hover:border-purple-500/50'
                   }`}
               >
                 <div className="flex items-center space-x-4">
@@ -310,7 +310,7 @@ export default function ProgrammingLanguagesCourse() {
             <Button variant="outline" onClick={() => setIsEnrollDialogOpen(false)} className="border-white/20 text-white hover:bg-white/10">
               Cancel
             </Button>
-            <Button 
+            <Button
               disabled={!selectedLanguage}
               className="bg-purple-600 hover:bg-purple-700 text-white disabled:opacity-50"
               onClick={() => {
@@ -323,12 +323,13 @@ export default function ProgrammingLanguagesCourse() {
           </div>
         </DialogContent>
       </Dialog>
-      
-      <StudentRegistrationModal 
-        isOpen={isRegistrationDialogOpen} 
-        onClose={() => setIsRegistrationDialogOpen(false)} 
-        courseName="Programming Languages" 
-        selectedLanguage={selectedLanguage} 
+
+      <StudentRegistrationModal
+        isOpen={isRegistrationDialogOpen}
+        onClose={() => setIsRegistrationDialogOpen(false)}
+        courseName="Programming Languages"
+        coursePrice={1}
+        selectedLanguage={selectedLanguage}
       />
     </div>
   );

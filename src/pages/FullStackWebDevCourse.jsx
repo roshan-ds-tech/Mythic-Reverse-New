@@ -218,7 +218,8 @@ export default function FullStackWebDevCourse() {
       <StudentRegistrationModal 
         isOpen={isRegistrationDialogOpen} 
         onClose={() => setIsRegistrationDialogOpen(false)} 
-        courseName="Full Stack Web Development" 
+        courseName="Full Stack Web Development"
+        coursePrice={19499}
       />
     </div>
   );

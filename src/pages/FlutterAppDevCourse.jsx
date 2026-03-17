@@ -218,7 +218,8 @@ export default function FlutterAppDevCourse() {
       <StudentRegistrationModal 
         isOpen={isRegistrationDialogOpen} 
         onClose={() => setIsRegistrationDialogOpen(false)} 
-        courseName="App Development with Flutter" 
+        courseName="App Development with Flutter"
+        coursePrice={19499}
       />
     </div>
   );

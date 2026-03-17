@@ -813,7 +813,7 @@ const Consultation = () => {
                 <section className="relative py-32 px-6">
                     <div className="max-w-5xl mx-auto">
                         <motion.div
-                            className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-[#8B5CF6]/20 via-[#111118] to-[#D946EF]/20 p-12 md:p-20 text-center"
+                            className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-[#8B5CF6]/20 via-[#111118] to-[#D946EF]/20 p-6 sm:p-12 md:p-20 text-center"
                             initial={{ opacity: 0, y: 40 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
@@ -888,10 +888,10 @@ const Consultation = () => {
                                 >
                                     <Button
                                         size="lg"
-                                        className="group relative overflow-hidden bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] hover:from-[#7C3AED] hover:to-[#C026D3] text-white px-10 py-7 text-xl rounded-xl shadow-2xl shadow-[#8B5CF6]/30 hover:shadow-[#8B5CF6]/50 transition-all cursor-pointer"
+                                        className="group relative overflow-hidden bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] hover:from-[#7C3AED] hover:to-[#C026D3] text-white px-5 py-4 sm:px-10 sm:py-7 text-base sm:text-lg md:text-xl rounded-xl shadow-2xl shadow-[#8B5CF6]/30 hover:shadow-[#8B5CF6]/50 transition-all cursor-pointer"
                                         onClick={() => document.getElementById('consultation-form').scrollIntoView({ behavior: 'smooth' })}
                                     >
-                                        <span className="relative z-10 flex items-center gap-3">
+                                        <span className="relative z-10 flex flex-wrap justify-center items-center gap-2 sm:gap-3">
                                             <Calendar className="h-6 w-6" />
                                             Schedule Your Strategy Call
                                             <ArrowRight className="h-6 w-6 group-hover:translate-x-1 transition-transform" />
