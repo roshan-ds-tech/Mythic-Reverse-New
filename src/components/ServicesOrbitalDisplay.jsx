@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useRef } from "react";
-import { Monitor, Smartphone, Server, Zap } from "lucide-react";
+import { Monitor, Smartphone, Server, Zap, TrendingUp } from "lucide-react";
 import { clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 
@@ -497,15 +497,15 @@ export default function ServicesOrbitalDisplayDemo() {
         },
         {
             id: 2,
-            title: "Website Redesign",
+            title: "Digital Marketing",
             date: "2024",
             content:
-                "Transform your existing website with modern design principles and improved user experience. We analyze your current site and implement strategic improvements that enhance both aesthetics and functionality.",
-            category: "Design",
-            icon: Monitor,
-            relatedIds: [1, 3],
+                "Data-driven marketing strategies that amplify your brand presence, engage your target audience, and maximize ROI across all digital channels.",
+            category: "Marketing",
+            icon: TrendingUp,
+            relatedIds: [1],
             status: "completed",
-            energy: 90,
+            energy: 92,
         },
         {
             id: 3,
