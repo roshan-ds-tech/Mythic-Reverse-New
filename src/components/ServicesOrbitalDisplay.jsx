@@ -323,8 +323,8 @@ function ServicesOrbitalDisplay({ servicesData }) {
                                                 {item.title}
                                             </div>
 
-                                            {/* Expanded Card Details */}
-                                            {isExpanded && (
+                                            {/* Expanded Card Details (Desktop only) */}
+                                            {!isMobile && isExpanded && (
                                                 <Card className="card-entry absolute top-20 left-1/2 -translate-x-1/2 w-[280px] sm:w-80 bg-zinc-900/95 backdrop-blur-lg border-violet-500/30 shadow-lg shadow-violet-900/10 overflow-visible z-[600]">
                                                     <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-px h-3 bg-violet-500/50"></div>
                                                     <CardHeader className="pb-2">
@@ -403,6 +403,78 @@ function ServicesOrbitalDisplay({ servicesData }) {
                         </div>
                     </div>
                 </div>
+
+                {/* Mobile Expanded Card Modal */}
+                {isMobile && activeNodeId && (
+                    <div 
+                        className="absolute inset-0 z-[1000] flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm animate-in fade-in duration-300"
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            toggleItem(activeNodeId);
+                        }}
+                    >
+                        {servicesData.filter(item => item.id === activeNodeId).map(item => (
+                            <Card 
+                                key={item.id} 
+                                className="card-entry w-full max-w-[320px] bg-zinc-900/95 border-violet-500/30 shadow-2xl shadow-violet-900/20"
+                                onClick={(e) => e.stopPropagation()}
+                            >
+                                <CardHeader className="pb-2">
+                                    <div className="flex justify-between items-center">
+                                        <Badge className={cn("px-2 text-xs", getStatusStyles(item.status))}>
+                                            {item.status === "completed" ? "ACTIVE" : item.status === "in-progress" ? "FEATURED" : "COMING SOON"}
+                                        </Badge>
+                                        <span className="text-xs font-mono text-violet-400/70">{item.date}</span>
+                                    </div>
+                                    <CardTitle className="text-sm mt-2 text-violet-400">{item.title}</CardTitle>
+                                </CardHeader>
+                                <CardContent className="text-xs text-neutral-300">
+                                    <p className="leading-relaxed">{item.content}</p>
+
+                                    <div className="mt-4 pt-3 border-t border-violet-500/20">
+                                        <div className="flex justify-between items-center text-xs mb-1">
+                                            <span className="flex items-center text-violet-400">
+                                                <Zap size={10} className="mr-1" />
+                                                Service Level
+                                            </span>
+                                            <span className="font-mono text-violet-400">{item.energy}%</span>
+                                        </div>
+                                        <div className="w-full h-1.5 bg-violet-500/10 rounded-full overflow-hidden">
+                                            <div className="h-full bg-gradient-to-r from-violet-600 to-fuchsia-600" style={{ width: `${item.energy}%` }}></div>
+                                        </div>
+                                    </div>
+
+                                    {item.relatedIds.length > 0 && (
+                                        <div className="mt-4 pt-3 border-t border-violet-500/20">
+                                            <div className="flex items-center mb-2">
+                                                <h4 className="text-xs uppercase tracking-wider font-medium text-violet-400/80">
+                                                    Related Services
+                                                </h4>
+                                            </div>
+                                            <div className="flex flex-wrap gap-1">
+                                                {item.relatedIds.map((relatedId) => {
+                                                    const relatedItem = servicesData.find((i) => i.id === relatedId);
+                                                    return (
+                                                        <button
+                                                            key={relatedId}
+                                                            className="flex items-center h-6 px-2 py-0 text-xs rounded-md border border-violet-500/30 bg-transparent hover:bg-violet-500/10 text-violet-400 transition-all"
+                                                            onClick={(e) => {
+                                                                e.stopPropagation();
+                                                                toggleItem(relatedId);
+                                                            }}
+                                                        >
+                                                            {relatedItem?.title}
+                                                        </button>
+                                                    );
+                                                })}
+                                            </div>
+                                        </div>
+                                    )}
+                                </CardContent>
+                            </Card>
+                        ))}
+                    </div>
+                )}
             </div>
         </>
     );
