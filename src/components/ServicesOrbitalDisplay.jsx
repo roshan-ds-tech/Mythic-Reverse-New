@@ -416,7 +416,7 @@ function ServicesOrbitalDisplay({ servicesData }) {
                         {servicesData.filter(item => item.id === activeNodeId).map(item => (
                             <Card 
                                 key={item.id} 
-                                className="card-entry w-full max-w-[320px] bg-zinc-900/95 border-violet-500/30 shadow-2xl shadow-violet-900/20"
+                                className="w-full max-w-[320px] bg-zinc-900/95 border-violet-500/30 shadow-2xl shadow-violet-900/20 animate-in fade-in zoom-in-95 duration-300"
                                 onClick={(e) => e.stopPropagation()}
                             >
                                 <CardHeader className="pb-2">
