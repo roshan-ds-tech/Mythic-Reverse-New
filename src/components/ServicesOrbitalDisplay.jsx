@@ -241,7 +241,9 @@ function ServicesOrbitalDisplay({ servicesData }) {
                                 // Resume animation from the current angle using negative delay
                                 // 30s duration. angle / 360 * 30s.
                                 animationDelay: `-${(rotationAngleRef.current % 360) / 360 * 30}s`
-                            } : {}}
+                            } : {
+                                transform: `rotate(${rotationAngleRef.current}deg)`
+                            }}
                         >
                             {servicesData.map((item, index) => {
                                 const position = calculateNodePosition(index, servicesData.length);
@@ -323,7 +325,7 @@ function ServicesOrbitalDisplay({ servicesData }) {
 
                                             {/* Expanded Card Details */}
                                             {isExpanded && (
-                                                <Card className="card-entry absolute top-20 left-1/2 -translate-x-1/2 w-80 bg-zinc-900/95 backdrop-blur-lg border-violet-500/30 shadow-lg shadow-violet-900/10 overflow-visible z-[600]">
+                                                <Card className="card-entry absolute top-20 left-1/2 -translate-x-1/2 w-[280px] sm:w-80 bg-zinc-900/95 backdrop-blur-lg border-violet-500/30 shadow-lg shadow-violet-900/10 overflow-visible z-[600]">
                                                     <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-px h-3 bg-violet-500/50"></div>
                                                     <CardHeader className="pb-2">
                                                         <div className="flex justify-between items-center">
