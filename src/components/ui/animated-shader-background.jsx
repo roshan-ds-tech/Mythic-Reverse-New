@@ -71,25 +71,20 @@ const AnimatedShaderBackground = ({ className, ...props }) => {
 
             float time = iTime * 0.8;
             
-            // Primary flow - Boosted to match About Us brightness
             vec2 p = px;
             float q = fbm(p - time * 0.1);
             vec2 r = vec2(fbm(p + q + time * 0.4 - p.x - p.y), fbm(p + q - time * 0.2));
-            vec3 c = mix(vec3(0.22, 0.0, 0.45), vec3(0.4, 0.0, 0.7), fbm(p + r)); // Brighter purple base
+            vec3 c = mix(vec3(0.22, 0.0, 0.45), vec3(0.4, 0.0, 0.7), fbm(p + r));
             
-            // Neon veins
             float vein = fbm(p * 3.0 + r * 5.0 + time);
             c = mix(c, vec3(0.85, 0.25, 1.0), smoothstep(0.0, 1.0, vein * vein * vein) * 0.65); 
             
-            // Secondary glow
             float glow = fbm(p * 6.0 - time * 0.5);
             c = mix(c, vec3(0.7, 0.05, 0.95), smoothstep(0.0, 1.0, glow * glow) * 0.55); 
             
-            // Extra "Intense" burst
             float burst = fbm(p * 10.0 + time);
             c += vec3(0.4, 0.05, 0.6) * smoothstep(0.4, 1.0, burst);
 
-            // Subtle vignette for focus
             float vignette = 1.0 - length(uv - 0.5) * 0.9;
             c *= clamp(vignette, 0.0, 1.0);
 
@@ -116,28 +111,78 @@ const AnimatedShaderBackground = ({ className, ...props }) => {
       }
     };
 
-    // Updates
     window.addEventListener('resize', updateSize);
     updateSize();
 
-    // Animation Loop
+    // Animation loop state
     let animationFrameId;
     const startTime = performance.now();
-    const fpsInterval = 1000 / 30; // Throttle to 30fps
+    let pausedAt = 0;
+    let pausedElapsed = 0;
+    let isPaused = false;
+
+    // Throttle: 20fps on mobile to cut GPU pressure that causes context loss
+    const isMobile = /Mobi|Android/i.test(navigator.userAgent);
+    const fpsInterval = isMobile ? 1000 / 20 : 1000 / 30;
     let lastFrameTime = 0;
 
     const render = (currentTime) => {
       animationFrameId = requestAnimationFrame(render);
+      if (isPaused) return;
+
       const elapsed = currentTime - lastFrameTime;
       if (elapsed < fpsInterval) return;
       lastFrameTime = currentTime - (elapsed % fpsInterval);
-      material.uniforms.iTime.value = (performance.now() - startTime) * 0.001;
+
+      material.uniforms.iTime.value = (performance.now() - startTime - pausedElapsed) * 0.001;
       renderer.render(scene, camera);
     };
-    render();
+    render(performance.now());
+
+    // ─── Page Visibility API ────────────────────────────────────────────────────
+    // Mobile browsers kill the GPU context when the page goes to background.
+    // Pause rendering on hide, resume on show without jumping the animation time.
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        isPaused = true;
+        pausedAt = performance.now();
+      } else {
+        if (pausedAt > 0) {
+          pausedElapsed += performance.now() - pausedAt;
+          pausedAt = 0;
+        }
+        isPaused = false;
+        updateSize();
+        renderer.render(scene, camera);
+      }
+    };
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+
+    // ─── WebGL Context Loss / Restore ──────────────────────────────────────────
+    // Mobile browsers can drop the WebGL context under GPU memory pressure
+    // (aggressive scrolling is a common trigger). Handle both events to recover.
+    const canvas = canvasRef.current;
+
+    const handleContextLost = (e) => {
+      e.preventDefault(); // Must call this or the context is NEVER restored
+      isPaused = true;
+      cancelAnimationFrame(animationFrameId);
+    };
+
+    const handleContextRestored = () => {
+      isPaused = false;
+      updateSize();
+      render(performance.now());
+    };
+
+    canvas.addEventListener('webglcontextlost', handleContextLost);
+    canvas.addEventListener('webglcontextrestored', handleContextRestored);
 
     return () => {
       window.removeEventListener('resize', updateSize);
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+      canvas.removeEventListener('webglcontextlost', handleContextLost);
+      canvas.removeEventListener('webglcontextrestored', handleContextRestored);
       cancelAnimationFrame(animationFrameId);
       geometry.dispose();
       material.dispose();
