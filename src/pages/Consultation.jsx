@@ -888,13 +888,13 @@ const Consultation = () => {
                                 >
                                     <Button
                                         size="lg"
-                                        className="group relative overflow-hidden bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] hover:from-[#7C3AED] hover:to-[#C026D3] text-white px-5 py-4 sm:px-10 sm:py-7 text-base sm:text-lg md:text-xl rounded-xl shadow-2xl shadow-[#8B5CF6]/30 hover:shadow-[#8B5CF6]/50 transition-all cursor-pointer"
+                                        className="group relative overflow-hidden bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] hover:from-[#7C3AED] hover:to-[#C026D3] text-white px-4 py-4 sm:px-10 sm:py-6 text-sm sm:text-lg md:text-xl rounded-xl shadow-2xl shadow-[#8B5CF6]/30 hover:shadow-[#8B5CF6]/50 transition-all cursor-pointer h-auto w-full sm:w-auto max-w-[90vw]"
                                         onClick={() => document.getElementById('consultation-form').scrollIntoView({ behavior: 'smooth' })}
                                     >
-                                        <span className="relative z-10 flex flex-wrap justify-center items-center gap-2 sm:gap-3">
-                                            <Calendar className="h-6 w-6" />
-                                            Schedule Your Strategy Call
-                                            <ArrowRight className="h-6 w-6 group-hover:translate-x-1 transition-transform" />
+                                        <span className="relative z-10 flex flex-row justify-center items-center gap-2 sm:gap-3 w-full">
+                                            <Calendar className="h-4 w-4 sm:h-6 sm:w-6 flex-shrink-0" />
+                                            <span className="text-center whitespace-normal leading-tight">Schedule Your Strategy Call</span>
+                                            <ArrowRight className="h-4 w-4 sm:h-6 sm:w-6 flex-shrink-0 group-hover:translate-x-1 transition-transform" />
                                         </span>
                                     </Button>
                                 </motion.div>
