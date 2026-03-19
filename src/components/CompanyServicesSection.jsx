@@ -250,7 +250,12 @@ export default function CompanyServicesSection() {
                             service={service}
                             index={index}
                             isActive={activeService === index}
-                            onClick={() => setActiveService(index)}
+                            onClick={() => {
+                                setActiveService(index);
+                                if (service.link) {
+                                    window.location.href = service.link;
+                                }
+                            }}
                         />
                     ))}
                 </div>
