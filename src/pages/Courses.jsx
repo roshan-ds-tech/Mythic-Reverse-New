@@ -840,7 +840,7 @@ function ExploreSection() {
 }
 
 const coursesData = [
-  { code: "C-01", price: "Rs. 1 / lang", course: "Programming Languages", stack: "13 languages · Cursor · Copilot", link: "/courses/programming-languages" },
+  { code: "C-01", price: "Rs. 8,499 / lang", course: "Programming Languages", stack: "13 languages · Cursor · Copilot", link: "/courses/programming-languages" },
   { code: "C-02", price: "Rs. 14,999", course: "Ethical Hacking & Cybersecurity", stack: "Kali Linux · Metasploit · Burp Suite", link: "/courses/ethical-hacking" },
   { code: "C-03", price: "Rs. 19,499", course: "Full Stack Web Development", stack: "React · Node.js · PostgreSQL · Vercel" },
   { code: "C-04", price: "Rs. 19,499", course: "App Development with Flutter", stack: "Dart · Flutter · Firebase · Android/iOS" },

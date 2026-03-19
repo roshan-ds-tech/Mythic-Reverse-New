@@ -101,7 +101,7 @@ export default function ProgrammingLanguagesCourse() {
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 py-8">
               <Card className="bg-white/5 border border-purple-500/20 backdrop-blur-md p-5 flex flex-col gap-2">
                 <div className="text-gray-400 text-sm font-medium uppercase tracking-wider">Price</div>
-                <div className="text-2xl font-bold text-white">Rs. 1<br /><span className="text-base text-gray-300 font-normal">per language</span></div>
+                <div className="text-2xl font-bold text-white">Rs. 8,499<br /><span className="text-base text-gray-300 font-normal">per language</span></div>
               </Card>
               <Card className="bg-white/5 border border-purple-500/20 backdrop-blur-md p-5 flex flex-col gap-2">
                 <div className="text-gray-400 text-sm font-medium uppercase tracking-wider">Duration</div>
@@ -124,7 +124,7 @@ export default function ProgrammingLanguagesCourse() {
                 className="bg-purple-600 hover:bg-purple-700 text-white font-semibold px-8 py-6 h-auto text-lg w-full sm:w-auto shadow-lg shadow-purple-500/20 group"
               >
                 <ShoppingCart className="w-5 h-5 mr-2 group-hover:-rotate-12 transition-transform" />
-                Buy Now — Rs. 1
+                Buy Now — Rs. 8,499
               </Button>
             </div>
 
@@ -328,7 +328,7 @@ export default function ProgrammingLanguagesCourse() {
         isOpen={isRegistrationDialogOpen}
         onClose={() => setIsRegistrationDialogOpen(false)}
         courseName="Programming Languages"
-        coursePrice={1}
+        coursePrice={8499}
         selectedLanguage={selectedLanguage}
       />
     </div>
