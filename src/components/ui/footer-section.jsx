@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 import { motion, useReducedMotion } from 'motion/react';
-import { FrameIcon, InstagramIcon, LinkedinIcon, YoutubeIcon, Phone, Mail } from 'lucide-react';
+import { InstagramIcon, LinkedinIcon, YoutubeIcon, Phone, Mail } from 'lucide-react';
 
 const footerLinks = [
     {
@@ -45,8 +45,8 @@ export function Footer() {
                 <div className="grid w-full gap-8 xl:grid-cols-3 xl:gap-8">
                     <AnimatedContainer className="space-y-4">
                         <div className="flex items-center gap-2">
-                            <FrameIcon className="size-8 text-white" />
-                            <span className="font-bold text-xl text-white">Mythic Reverse</span>
+                            <img src="/images/pictures/logo.jpeg" alt="Mythic Reverse Logo" className="w-24 h-24 sm:w-28 sm:h-28 object-contain scale-[1.8] mix-blend-screen pointer-events-none" />
+                            <span className="font-bold text-2xl text-white relative z-10 -ml-4">Mythic Reverse</span>
                         </div>
                         <p className="text-zinc-500 mt-8 text-sm md:mt-0">
                             © {new Date().getFullYear()} Mythic Reverse. All rights reserved.

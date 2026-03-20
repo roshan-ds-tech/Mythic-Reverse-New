@@ -100,7 +100,7 @@ export function ProjectInquiryDialog({ open, onOpenChange }) {
                             <Input
                                 id="name"
                                 name="name"
-                                placeholder="John Doe"
+                                placeholder="Enter your full name"
                                 value={formData.name}
                                 onChange={handleChange}
                                 required
@@ -116,7 +116,7 @@ export function ProjectInquiryDialog({ open, onOpenChange }) {
                                 id="email"
                                 name="email"
                                 type="email"
-                                placeholder="john@company.com"
+                                placeholder="your.name@company.com"
                                 value={formData.email}
                                 onChange={handleChange}
                                 required
@@ -133,7 +133,7 @@ export function ProjectInquiryDialog({ open, onOpenChange }) {
                         <Input
                             id="company"
                             name="company"
-                            placeholder="Acme Inc."
+                            placeholder="Your Company Name"
                             value={formData.company}
                             onChange={handleChange}
                             className="h-9 bg-white/5 border-white/10 text-white placeholder:text-neutral-500 focus:border-purple-500 focus:ring-purple-500/20"
@@ -194,7 +194,7 @@ export function ProjectInquiryDialog({ open, onOpenChange }) {
                         <Input
                             id="timeline"
                             name="timeline"
-                            placeholder="e.g., 3-6 months"
+                            placeholder="e.g., 2-4 months"
                             value={formData.timeline}
                             onChange={handleChange}
                             className="h-9 bg-white/5 border-white/10 text-white placeholder:text-neutral-500 focus:border-purple-500 focus:ring-purple-500/20"
@@ -209,7 +209,7 @@ export function ProjectInquiryDialog({ open, onOpenChange }) {
                         <Textarea
                             id="description"
                             name="description"
-                            placeholder="Tell us about your project vision, goals, and any specific requirements..."
+                            placeholder="Describe your project goals, features, and ideal outcome..."
                             value={formData.description}
                             onChange={handleChange}
                             required

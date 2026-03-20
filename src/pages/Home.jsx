@@ -2,6 +2,7 @@ import { AboutHero } from "../components/AboutHero";
 import { ScrollAnimationDemo } from "../components/ScrollAnimationDemo";
 import { GlowingEffectDemoSecond } from "../components/GlowingEffectDemoSecond";
 import CompanyServicesSection from "../components/CompanyServicesSection";
+import CompaniesSlider from "../components/CompaniesSlider";
 import TestimonialsSection from "../components/ui/testimonial-v2";
 import { SparklesCore } from "../components/ui/sparkles";
 
@@ -38,6 +39,7 @@ const Home = () => {
                     <GlowingEffectDemoSecond />
                 </div>
                 <CompanyServicesSection />
+                <CompaniesSlider />
                 <TestimonialsSection />
                 <CTASection />
                 <Footer />
