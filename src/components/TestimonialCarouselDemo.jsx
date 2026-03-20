@@ -51,7 +51,7 @@ const DIRECTORS_DATA = [
         id: 4,
         name: "Premdharshan C V",
         role: "Chief Operating Officer (COO)",
-        avatar: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80",
+        avatar: "images/web_images/prem.jpeg",
         description: (
             <div className="space-y-4 md:space-y-8">
                 <p>Premdharshan oversees daily operations and ensures efficient execution of business strategies. He focuses on operational excellence, performance optimization, and building strong internal systems for sustainable success.</p>
@@ -66,7 +66,7 @@ const DIRECTORS_DATA = [
         id: 5,
         name: "Vivek K A",
         role: "Chief Marketing Officer (CMO)",
-        avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+        avatar: "images/web_images/vivek.avif",
         description: (
             <div className="space-y-4 md:space-y-8">
                 <p>Vivek leads the company’s marketing and brand strategy, driving customer engagement, market expansion, and revenue growth. He ensures strong brand positioning and impactful marketing campaigns across platforms.</p>
