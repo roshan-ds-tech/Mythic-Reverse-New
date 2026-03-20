@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 import { motion, useReducedMotion } from 'motion/react';
-import { FrameIcon, InstagramIcon, LinkedinIcon, YoutubeIcon } from 'lucide-react';
+import { FrameIcon, InstagramIcon, LinkedinIcon, YoutubeIcon, Phone, Mail } from 'lucide-react';
 
 const footerLinks = [
     {
@@ -25,6 +25,13 @@ const footerLinks = [
             { title: 'Instagram', href: 'https://www.instagram.com/mythicreverse?utm_source=qr&igsh=YnZkbnRramU0eW9i', icon: InstagramIcon },
             { title: 'Youtube', href: 'https://youtube.com/@mythicreverse?si=QpIZR8mza033CVeQ', icon: YoutubeIcon },
             { title: 'LinkedIn', href: 'https://www.linkedin.com/company/mythic-reverse/', icon: LinkedinIcon },
+        ],
+    },
+    {
+        label: 'Contact',
+        links: [
+            { title: '9731655789', href: 'tel:9731655789', icon: Phone },
+            { title: 'prasanna@mythicreverse.com', href: 'mailto:prasanna@mythicreverse.com', icon: Mail }
         ],
     },
 ];
@@ -56,10 +63,10 @@ export function Footer() {
                                             <li key={link.title}>
                                                 <a
                                                     href={link.href}
-                                                    className="hover:text-white inline-flex items-center transition-all duration-300"
+                                                    className="hover:text-white inline-flex items-start transition-all duration-300"
                                                 >
-                                                    {link.icon && <link.icon className="me-2 size-4" />}
-                                                    {link.title}
+                                                    {link.icon && <link.icon className="me-2 size-4 mt-0.5 flex-shrink-0" />}
+                                                    <span className="whitespace-nowrap">{link.title}</span>
                                                 </a>
                                             </li>
                                         ))}

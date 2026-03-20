@@ -27,7 +27,7 @@ const testimonials = [
         text: "Seamless integration enhanced our business operations and efficiency. Highly recommend for its intuitive interface.",
         image: "images/web_images/hariprasad1.avif",
         name: "Hariprasad",
-        role: "CEO",
+        role: "Project Lead",
     },
     {
         text: "Robust features and quick support have transformed our workflow, making us significantly more efficient.",
