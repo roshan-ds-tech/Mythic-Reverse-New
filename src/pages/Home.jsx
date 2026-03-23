@@ -48,6 +48,30 @@ const Home = () => {
 
             <div className="main-content">
                 <AboutHero />
+                <section className="py-20 bg-black relative z-10 overflow-hidden">
+                    {/* Sparkles Overlay */}
+                    <div className="absolute inset-0 z-0 pointer-events-none">
+                        <SparklesCore
+                            id="intro-section-sparkles"
+                            background="transparent"
+                            minSize={0.6}
+                            maxSize={1.4}
+                            particleDensity={20}
+                            className="w-full h-full"
+                            particleColor="#FFFFFF"
+                        />
+                    </div>
+                    <div className="container mx-auto px-6 max-w-5xl text-center relative z-10">
+                        <p className="text-xl md:text-3xl font-light text-neutral-300 leading-relaxed bg-clip-text text-transparent bg-gradient-to-r from-white via-white to-neutral-500">
+
+                            We build high-performance websites, scalable platforms, and immersive digital experiences that help startups and businesses grow faster, increase engagement, and achieve measurable results.
+                        </p>
+                        <p className="text-lg md:text-xl text-neutral-400 max-w-2xl mx-auto mt-6 leading-relaxed">
+                            From performance marketing, SEO, and social media growth to full-scale product development, we deliver end-to-end digital solutions that define the next generation of the web.
+                        </p>
+                    </div>
+                </section>
+
                 <ScrollAnimationDemo />
                 <div className="pt-0 pb-20 px-4">
                     <GlowingEffectDemoSecond />

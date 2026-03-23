@@ -68,8 +68,10 @@ export function AboutHero() {
                     </div>
 
                     <p className="mt-6 text-lg md:text-xl text-neutral-400 max-w-2xl mx-auto leading-relaxed animate-fade-in-up delay-500 opacity-0 fill-mode-forwards">
-                        We are a design and technology collective offering full stack web dev courses in Bangalore for freshers, ethical hacking training in Chennai, and world-class digital solutions that define the next generation of the web.
+                        We are a leading design and technology collective specializing in web development, app development, UI/UX design, digital marketing, and AI-powered solutions.
                     </p>
+
+
 
 
                     {/* Buttons */}

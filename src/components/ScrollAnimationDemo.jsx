@@ -32,10 +32,7 @@ export function ScrollAnimationDemo() {
                     </h1>
 
                     <p className="text-lg text-neutral-300 max-w-lg leading-relaxed">
-                        We bridge the gap between education and industry. Join our ecosystem of
-                        <span className="font-bold text-white"> IT Solutions</span>,
-                        <span className="font-bold text-white"> EdTech</span>, and
-                        <span className="font-bold text-white"> Hackathons</span>.
+                        We also offer one of the best AI-powered coding courses in India, designed to make complete beginners job-ready in just 45 days. Our programs include programming languages, ethical hacking and cybersecurity, full stack web development, Flutter app development, and React Native app development. With a hands-on, project-based learning approach, students build real-world projects, create strong GitHub portfolios, and gain practical industry-ready skills using advanced AI tools like ChatGPT, GitHub Copilot, and modern developer workflows.
                     </p>
 
                     <ul className="space-y-4 mt-8">
@@ -51,6 +48,11 @@ export function ScrollAnimationDemo() {
                             </li>
                         ))}
                     </ul>
+
+                    <p className="text-sm text-neutral-400 max-w-lg mt-6 leading-relaxed border-t border-white/10 pt-4">
+                        Our coding and development courses are available across India, including Chennai, Bengaluru, Vellore, Hyderabad, Andhra Pradesh, and Telangana. We focus on affordable, high-quality tech education, making us a top choice for students searching for the best coding courses, full stack development programs, and cybersecurity training in India.
+                    </p>
+
                 </div>
 
                 {/* Right Content: 3D Scroll Animation Component */}
