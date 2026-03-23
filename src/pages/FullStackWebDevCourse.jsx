@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+
 import { motion } from 'framer-motion';
 import { ShieldAlert, Terminal, Lock, Layout, Clock, Code2, AlertTriangle, ChevronRight, ShoppingCart } from 'lucide-react';
 import { Badge } from '../components/ui/badge';
@@ -58,6 +59,17 @@ const syllabusData = [
 export default function FullStackWebDevCourse() {
   const [isRegistrationDialogOpen, setIsRegistrationDialogOpen] = useState(false);
 
+  useEffect(() => {
+    document.title = "Full stack web dev courses Bangalore | MERN";
+    let metaDesc = document.querySelector('meta[name="description"]');
+    if (!metaDesc) {
+      metaDesc = document.createElement('meta');
+      metaDesc.name = "description";
+      document.head.appendChild(metaDesc);
+    }
+    metaDesc.content = "Join our Full Stack Web Development Course in Bangalore. Node.js React training for Chennai freshers. MERN stack course in Tamil Nadu.";
+  }, []);
+
   return (
     <div className="bg-black min-h-screen pt-24">
       {/* Hero Section */}
@@ -77,13 +89,14 @@ export default function FullStackWebDevCourse() {
             </div>
 
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white tracking-tight">
-              <span className="text-purple-500 mr-4">C-03</span><span className="hidden sm:inline">—</span> Full Stack Web Development
+              <span className="text-purple-500 mr-4">C-03</span> Full Stack Web Developer Course Bangalore Rs.21999
             </h1>
+
 
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 py-8">
               <Card className="bg-white/5 border border-purple-500/20 backdrop-blur-md p-5 flex flex-col gap-2">
                 <div className="text-gray-400 text-sm font-medium uppercase tracking-wider">Price</div>
-                <div className="text-2xl font-bold text-white">Rs. 19,499</div>
+                <div className="text-2xl font-bold text-white">Rs. 21,999</div>
               </Card>
               <Card className="bg-white/5 border border-purple-500/20 backdrop-blur-md p-5 flex flex-col gap-2">
                 <div className="text-gray-400 text-sm font-medium uppercase tracking-wider">Duration</div>
@@ -106,9 +119,10 @@ export default function FullStackWebDevCourse() {
                 className="bg-purple-600 hover:bg-purple-700 text-white font-semibold px-8 py-6 h-auto text-lg w-full sm:w-auto shadow-lg shadow-purple-500/20 group"
               >
                 <ShoppingCart className="w-5 h-5 mr-2 group-hover:-rotate-12 transition-transform" />
-                Buy Now — Rs. 19,499
+                Buy Now — Rs. 21,999
               </Button>
             </div>
+
             
           </motion.div>
         </div>
@@ -127,9 +141,10 @@ export default function FullStackWebDevCourse() {
           >
             <h2 className="text-purple-500 font-bold uppercase tracking-widest text-sm">Who This Is For</h2>
             <p className="text-xl text-gray-300 leading-relaxed font-light">
-              The most AI-tool-rich course in the curriculum. v0 by Vercel generates React components from text descriptions. Google Stitch designs your screens before you write a line of code. Windsurf scaffolds multi-file backend features. By Day 45 you have a live full-stack application deployed on Vercel and Railway that anyone in the world can visit.
+              This **Node.js React training Chennai freshers** course is the most AI-tool-rich in our curriculum. Perfect for **MERN stack course Tamil Nadu** seekers. Build live apps with v0 and Windsurf. Deployed on Vercel/Railway.
             </p>
           </motion.div>
+
 
         </div>
       </section>
@@ -219,8 +234,9 @@ export default function FullStackWebDevCourse() {
         isOpen={isRegistrationDialogOpen} 
         onClose={() => setIsRegistrationDialogOpen(false)} 
         courseName="Full Stack Web Development"
-        coursePrice={19499}
+        coursePrice={21999}
       />
+
     </div>
   );
 }

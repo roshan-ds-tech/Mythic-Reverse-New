@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+
 import { motion } from 'framer-motion';
 import { ShieldAlert, Terminal, Lock, Layout, Clock, Code2, AlertTriangle, ChevronRight, ShoppingCart } from 'lucide-react';
 import { Badge } from '../components/ui/badge';
@@ -58,6 +59,17 @@ const syllabusData = [
 export default function ReactNativeAppDevCourse() {
   const [isRegistrationDialogOpen, setIsRegistrationDialogOpen] = useState(false);
 
+  useEffect(() => {
+    document.title = "React Native course Bangalore | App Development";
+    let metaDesc = document.querySelector('meta[name="description"]');
+    if (!metaDesc) {
+      metaDesc = document.createElement('meta');
+      metaDesc.name = "description";
+      document.head.appendChild(metaDesc);
+    }
+    metaDesc.content = "Join our React Native App Development Course in Bangalore. Cross platform apps training in Chennai. Mobile development course in Tamil Nadu.";
+  }, []);
+
   return (
     <div className="bg-black min-h-screen pt-24">
       {/* Hero Section */}
@@ -77,8 +89,9 @@ export default function ReactNativeAppDevCourse() {
             </div>
 
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white tracking-tight">
-              <span className="text-purple-500 mr-4">C-05</span><span className="hidden sm:inline">—</span> App Development with React Native
+              <span className="text-purple-500 mr-4">C-05</span> React Native App Development Course Bangalore
             </h1>
+
 
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 py-8">
               <Card className="bg-white/5 border border-purple-500/20 backdrop-blur-md p-5 flex flex-col gap-2">
@@ -127,9 +140,10 @@ export default function ReactNativeAppDevCourse() {
           >
             <h2 className="text-purple-500 font-bold uppercase tracking-widest text-sm">Who This Is For</h2>
             <p className="text-xl text-gray-300 leading-relaxed font-light">
-              JavaScript's path to mobile. Bolt.new scaffolds your full Expo project in 30 seconds. v0 generates UI components you adapt to React Native with NativeWind. Supabase gives you a full Postgres backend with authentication, storage, and real-time data — no separate server required. By Day 45 you have a working APK from a real EAS Build.
+              This **Cross platform apps Chennai training** course is JavaScript's path to mobile. Perfect for **Mobile development course Tamil Nadu** seekers. Use Expo, Supabase and EAS Build to create production-ready apps fast.
             </p>
           </motion.div>
+
 
         </div>
       </section>

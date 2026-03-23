@@ -46,6 +46,11 @@ export function AboutHero() {
                 <div className="absolute bottom-0 left-0 w-full h-40 bg-gradient-to-t from-black/80 to-transparent z-[2] pointer-events-none" />
 
                 <div className="relative z-10 text-center flex flex-col items-center gap-4">
+                    {/* H1 for SEO - styled as a subtle badge/subtitle above the main visual heading */}
+                    <h1 className="text-sm uppercase tracking-widest text-[#8B5CF6] mb-2 font-medium bg-[#8B5CF6]/10 px-4 py-1.5 rounded-full border border-[#8B5CF6]/20">
+                        India's AI Developer Academy & SaaS Agency - Bangalore/Tamil Nadu
+                    </h1>
+
                     <div className="animate-fade-in-up delay-100 opacity-0 fill-mode-forwards">
                         <HyperText
                             className="text-2xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-black tracking-tighter bg-clip-text text-transparent bg-gradient-to-b from-white to-white/40"
@@ -63,9 +68,9 @@ export function AboutHero() {
                     </div>
 
                     <p className="mt-6 text-lg md:text-xl text-neutral-400 max-w-2xl mx-auto leading-relaxed animate-fade-in-up delay-500 opacity-0 fill-mode-forwards">
-                        We are a design and technology collective. We build products, platforms,
-                        and experiences that define the next generation of the web.
+                        We are a design and technology collective offering full stack web dev courses in Bangalore for freshers, ethical hacking training in Chennai, and world-class digital solutions that define the next generation of the web.
                     </p>
+
 
                     {/* Buttons */}
                     <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in-up delay-700 opacity-0 fill-mode-forwards">
