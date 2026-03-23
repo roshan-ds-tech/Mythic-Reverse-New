@@ -49,8 +49,9 @@ export function AboutHero() {
                 <div className="relative z-10 text-center flex flex-col items-center gap-4">
                     {/* H1 for SEO - styled as a subtle badge/subtitle above the main visual heading */}
                     <h1 className="text-sm uppercase tracking-widest text-[#8B5CF6] mb-2 font-medium bg-[#8B5CF6]/10 px-4 py-1.5 rounded-full border border-[#8B5CF6]/20">
-                        India's AI Developer Academy & SaaS Agency - Bangalore/Tamil Nadu
+                        India's AI Developer Academy & SaaS Agency - Bangalore/Chennai
                     </h1>
+
 
                     <div className="animate-fade-in-up delay-100 opacity-0 fill-mode-forwards">
                         <HyperText
