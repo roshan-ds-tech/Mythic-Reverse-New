@@ -43,7 +43,8 @@ export function AboutHero() {
                 </div>
 
                 {/* Gradient to blend hero into next section */}
-                <div className="absolute bottom-0 left-0 w-full h-40 bg-gradient-to-t from-black/80 to-transparent z-[2] pointer-events-none" />
+                <div className="absolute bottom-0 left-0 w-full h-56 bg-gradient-to-t from-black via-black/80 to-transparent z-[2] pointer-events-none" />
+
 
                 <div className="relative z-10 text-center flex flex-col items-center gap-4">
                     {/* H1 for SEO - styled as a subtle badge/subtitle above the main visual heading */}
