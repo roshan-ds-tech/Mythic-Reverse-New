@@ -38,17 +38,19 @@ const footerLinks = [
 
 export function Footer() {
     return (
-        <footer className="relative w-full border-t border-purple-500/30 px-4 sm:px-6 py-8 sm:py-12 lg:py-16 shadow-[0_-1px_15px_-5px_theme(colors.purple.500/30%)] overflow-hidden">
+        <footer className="relative w-full border-t border-purple-500/30 px-4 sm:px-6 py-8 sm:py-12 lg:py-16 shadow-[0_-1px_15px_-5px_theme(colors.purple.500/30%)] overflow-hidden bg-black">
+
             <div className="bg-purple-500/30 absolute top-0 left-1/2 -translate-x-1/2 h-px w-1/3 rounded-full blur-[2px]" />
 
             <div className="max-w-7xl mx-auto">
                 <div className="grid w-full gap-8 xl:grid-cols-3 xl:gap-8">
-                    <AnimatedContainer className="space-y-4">
-                        <div className="flex items-center gap-2">
-                            <img src="/images/pictures/logo.jpeg" alt="Mythic Reverse Logo" className="w-24 h-24 sm:w-28 sm:h-28 object-contain scale-[1.8] mix-blend-screen pointer-events-none" />
-                            <span className="font-bold text-2xl text-white relative z-10 -ml-4">Mythic Reverse</span>
+                    <AnimatedContainer className="space-y-4 flex flex-col items-center">
+                        <div className="flex flex-col items-center justify-center">
+                            <img src="/images/pictures/logo-favicon.png" alt="Mythic Reverse Logo" className="w-16 h-16 sm:w-20 sm:h-20 object-contain pointer-events-none" />
+                            <span className="font-bold text-2xl text-white relative z-10 mt-2 text-center">Mythic Reverse</span>
+
                         </div>
-                        <p className="text-zinc-500 mt-8 text-sm md:mt-0">
+                        <p className="text-zinc-500 mt-4 text-sm text-center">
                             © {new Date().getFullYear()} Mythic Reverse. All rights reserved.
                         </p>
                     </AnimatedContainer>
