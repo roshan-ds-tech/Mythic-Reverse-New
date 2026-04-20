@@ -37,7 +37,7 @@ export default async function handler(req, res) {
     // Find the registration by order_id and email
     const { data: registration, error: findError } = await supabase
       .from("student_registrations")
-      .select("id, selected_language")
+      .select("id, selected_language, applied_coupon")
       .eq("email", email)
       .eq("order_id", razorpay_order_id)
       .eq("payment_status", "pending")
@@ -61,6 +61,23 @@ export default async function handler(req, res) {
     if (updateError) {
       console.error("DB update error:", updateError);
       return res.status(500).json({ success: false, error: "Database update failed" });
+    }
+
+    // Increment coupon used_count if a coupon was used
+    if (registration.applied_coupon) {
+      // Fetch the coupon id first
+      const { data: couponToUpdate } = await supabase
+        .from("coupons")
+        .select("id, used_count")
+        .eq("code", registration.applied_coupon)
+        .single();
+
+      if (couponToUpdate) {
+        await supabase
+          .from("coupons")
+          .update({ used_count: couponToUpdate.used_count + 1 })
+          .eq("id", couponToUpdate.id);
+      }
     }
 
     // Send confirmation email

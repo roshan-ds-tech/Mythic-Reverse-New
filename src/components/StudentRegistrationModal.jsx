@@ -114,6 +114,11 @@ export default function StudentRegistrationModal({
   const [paymentState, setPaymentState] = useState('idle'); // idle | processing | success | failed
   const [paymentError, setPaymentError] = useState('');
 
+  // Coupon state
+  const [couponCode, setCouponCode] = useState('');
+  const [couponStatus, setCouponStatus] = useState(null); // { valid: boolean, message: string, discountAmount: number, finalPrice: number }
+  const [isApplyingCoupon, setIsApplyingCoupon] = useState(false);
+
   useRazorpayScript();
 
   // Helper: bind text/date/tel/email inputs
@@ -125,6 +130,8 @@ export default function StudentRegistrationModal({
     setForm(initialForm);
     setPaymentState('idle');
     setPaymentError('');
+    setCouponCode('');
+    setCouponStatus(null);
   };
 
   const handleClose = () => {
@@ -202,6 +209,34 @@ export default function StudentRegistrationModal({
     rzp.open();
   };
 
+  const handleApplyCoupon = async () => {
+    if (!couponCode.trim()) return;
+    setIsApplyingCoupon(true);
+    setCouponStatus(null);
+    try {
+      const res = await fetch("/api/validate-coupon", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ couponCode: couponCode.trim(), courseName })
+      });
+      const data = await res.json();
+      if (!res.ok || !data.valid) {
+        setCouponStatus({ valid: false, message: data.error || 'Invalid coupon code.' });
+      } else {
+        setCouponStatus({ 
+          valid: true, 
+          message: data.message, 
+          discountAmount: data.discountAmount,
+          finalPrice: data.finalPrice 
+        });
+      }
+    } catch (err) {
+      console.error(err);
+      setCouponStatus({ valid: false, message: 'Failed to apply coupon: ' + err.message });
+    }
+    setIsApplyingCoupon(false);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -257,7 +292,12 @@ export default function StudentRegistrationModal({
       const orderRes = await fetch("/api/create-order", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ amount: coursePrice, email: form.email, courseName }),
+        body: JSON.stringify({ 
+          amount: coursePrice, 
+          email: form.email, 
+          courseName,
+          couponCode: couponStatus?.valid ? couponCode.trim() : undefined
+        }),
       });
 
       if (!orderRes.ok) {
@@ -658,7 +698,65 @@ export default function StudentRegistrationModal({
               </form>
             </div>
 
-            <div className="p-6 border-t border-white/10 shrink-0 bg-neutral-950 flex justify-end gap-3 z-10">
+            {/* Coupon Section */}
+            <div className="p-4 sm:p-6 border-t border-white/10 shrink-0 bg-neutral-950 flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
+              <div className="flex-1 w-full max-w-sm">
+                <label className="text-sm font-medium text-gray-300 mb-1.5 block">Have a Coupon Code?</label>
+                <div className="flex gap-2">
+                  <input 
+                    type="text" 
+                    value={couponCode} 
+                    onChange={e => setCouponCode(e.target.value.toUpperCase())}
+                    className="flex-1 h-10 rounded-md border border-white/10 bg-black/50 px-3 py-2 text-sm text-white uppercase placeholder:normal-case font-mono focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-500/50 transition-colors" 
+                    placeholder="Enter code" 
+                    disabled={couponStatus?.valid}
+                  />
+                  {!couponStatus?.valid ? (
+                    <Button 
+                      type="button" 
+                      onClick={handleApplyCoupon} 
+                      disabled={isApplyingCoupon || !couponCode.trim()} 
+                      className="bg-white/10 hover:bg-white/20 text-white"
+                    >
+                      {isApplyingCoupon ? 'Applying...' : 'Apply'}
+                    </Button>
+                  ) : (
+                    <Button 
+                      type="button" 
+                      variant="outline"
+                      onClick={() => { setCouponCode(''); setCouponStatus(null); }} 
+                      className="border-red-500/30 text-red-400 hover:bg-red-500/10"
+                    >
+                      Remove
+                    </Button>
+                  )}
+                </div>
+                {couponStatus && (
+                  <p className={`mt-2 text-sm ${couponStatus.valid ? 'text-green-400' : 'text-red-400'}`}>
+                    {couponStatus.message}
+                  </p>
+                )}
+              </div>
+              
+              <div className="flex flex-col items-end gap-1 text-right min-w-[140px]">
+                {couponStatus?.valid ? (
+                  <>
+                    <p className="text-gray-500 text-sm line-through decoration-red-500/50">₹{coursePrice?.toLocaleString('en-IN')}</p>
+                    <p className="text-xl font-bold text-white flex items-center gap-2">
+                      <span className="text-xs px-2 py-0.5 rounded-full bg-green-500/20 text-green-400 border border-green-500/30">-₹{couponStatus.discountAmount.toLocaleString('en-IN')}</span>
+                      ₹{couponStatus.finalPrice.toLocaleString('en-IN')}
+                    </p>
+                  </>
+                ) : (
+                  <>
+                    <p className="text-gray-400 text-xs uppercase tracking-wider">Total Amount</p>
+                    <p className="text-xl font-bold text-white">₹{coursePrice?.toLocaleString('en-IN')}</p>
+                  </>
+                )}
+              </div>
+            </div>
+
+            <div className="p-4 sm:p-6 border-t border-black shrink-0 bg-neutral-900 flex justify-end gap-3 z-10">
               <Button type="button" variant="outline" onClick={handleClose} className="border-white/20 text-white hover:bg-white/10">
                 Cancel
               </Button>
@@ -668,7 +766,7 @@ export default function StudentRegistrationModal({
                 disabled={isSubmitting}
                 className="bg-purple-600 hover:bg-purple-700 text-white min-w-[170px]"
               >
-                {isSubmitting ? 'Processing...' : `Proceed to Payment — ₹${coursePrice ? coursePrice.toLocaleString('en-IN') : ''}`}
+                {isSubmitting ? 'Processing...' : `Proceed to Payment`}
               </Button>
             </div>
           </>

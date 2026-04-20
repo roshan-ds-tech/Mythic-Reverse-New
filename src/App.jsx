@@ -17,6 +17,7 @@ import ProgrammingLanguagesCourse from "./pages/ProgrammingLanguagesCourse";
 import SaaSDevelopment from "./pages/SaaSDevelopment";
 import DigitalMarketing from "./pages/DigitalMarketing";
 import WebDevelopment from "./pages/WebDevelopment";
+import AdminCoupons from "./pages/AdminCoupons";
 
 function App() {
     return (
@@ -40,6 +41,9 @@ function App() {
                 <Route path="/saas-development" element={<SaaSDevelopment />} />
                 <Route path="/digital-marketing-agency" element={<DigitalMarketing />} />
                 <Route path="/web-development" element={<WebDevelopment />} />
+
+                {/* Admin Pages */}
+                <Route path="/admin/coupons" element={<AdminCoupons />} />
             </Routes>
         </Router>
     )
