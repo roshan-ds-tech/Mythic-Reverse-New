@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/((?!api/|assets/|@vite/|src/|node_modules/|.*\\..*).*)",
+      "destination": "/index.html"
+    }
+  ]
+}
